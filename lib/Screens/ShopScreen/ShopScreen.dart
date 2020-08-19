@@ -1,8 +1,11 @@
 import 'package:arena/Colors/colors.dart';
 import 'package:arena/CustomClipper/ShopScreenClipBG.dart';
+import 'package:arena/Screens/ShopScreen/Store_Item_Detail_Page.dart';
+import 'package:arena/Screens/loading_screen.dart';
 
 import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/Utilities/FunkoPopDetail.dart';
+import 'package:arena/Utilities/StoreItemDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -24,8 +27,10 @@ class ShopScreen extends StatefulWidget {
 }
 
 class _ShopScreenState extends State<ShopScreen> {
-  Game selectedGame;
+  Game selectedGame = Game.Fortnite;
   List<FunkoPopDetail> funkoPops = listFunkoPop;
+
+  List<Store> storeItems = listStoreItem;
 
   @override
   Widget build(BuildContext context) {
@@ -214,8 +219,180 @@ class _ShopScreenState extends State<ShopScreen> {
                     },
                   ),
                 ),
-
-                
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 30.0, top: 20),
+                  child: Text(
+                    'Store',
+                    style: GoogleFonts.nunito(
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w800),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 10.0,
+                  ),
+                  child: SizedBox(
+                    height: 350,
+                    child: ListView.builder(
+                      itemCount: storeItems.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => StoreItemDetailPage(
+                                  storeItem: storeItems[index],
+                                ),
+                              ),
+                            );
+                          },
+                          child: Stack(
+                            children: <Widget>[
+                              Container(
+                                margin: EdgeInsets.only(
+                                    left: 10, top: 100, right: 10),
+                                width: 300,
+                                height: 250,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                      colors: [
+                                        storeItems[index].bgBeginColor,
+                                        storeItems[index].bgEndColor,
+                                      ],
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(30),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 100,
+                                left: 70,
+                                child: Hero(
+                                  tag: storeItems[index].itemCount,
+                                  child: Image.asset(
+                                    storeItems[index].itemImageUrl,
+                                    fit: BoxFit.contain,
+                                    height: 250,
+                                    width: 250,
+                                  ),
+                                ),
+                              ),
+                              Hero(
+                                tag: storeItems[index].name,
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                    left: 35,
+                                    top: 126,
+                                  ),
+                                  width: 250,
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Positioned(
+                                        top: 20,
+                                        left: 20,
+                                        child: Text(
+                                          listStoreItem[index].name,
+                                          style: kShopScreenItemNameTheme(
+                                              storeItems[index].bgBeginColor,
+                                              25),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        bottom: 20,
+                                        right: 20,
+                                        child: Text(
+                                          '\$ ${listStoreItem[index].price}',
+                                          style: kShopScreenItemNameTheme(
+                                              storeItems[index].bgBeginColor,
+                                              25),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Divider(
+                    color: Colors.black.withOpacity(0.3),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, LoadingScreen.id);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(15),
+                        ),
+                      ),
+                      child: Stack(
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Container(
+                              margin: EdgeInsets.only(right: 10.0, top: 5),
+                              child: Image.asset(
+                                  'images/fortnite_commondo_bg.png'),
+                            ),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: Color(0xFF008CCB).withOpacity(0.6),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            left: 10,
+                            top: 30,
+                            child: Text(
+                              'Show Item Shop',
+                              style: kShopScreenItemNameTheme(Colors.white, 20),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),

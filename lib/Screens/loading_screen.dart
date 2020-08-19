@@ -1,3 +1,4 @@
+import 'package:arena/Screens/ShopScreen/FortniteItemShop.dart';
 import 'package:arena/Screens/ShopScreen/ItemsScreen.dart';
 import 'package:arena/services/networking.dart';
 import 'package:flutter/cupertino.dart';
@@ -28,7 +29,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
       context,
       MaterialPageRoute(
         builder: (context) {
-          return MyItemsScreen(
+          // return MyItemsScreen(
+          //   itemData: itemData,
+          // );
+          return FortniteItemShop(
             itemData: itemData,
           );
         },
@@ -47,8 +51,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF131339),
-      body: Center(child: SpinKitDoubleBounce(color: Colors.white, size: 50.0)),
+      backgroundColor: Colors.white,
+      body: Center(
+        child: SpinKitDoubleBounce(color: Color(0xFF008CCB).withOpacity(0.6), size: 50.0),
+      ),
     );
   }
 }

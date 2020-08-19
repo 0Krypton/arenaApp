@@ -1,10 +1,7 @@
-import 'package:arena/Utilities/ItemInfo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-List<ItemInfo> itemInfo = [];
 
 class MyItemsScreen extends StatefulWidget {
   MyItemsScreen({this.itemData});
@@ -18,12 +15,6 @@ class MyItemsScreen extends StatefulWidget {
 class _MyItemsScreenState extends State<MyItemsScreen> {
   List<dynamic> dailyItemList = [];
   List<dynamic> featuredItemList = [];
-  String name;
-
-  String description;
-  String type;
-  int price;
-  String url;
 
   @override
   void initState() {
@@ -33,11 +24,6 @@ class _MyItemsScreenState extends State<MyItemsScreen> {
   }
 
   void updateUI(dynamic itemData) {
-//    name = itemData['daily'][4]['name'];
-//    description = itemData['daily'][4]['description'];
-//    type = itemData['daily'][4]['type'];
-//    price = itemData['daily'][4]['price'];
-//    url = itemData['daily'][4]['full_background'];
 
     dailyItemList = itemData['daily'];
     featuredItemList = itemData['featured'];

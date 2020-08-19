@@ -21,12 +21,12 @@ class _FunkoPopDetailPageState extends State<FunkoPopDetailPage> {
         elevation: 0,
         title: Text(
           "Item Details",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: Colors.black,
+            color: Colors.white,
           ),
           onPressed: () {
             Navigator.of(context).pop();
