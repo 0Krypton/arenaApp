@@ -29,23 +29,13 @@ class _LoadingScreenState extends State<LoadingScreen> {
       context,
       MaterialPageRoute(
         builder: (context) {
-          // return MyItemsScreen(
-          //   itemData: itemData,
-          // );
+          
           return FortniteItemShop(
             itemData: itemData,
           );
         },
       ),
     );
-//    Navigator.push(
-//      context,
-//      MaterialPageRoute(
-//        builder: (context) {
-//          return MyItemsScreen(itemData: itemData,);
-//        },
-//      ),
-//    );
   }
 
   @override
