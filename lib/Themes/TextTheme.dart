@@ -27,3 +27,13 @@ final TextStyle kStoreItemDetailPageTitle = GoogleFonts.nunito(
   fontSize: 25,
   fontWeight: FontWeight.w800
 );
+
+/////////////////////////////////////////////////////////////////
+
+TextStyle kMenuScreenItemNameTheme(Color textColor, double sizeFont) {
+  return GoogleFonts.nunito(
+    color: textColor,
+    fontSize: sizeFont,
+    fontWeight: FontWeight.w900,
+  );
+}

@@ -1,3 +1,4 @@
+import 'package:arena/Screens/HomeScreen/HomeScreen.dart';
 import 'package:arena/Screens/ProfileScreen/DashboardProfile.dart';
 import 'package:arena/Screens/ShopScreen/ShopScreen.dart';
 import 'package:flutter/material.dart';
@@ -58,11 +59,7 @@ class _BottomNavBarState extends State<BottomNavBar>
           child: Text('top'),
         ),
       ),
-      Container(
-        child: Center(
-          child: Text('home'),
-        ),
-      ),
+      HomeScreen(),
       Container(
         child: Center(
           child: Text('search'),

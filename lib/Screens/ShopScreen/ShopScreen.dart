@@ -42,9 +42,7 @@ class _ShopScreenState extends State<ShopScreen> {
       decoration: BoxDecoration(
         color: kMainBackGroundColor,
       ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SafeArea(
+      child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -389,7 +387,7 @@ class _ShopScreenState extends State<ShopScreen> {
             ),
           ),
         ),
-      ),
+      
     );
   }
 
