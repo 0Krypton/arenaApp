@@ -114,12 +114,9 @@ class _FunkoPopDetailPageState extends State<FunkoPopDetailPage> {
             Positioned(
               left: 110,
               bottom: 90,
-              child: Hero(
-                tag: widget.funkoPop.tagTitle,
-                child: Image.asset(
-                  widget.funkoPop.imageUrl,
-                  width: MediaQuery.of(context).size.width * .85,
-                ),
+              child: Image.asset(
+                widget.funkoPop.imageUrl,
+                width: MediaQuery.of(context).size.width * .85,
               ),
             ),
           ],

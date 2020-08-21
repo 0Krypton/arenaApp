@@ -4,12 +4,11 @@ class FunkoPopDetail {
   final String imageUrl;
   final String price;
   final String title;
-  final int tagTitle;
   final Color bgColor;
   final int remainingOfItem;
   final int rating;
 
-  FunkoPopDetail(this.tagTitle,
+  FunkoPopDetail(
       {this.imageUrl,
       this.rating,
       this.price,
@@ -20,7 +19,6 @@ class FunkoPopDetail {
 
 List<FunkoPopDetail> listFunkoPop = [
   FunkoPopDetail(
-    1,
     imageUrl: 'images/funko_pop_fortnite_1.png',
     price: '\$ 6.99',
     title: 'Rippley vs Sludge',
@@ -29,7 +27,6 @@ List<FunkoPopDetail> listFunkoPop = [
     rating: 3,
   ),
   FunkoPopDetail(
-    2,
     imageUrl: 'images/funko_pop_fortnite_2.png',
     price: '\$ 4.99',
     title: 'P.A.N.D.A \nTeam Leader',
@@ -38,7 +35,6 @@ List<FunkoPopDetail> listFunkoPop = [
     rating: 5,
   ),
   FunkoPopDetail(
-    3,
     imageUrl: 'images/funko_pop_fortnite_3.png',
     price: '\$ 9.99',
     title: 'Fish Skin',
@@ -47,7 +43,6 @@ List<FunkoPopDetail> listFunkoPop = [
     rating: 4,
   ),
   FunkoPopDetail(
-    4,
     imageUrl: 'images/funko_pop_fortnite_4.png',
     price: '\$ 14.99',
     title: 'Wild Card',

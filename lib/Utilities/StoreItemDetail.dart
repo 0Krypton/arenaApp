@@ -9,8 +9,10 @@ class Store {
   final String detailItemImageUrl;
   final Color bgBeginColor;
   final Color bgEndColor;
+  final int tagTitle;
 
   Store({
+    this.tagTitle,
     this.name,
     this.description,
     this.price,
@@ -24,6 +26,7 @@ class Store {
 
 List<Store> listStoreItem = [
   Store(
+    tagTitle: 1,
     name: 'Psycho\nBundle',
     description: '1 Skin\n1 Backbling\n1 Pickaxe',
     price: 22.99,
@@ -34,6 +37,7 @@ List<Store> listStoreItem = [
     bgEndColor: Color(0xFFCE3233),
   ),
   Store(
+    tagTitle: 2,
     name: 'Sahdow\nRising',
     description: '3 Skin\n3 Backbling\n1 Wrap',
     price: 19.99,
@@ -44,6 +48,7 @@ List<Store> listStoreItem = [
     bgEndColor: Color(0xFF131313),
   ),
   Store(
+    tagTitle: 3,
     name: 'DarkFire\nBundle',
     description: '3 Skin\n3 Backbling\n3 Pickaxe\n3 Wrap\n1 Emote',
     price: 29.99,

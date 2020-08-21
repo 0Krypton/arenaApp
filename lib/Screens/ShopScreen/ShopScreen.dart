@@ -28,14 +28,16 @@ class ShopScreen extends StatefulWidget {
 
 class _ShopScreenState extends State<ShopScreen> {
   Game selectedGame = Game.Fortnite;
-  List<FunkoPopDetail> funkoPops = listFunkoPop;
 
+  List<FunkoPopDetail> funkoPops = listFunkoPop;
   List<Store> storeItems = listStoreItem;
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
+
     return Container(
       decoration: BoxDecoration(
         color: kMainBackGroundColor,
@@ -182,7 +184,6 @@ class _ShopScreenState extends State<ShopScreen> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                          print(index);
                           Navigator.push(
                             context,
                             PageRouteBuilder(
@@ -203,14 +204,10 @@ class _ShopScreenState extends State<ShopScreen> {
                             Positioned(
                               bottom: 50,
                               left: 50,
-                              child: Hero(
-                                tag: Text('${listFunkoPop[index].tagTitle}'),
-                                //tag: listFunkoPop[index].tagTitle,
-                                child: Image.asset(
-                                  funkoPops[index].imageUrl,
-                                  width: 300,
-                                  height: 300,
-                                ),
+                              child: Image.asset(
+                                funkoPops[index].imageUrl,
+                                width: 300,
+                                height: 300,
                               ),
                             ),
                           ],
@@ -241,6 +238,7 @@ class _ShopScreenState extends State<ShopScreen> {
                     child: ListView.builder(
                       itemCount: storeItems.length,
                       scrollDirection: Axis.horizontal,
+                      physics: BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
@@ -276,55 +274,49 @@ class _ShopScreenState extends State<ShopScreen> {
                               Positioned(
                                 bottom: 100,
                                 left: 70,
-                                child: Hero(
-                                  tag: storeItems[index].itemCount,
-                                  child: Image.asset(
-                                    storeItems[index].itemImageUrl,
-                                    fit: BoxFit.contain,
-                                    height: 250,
-                                    width: 250,
-                                  ),
+                                child: Image.asset(
+                                  storeItems[index].itemImageUrl,
+                                  fit: BoxFit.contain,
+                                  height: 250,
+                                  width: 250,
                                 ),
                               ),
-                              Hero(
-                                tag: storeItems[index].name,
-                                child: Container(
-                                  margin: EdgeInsets.only(
-                                    left: 35,
-                                    top: 126,
+                              Container(
+                                margin: EdgeInsets.only(
+                                  left: 35,
+                                  top: 126,
+                                ),
+                                width: 250,
+                                height: 200,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20),
                                   ),
-                                  width: 250,
-                                  height: 200,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(20),
+                                ),
+                                child: Stack(
+                                  children: <Widget>[
+                                    Positioned(
+                                      top: 20,
+                                      left: 20,
+                                      child: Text(
+                                        listStoreItem[index].name,
+                                        style: kShopScreenItemNameTheme(
+                                            storeItems[index].bgBeginColor,
+                                            25),
+                                      ),
                                     ),
-                                  ),
-                                  child: Stack(
-                                    children: <Widget>[
-                                      Positioned(
-                                        top: 20,
-                                        left: 20,
-                                        child: Text(
-                                          listStoreItem[index].name,
-                                          style: kShopScreenItemNameTheme(
-                                              storeItems[index].bgBeginColor,
-                                              25),
-                                        ),
+                                    Positioned(
+                                      bottom: 20,
+                                      right: 20,
+                                      child: Text(
+                                        '\$ ${listStoreItem[index].price}',
+                                        style: kShopScreenItemNameTheme(
+                                            storeItems[index].bgBeginColor,
+                                            25),
                                       ),
-                                      Positioned(
-                                        bottom: 20,
-                                        right: 20,
-                                        child: Text(
-                                          '\$ ${listStoreItem[index].price}',
-                                          style: kShopScreenItemNameTheme(
-                                              storeItems[index].bgBeginColor,
-                                              25),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
