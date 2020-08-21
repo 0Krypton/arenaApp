@@ -37,12 +37,13 @@ class _ShopScreenState extends State<ShopScreen> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
-
     return Container(
       decoration: BoxDecoration(
         color: kMainBackGroundColor,
       ),
-      child: SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -300,8 +301,7 @@ class _ShopScreenState extends State<ShopScreen> {
                                       child: Text(
                                         listStoreItem[index].name,
                                         style: kShopScreenItemNameTheme(
-                                            storeItems[index].bgBeginColor,
-                                            25),
+                                            storeItems[index].bgBeginColor, 25),
                                       ),
                                     ),
                                     Positioned(
@@ -310,8 +310,7 @@ class _ShopScreenState extends State<ShopScreen> {
                                       child: Text(
                                         '\$ ${listStoreItem[index].price}',
                                         style: kShopScreenItemNameTheme(
-                                            storeItems[index].bgBeginColor,
-                                            25),
+                                            storeItems[index].bgBeginColor, 25),
                                       ),
                                     ),
                                   ],
@@ -382,12 +381,15 @@ class _ShopScreenState extends State<ShopScreen> {
                       ),
                     ),
                   ),
-                )
+                ),
+                SizedBox(
+                  height: 20,
+                ),
               ],
             ),
           ),
         ),
-      
+      ),
     );
   }
 

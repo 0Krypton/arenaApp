@@ -7,6 +7,7 @@ class News {
   final Color bgColor;
   final String extraLinks;
   final String extraImages;
+  final bool isUpperBg;
 
   News({
     this.bgColor,
@@ -15,6 +16,7 @@ class News {
     this.imageUrl,
     this.extraImages,
     this.extraLinks,
+    this.isUpperBg,
   });
 }
 
@@ -23,10 +25,12 @@ List<News> newsList = [
     title: 'Ninja\nReturn\nto Twitch',
     imageUrl: 'images/ninja_v3.png',
     bgColor: Color(0xFF008CCB),
+    isUpperBg: true,
   ),
   News(
     title: 'Fortnite\nRaise The Cup\nTournoument',
     imageUrl: 'images/raise_the_cup.png',
     bgColor: Color(0xFFB9131F),
+    isUpperBg: false,
   ),
 ];

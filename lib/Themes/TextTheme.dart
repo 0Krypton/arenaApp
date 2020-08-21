@@ -34,6 +34,15 @@ TextStyle kMenuScreenItemNameTheme(Color textColor, double sizeFont) {
   return GoogleFonts.nunito(
     color: textColor,
     fontSize: sizeFont,
-    fontWeight: FontWeight.w900,
+    fontWeight: FontWeight.w700,
+  );
+}
+/////////////////////////////////////////////////////////////////
+
+TextStyle kHomeScreenNewsTitleTheme(Color textColor, double sizeFont) {
+  return GoogleFonts.nunito(
+    color: textColor,
+    fontSize: sizeFont,
+    fontWeight: FontWeight.w700,
   );
 }

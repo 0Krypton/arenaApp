@@ -1,4 +1,3 @@
-import 'package:arena/Utilities/ShopScreenItemInfo.dart';
 import 'package:flutter/material.dart';
 
 class Tournoument {

@@ -153,7 +153,7 @@ class DashBoardProfile extends StatelessWidget {
                         child: GridView.count(
                           crossAxisCount: 2,
                           childAspectRatio: 11 / 7,
-                          children: listItem
+                          children: listGamesPlayed
                               .map(
                                 (item) => Container(
                                   child: Stack(
