@@ -1,3 +1,4 @@
+import 'package:arena/Screens/HomeScreen/FortniteStatsScreen.dart';
 import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/Utilities/NewsDetail.dart';
 import 'package:arena/Utilities/ProfileGamesPlayed.dart';
@@ -192,21 +193,36 @@ class BuildStats extends StatelessWidget {
         itemBuilder: (context, index) {
           return Stack(
             children: <Widget>[
-              Container(
-                height: 150,
-                width: 270,
-                margin: EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  color: (listGamesPlayed[index].color),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(15),
+              InkWell(
+                onTap: () {
+                  if (listGamesPlayed[index] == 1) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FortniteStatsScreen(
+                          color: listGamesPlayed[index].color,
+                        ),
+                      ),
+                    );
+                  }
+                  print("${listGamesPlayed[index]}");
+                },
+                child: Container(
+                  height: 150,
+                  width: 270,
+                  margin: EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    color: (listGamesPlayed[index].color),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15),
+                    ),
                   ),
-                ),
-                child: Center(
-                  child: Container(
-                    height: 100,
-                    width: 150,
-                    child: Image.asset(listGamesPlayed[index].imageUrl),
+                  child: Center(
+                    child: Container(
+                      height: 100,
+                      width: 150,
+                      child: Image.asset(listGamesPlayed[index].imageUrl),
+                    ),
                   ),
                 ),
               ),
