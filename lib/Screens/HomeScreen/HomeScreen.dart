@@ -195,17 +195,20 @@ class BuildStats extends StatelessWidget {
             children: <Widget>[
               InkWell(
                 onTap: () {
-                  if (listGamesPlayed[index] == 1) {
+                  if (index == 1) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => FortniteStatsScreen(
-                          color: listGamesPlayed[index].color,
-                        ),
+                        builder: (context) {
+                          return (
+                            FortniteStatsScreen(
+                            color: listGamesPlayed[index].color,
+                          ));
+                        },
                       ),
                     );
                   }
-                  print("${listGamesPlayed[index]}");
+                  print("$index");
                 },
                 child: Container(
                   height: 150,

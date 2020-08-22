@@ -99,11 +99,11 @@ class _FortniteItemShopState extends State<FortniteItemShop> {
               Padding(
                 padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
-                  dailyItemList.length == 0 ? '' : 'Special Daily Items',
+                  specialDailyItemList.length == 0 ? '' : 'Special Daily Items',
                   style: kShopScreenItemNameTheme(Colors.black, 20),
                 ),
               ),
-              SizedBox(height: dailyItemList.length == 0 ? 0 : 10),
+              SizedBox(height: specialDailyItemList.length == 0 ? 0 : 10),
               dailyItemList.length == 0
                   ? SizedBox(
                       height: 0,

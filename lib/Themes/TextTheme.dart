@@ -46,3 +46,12 @@ TextStyle kHomeScreenNewsTitleTheme(Color textColor, double sizeFont) {
     fontWeight: FontWeight.w700,
   );
 }
+
+///////////////////////////////////////////////////////////////
+ TextStyle kFortniteStatsTextTheme(Color color , double fontSize,FontWeight fontWeight){
+   return GoogleFonts.nunito(
+     color: color,
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+   );
+ }
