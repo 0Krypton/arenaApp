@@ -1,6 +1,7 @@
 import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/services/fortnite_stats_api.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FortniteStatsScreen extends StatefulWidget {
   final Color color;
@@ -225,7 +226,6 @@ class _FortniteStatsScreenState extends State<FortniteStatsScreen> {
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Container(
-              height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -403,12 +403,454 @@ class _FortniteStatsScreenState extends State<FortniteStatsScreen> {
                               Radius.circular(15),
                             ),
                           ),
-                          height: 300,
+                          height: 200,
                           width: MediaQuery.of(context).size.width,
-                          child: Row(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 60, vertical: 10),
+                          child: Column(
                             children: [
-
+                              Text(
+                                'LifeTime',
+                                style: kFortniteStatsTextTheme(
+                                  widget.color,
+                                  20,
+                                  FontWeight.w900,
+                                ),
+                              ),
+                              SizedBox(height: 20),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        FontAwesomeIcons.chartLine,
+                                        color: widget.color,
+                                      ),
+                                      SizedBox(width: 10),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Score',
+                                            style: kFortniteStatsTextTheme(
+                                              widget.color,
+                                              15,
+                                              FontWeight.w900,
+                                            ),
+                                          ),
+                                          Text(
+                                            lifeTimeStatPicker.score,
+                                            style: kFortniteStatsTextTheme(
+                                              widget.color,
+                                              15,
+                                              FontWeight.w900,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            FontAwesomeIcons.trophy,
+                                            color: widget.color,
+                                          ),
+                                          SizedBox(width: 10),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Wins',
+                                                style: kFortniteStatsTextTheme(
+                                                  widget.color,
+                                                  15,
+                                                  FontWeight.w900,
+                                                ),
+                                              ),
+                                              Text(
+                                                lifeTimeStatPicker.wins,
+                                                style: kFortniteStatsTextTheme(
+                                                  widget.color,
+                                                  15,
+                                                  FontWeight.w900,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        FontAwesomeIcons.skull,
+                                        color: widget.color,
+                                      ),
+                                      SizedBox(width: 10),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Kills',
+                                            style: kFortniteStatsTextTheme(
+                                              widget.color,
+                                              15,
+                                              FontWeight.w900,
+                                            ),
+                                          ),
+                                          Text(
+                                            lifeTimeStatPicker.kills,
+                                            style: kFortniteStatsTextTheme(
+                                              widget.color,
+                                              15,
+                                              FontWeight.w900,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            FontAwesomeIcons.userClock,
+                                            color: widget.color,
+                                          ),
+                                          SizedBox(width: 10),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'K/D',
+                                                style: kFortniteStatsTextTheme(
+                                                  widget.color,
+                                                  15,
+                                                  FontWeight.w900,
+                                                ),
+                                              ),
+                                              Text(
+                                                lifeTimeStatPicker.kd,
+                                                style: kFortniteStatsTextTheme(
+                                                  widget.color,
+                                                  15,
+                                                  FontWeight.w900,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ],
+                          ),
+                        ),
+                  SizedBox(height: 20),
+                  statsList.length == 0
+                      ? SizedBox(
+                          height: 0,
+                          width: 0,
+                        )
+                      : Container(
+                          height: MediaQuery.of(context).size.height - 300,
+                          width: MediaQuery.of(context).size.width,
+                          child: ListView.builder(
+                            itemCount: statsList.length,
+                            physics: BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Container(
+                                height: 250,
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 30, vertical: 10),
+                                margin: EdgeInsets.symmetric(vertical: 10),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      statsList[index].mode,
+                                      style: kFortniteStatsTextTheme(
+                                        widget.color,
+                                        20,
+                                        FontWeight.w900,
+                                      ),
+                                    ),
+                                    SizedBox(height: 20),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              FontAwesomeIcons.star,
+                                              color: widget.color,
+                                            ),
+                                            SizedBox(width: 10),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'TRN Rating',
+                                                  style:
+                                                      kFortniteStatsTextTheme(
+                                                    widget.color,
+                                                    15,
+                                                    FontWeight.w900,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "${statsList[index].trnRatingValue} Scout",
+                                                  style:
+                                                      kFortniteStatsTextTheme(
+                                                    widget.color,
+                                                    15,
+                                                    FontWeight.w900,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  FontAwesomeIcons
+                                                      .flagCheckered,
+                                                  color: widget.color,
+                                                ),
+                                                SizedBox(width: 10),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Rank',
+                                                      style:
+                                                          kFortniteStatsTextTheme(
+                                                        widget.color,
+                                                        15,
+                                                        FontWeight.w900,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      "${statsList[index].trnRatingRank.toString()}",
+                                                      style:
+                                                          kFortniteStatsTextTheme(
+                                                        widget.color,
+                                                        13,
+                                                        FontWeight.w900,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              FontAwesomeIcons.chartLine,
+                                              color: widget.color,
+                                            ),
+                                            SizedBox(width: 10),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Score',
+                                                  style:
+                                                      kFortniteStatsTextTheme(
+                                                    widget.color,
+                                                    15,
+                                                    FontWeight.w900,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  statsList[index].scoreValue,
+                                                  style:
+                                                      kFortniteStatsTextTheme(
+                                                    widget.color,
+                                                    15,
+                                                    FontWeight.w900,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  FontAwesomeIcons.trophy,
+                                                  color: widget.color,
+                                                ),
+                                                SizedBox(width: 10),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Wins',
+                                                      style:
+                                                          kFortniteStatsTextTheme(
+                                                        widget.color,
+                                                        15,
+                                                        FontWeight.w900,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      statsList[index].wins,
+                                                      style:
+                                                          kFortniteStatsTextTheme(
+                                                        widget.color,
+                                                        15,
+                                                        FontWeight.w900,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              FontAwesomeIcons.skull,
+                                              color: widget.color,
+                                            ),
+                                            SizedBox(width: 10),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Kills',
+                                                  style:
+                                                      kFortniteStatsTextTheme(
+                                                    widget.color,
+                                                    15,
+                                                    FontWeight.w900,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  statsList[index].killsValue,
+                                                  style:
+                                                      kFortniteStatsTextTheme(
+                                                    widget.color,
+                                                    15,
+                                                    FontWeight.w900,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Icon(
+                                                  FontAwesomeIcons.userClock,
+                                                  color: widget.color,
+                                                ),
+                                                SizedBox(width: 10),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'K/D',
+                                                      style:
+                                                          kFortniteStatsTextTheme(
+                                                        widget.color,
+                                                        15,
+                                                        FontWeight.w900,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      statsList[index].kdValue,
+                                                      style:
+                                                          kFortniteStatsTextTheme(
+                                                        widget.color,
+                                                        15,
+                                                        FontWeight.w900,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                           ),
                         ),
                 ],
