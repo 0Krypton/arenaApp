@@ -1,4 +1,5 @@
 import 'package:arena/Themes/TextTheme.dart';
+import 'package:arena/Utilities/FortniteStatsModelClass.dart';
 import 'package:arena/services/fortnite_stats_api.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -243,122 +244,7 @@ class _FortniteStatsScreenState extends State<FortniteStatsScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 5,
-                        child: Form(
-                          key: _formUserId,
-                          child: TextFormField(
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                            textAlignVertical: TextAlignVertical.center,
-                            onSaved: (input) => userId = input,
-                            validator: (v) {
-                              if (v.isEmpty) {
-                                return 'Empty UserName';
-                              }
-                              return null;
-                            },
-                            textAlign: TextAlign.center,
-                            onChanged: (value) {
-                              userId = value;
-                            },
-                            decoration: InputDecoration(
-                              labelStyle:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                              labelText: 'Epic User Id',
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 8.0, vertical: 5.0),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                              prefixIcon: Icon(
-                                Icons.person,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 5),
-                      Expanded(
-                        flex: 3,
-                        child: Form(
-                          key: _formPlatform,
-                          child: TextFormField(
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                            textAlignVertical: TextAlignVertical.center,
-                            onSaved: (input) => platform = input,
-                            validator: (v) {
-                              if (v.isEmpty) {
-                                return 'Empty Platform';
-                              }
-                              return null;
-                            },
-                            textAlign: TextAlign.center,
-                            onChanged: (value) {
-                              userId = value;
-                            },
-                            decoration: InputDecoration(
-                              labelStyle:
-                                  TextStyle(color: Colors.white, fontSize: 15),
-                              labelText: 'Platform',
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 8.0, vertical: 5.0),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Colors.white,
-                                ),
-                                borderRadius: BorderRadius.circular(15.0),
-                              ),
-                              prefixIcon: Icon(
-                                Icons.person,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            if (_formUserId.currentState.validate() &&
-                                _formPlatform.currentState.validate()) {
-                              _formUserId.currentState.save();
-                              _formPlatform.currentState.save();
-                              //setState(() {
-                              fetchData();
-                              //});
-                            }
-                          },
-                        ),
-                      )
-                    ],
-                  ),
+                  buildFormInputText(),
                   SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -396,179 +282,9 @@ class _FortniteStatsScreenState extends State<FortniteStatsScreen> {
                           height: 0,
                           width: 0,
                         )
-                      : Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15),
-                            ),
-                          ),
-                          height: 200,
-                          width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 60, vertical: 10),
-                          child: Column(
-                            children: [
-                              Text(
-                                'LifeTime',
-                                style: kFortniteStatsTextTheme(
-                                  widget.color,
-                                  20,
-                                  FontWeight.w900,
-                                ),
-                              ),
-                              SizedBox(height: 20),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        FontAwesomeIcons.chartLine,
-                                        color: widget.color,
-                                      ),
-                                      SizedBox(width: 10),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Score',
-                                            style: kFortniteStatsTextTheme(
-                                              widget.color,
-                                              15,
-                                              FontWeight.w900,
-                                            ),
-                                          ),
-                                          Text(
-                                            lifeTimeStatPicker.score,
-                                            style: kFortniteStatsTextTheme(
-                                              widget.color,
-                                              15,
-                                              FontWeight.w900,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            FontAwesomeIcons.trophy,
-                                            color: widget.color,
-                                          ),
-                                          SizedBox(width: 10),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Wins',
-                                                style: kFortniteStatsTextTheme(
-                                                  widget.color,
-                                                  15,
-                                                  FontWeight.w900,
-                                                ),
-                                              ),
-                                              Text(
-                                                lifeTimeStatPicker.wins,
-                                                style: kFortniteStatsTextTheme(
-                                                  widget.color,
-                                                  15,
-                                                  FontWeight.w900,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        FontAwesomeIcons.skull,
-                                        color: widget.color,
-                                      ),
-                                      SizedBox(width: 10),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Kills',
-                                            style: kFortniteStatsTextTheme(
-                                              widget.color,
-                                              15,
-                                              FontWeight.w900,
-                                            ),
-                                          ),
-                                          Text(
-                                            lifeTimeStatPicker.kills,
-                                            style: kFortniteStatsTextTheme(
-                                              widget.color,
-                                              15,
-                                              FontWeight.w900,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            FontAwesomeIcons.userClock,
-                                            color: widget.color,
-                                          ),
-                                          SizedBox(width: 10),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'K/D',
-                                                style: kFortniteStatsTextTheme(
-                                                  widget.color,
-                                                  15,
-                                                  FontWeight.w900,
-                                                ),
-                                              ),
-                                              Text(
-                                                lifeTimeStatPicker.kd,
-                                                style: kFortniteStatsTextTheme(
-                                                  widget.color,
-                                                  15,
-                                                  FontWeight.w900,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                      : BuildLifeTimeStats(
+                          color: widget.color,
+                          lifeTimeStatPicker: lifeTimeStatPicker,
                         ),
                   SizedBox(height: 20),
                   statsList.length == 0
@@ -583,272 +299,9 @@ class _FortniteStatsScreenState extends State<FortniteStatsScreen> {
                             itemCount: statsList.length,
                             physics: BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
-                              return Container(
-                                height: 250,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 30, vertical: 10),
-                                margin: EdgeInsets.symmetric(vertical: 10),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      statsList[index].mode,
-                                      style: kFortniteStatsTextTheme(
-                                        widget.color,
-                                        20,
-                                        FontWeight.w900,
-                                      ),
-                                    ),
-                                    SizedBox(height: 20),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              FontAwesomeIcons.star,
-                                              color: widget.color,
-                                            ),
-                                            SizedBox(width: 10),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'TRN Rating',
-                                                  style:
-                                                      kFortniteStatsTextTheme(
-                                                    widget.color,
-                                                    15,
-                                                    FontWeight.w900,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  "${statsList[index].trnRatingValue} Scout",
-                                                  style:
-                                                      kFortniteStatsTextTheme(
-                                                    widget.color,
-                                                    15,
-                                                    FontWeight.w900,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Icon(
-                                                  FontAwesomeIcons
-                                                      .flagCheckered,
-                                                  color: widget.color,
-                                                ),
-                                                SizedBox(width: 10),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Rank',
-                                                      style:
-                                                          kFortniteStatsTextTheme(
-                                                        widget.color,
-                                                        15,
-                                                        FontWeight.w900,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      "${statsList[index].trnRatingRank.toString()}",
-                                                      style:
-                                                          kFortniteStatsTextTheme(
-                                                        widget.color,
-                                                        13,
-                                                        FontWeight.w900,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              FontAwesomeIcons.chartLine,
-                                              color: widget.color,
-                                            ),
-                                            SizedBox(width: 10),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Score',
-                                                  style:
-                                                      kFortniteStatsTextTheme(
-                                                    widget.color,
-                                                    15,
-                                                    FontWeight.w900,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  statsList[index].scoreValue,
-                                                  style:
-                                                      kFortniteStatsTextTheme(
-                                                    widget.color,
-                                                    15,
-                                                    FontWeight.w900,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Icon(
-                                                  FontAwesomeIcons.trophy,
-                                                  color: widget.color,
-                                                ),
-                                                SizedBox(width: 10),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Wins',
-                                                      style:
-                                                          kFortniteStatsTextTheme(
-                                                        widget.color,
-                                                        15,
-                                                        FontWeight.w900,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      statsList[index].wins,
-                                                      style:
-                                                          kFortniteStatsTextTheme(
-                                                        widget.color,
-                                                        15,
-                                                        FontWeight.w900,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              FontAwesomeIcons.skull,
-                                              color: widget.color,
-                                            ),
-                                            SizedBox(width: 10),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Kills',
-                                                  style:
-                                                      kFortniteStatsTextTheme(
-                                                    widget.color,
-                                                    15,
-                                                    FontWeight.w900,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  statsList[index].killsValue,
-                                                  style:
-                                                      kFortniteStatsTextTheme(
-                                                    widget.color,
-                                                    15,
-                                                    FontWeight.w900,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Icon(
-                                                  FontAwesomeIcons.userClock,
-                                                  color: widget.color,
-                                                ),
-                                                SizedBox(width: 10),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'K/D',
-                                                      style:
-                                                          kFortniteStatsTextTheme(
-                                                        widget.color,
-                                                        15,
-                                                        FontWeight.w900,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      statsList[index].kdValue,
-                                                      style:
-                                                          kFortniteStatsTextTheme(
-                                                        widget.color,
-                                                        15,
-                                                        FontWeight.w900,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                              return BuildStatsContainer(
+                                color: widget.color,
+                                statPicker: statsList[index],
                               );
                             },
                           ),
@@ -861,38 +314,350 @@ class _FortniteStatsScreenState extends State<FortniteStatsScreen> {
       ),
     );
   }
+
+  Row buildFormInputText() {
+    return Row(
+      children: [
+        Expanded(
+          flex: 3,
+          child: Form(
+            key: _formUserId,
+            child: TextFormField(
+              style: TextStyle(
+                color: Colors.white,
+              ),
+              textAlignVertical: TextAlignVertical.center,
+              onSaved: (input) => userId = input,
+              validator: (v) {
+                if (v.isEmpty) {
+                  return 'Empty UserName';
+                }
+                return null;
+              },
+              textAlign: TextAlign.center,
+              onChanged: (value) {
+                userId = value;
+              },
+              decoration: InputDecoration(
+                labelStyle: TextStyle(color: Colors.white, fontSize: 15),
+                labelText: 'Epic User Id',
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.white,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.white,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                prefixIcon: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(width: 5),
+        Expanded(
+          flex: 2,
+          child: Form(
+            key: _formPlatform,
+            child: TextFormField(
+              style: TextStyle(
+                color: Colors.white,
+              ),
+              textAlignVertical: TextAlignVertical.center,
+              onSaved: (input) => platform = input,
+              validator: (v) {
+                if (v.isEmpty) {
+                  return 'Empty Platform';
+                }
+                return null;
+              },
+              textAlign: TextAlign.center,
+              onChanged: (value) {
+                userId = value;
+              },
+              decoration: InputDecoration(
+                labelStyle: TextStyle(color: Colors.white, fontSize: 12),
+                labelText: 'Platform',
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.white,
+                  ),
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.white,
+                  ),
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                prefixIcon: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(width: 5),
+        Expanded(
+          flex: 1,
+          child: IconButton(
+            icon: Icon(
+              Icons.search,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              if (_formUserId.currentState.validate() &&
+                  _formPlatform.currentState.validate()) {
+                _formUserId.currentState.save();
+                _formPlatform.currentState.save();
+                //setState(() {
+                fetchData();
+                //});
+              }
+            },
+          ),
+        )
+      ],
+    );
+  }
 }
 
-class StatPicker {
-  final String mode;
-  final int trnRatingRank;
-  final String trnRatingValue;
-  final String scoreValue;
-  final String kdValue;
-  final String killsValue;
-  final String wins;
+class BuildStatsContainer extends StatelessWidget {
+  final StatPicker statPicker;
+  final Color color;
+  BuildStatsContainer({this.statPicker, this.color});
 
-  StatPicker({
-    this.mode,
-    this.trnRatingRank, //['p2']['trnRating']['rank']
-    this.trnRatingValue, //['p2']['trnRating']['value']
-    this.scoreValue, //['p2']['score']['value']
-    this.kdValue, //['p2']['kd']['value']
-    this.killsValue, //['p2']['kills']['value']
-    this.wins, //['p2']['top1']['value']
-  });
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 250,
+      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      margin: EdgeInsets.symmetric(vertical: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(
+          Radius.circular(15),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            statPicker.mode,
+            style: kFortniteStatsTextTheme(
+              color,
+              20,
+              FontWeight.w900,
+            ),
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  BuildRowStatsItem(
+                    color: color,
+                    nameRow: 'TRN Rating',
+                    picker: '${statPicker.trnRatingValue} Scouts',
+                    icon: FontAwesomeIcons.star,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  BuildRowStatsItem(
+                    color: color,
+                    nameRow: 'Wins',
+                    icon: FontAwesomeIcons.trophy,
+                    picker: statPicker.wins,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  BuildRowStatsItem(
+                    color: color,
+                    nameRow: 'K/D',
+                    icon: FontAwesomeIcons.userClock,
+                    picker: statPicker.kdValue,
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  BuildRowStatsItem(
+                    color: color,
+                    nameRow: 'Rank',
+                    picker: statPicker.trnRatingRank.toString(),
+                    icon: FontAwesomeIcons.flagCheckered,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  BuildRowStatsItem(
+                    color: color,
+                    nameRow: 'Kills',
+                    icon: FontAwesomeIcons.skull,
+                    picker: statPicker.killsValue,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  BuildRowStatsItem(
+                    color: color,
+                    nameRow: 'Score',
+                    icon: FontAwesomeIcons.chartLine,
+                    picker: statPicker.scoreValue,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 }
 
-class LifeTimeStatPicker {
-  var score; //['lifeTimeStats'][6]['value']
-  var wins; //['lifeTimeStats'][8]['value']
-  var kills; //['lifeTimeStats][10]['value']
-  var kd; //['lifeTimeStats][11]['value']
+class BuildRowStatsItem extends StatelessWidget {
+  final String picker;
+  final String nameRow;
+  final IconData icon;
+  final Color color;
 
-  LifeTimeStatPicker({
-    this.score,
-    this.wins,
-    this.kills,
-    this.kd,
+  BuildRowStatsItem({
+    this.icon,
+    this.picker,
+    this.nameRow,
+    this.color,
   });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(
+          icon,
+          color: color,
+        ),
+        SizedBox(width: 10),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              nameRow,
+              style: kFortniteStatsTextTheme(
+                color,
+                15,
+                FontWeight.w900,
+              ),
+            ),
+            Text(
+              "$picker",
+              style: kFortniteStatsTextTheme(
+                color,
+                15,
+                FontWeight.w900,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class BuildLifeTimeStats extends StatelessWidget {
+  final LifeTimeStatPicker lifeTimeStatPicker;
+  final Color color;
+
+  BuildLifeTimeStats({this.color, this.lifeTimeStatPicker});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(
+          Radius.circular(15),
+        ),
+      ),
+      height: 200,
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.symmetric(horizontal: 60, vertical: 10),
+      child: Column(
+        children: [
+          Text(
+            'LifeTime',
+            style: kFortniteStatsTextTheme(
+              color,
+              20,
+              FontWeight.w900,
+            ),
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  BuildRowStatsItem(
+                    color: color,
+                    nameRow: 'Wins',
+                    picker: lifeTimeStatPicker.wins,
+                    icon: FontAwesomeIcons.trophy,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  BuildRowStatsItem(
+                    color: color,
+                    nameRow: 'K/D',
+                    icon: FontAwesomeIcons.userClock,
+                    picker: lifeTimeStatPicker.kd,
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  BuildRowStatsItem(
+                    color: color,
+                    nameRow: 'Kills',
+                    picker: lifeTimeStatPicker.kills,
+                    icon: FontAwesomeIcons.skull,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  BuildRowStatsItem(
+                    color: color,
+                    nameRow: 'Score',
+                    icon: FontAwesomeIcons.chartLine,
+                    picker: lifeTimeStatPicker.score,
+                  ),
+                ],
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
 }
