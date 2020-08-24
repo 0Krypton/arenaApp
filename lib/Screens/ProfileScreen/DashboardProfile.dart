@@ -151,6 +151,7 @@ class DashBoardProfile extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: GridView.count(
+                          physics: BouncingScrollPhysics(),
                           crossAxisCount: 2,
                           childAspectRatio: 11 / 7,
                           children: listGamesPlayed

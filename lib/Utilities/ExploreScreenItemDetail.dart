@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SearchScreenTournoumentDetail {
+class ExploreScreenTournoumentDetail {
   final String creator;
   final String title;
   final String description;
@@ -12,7 +12,7 @@ class SearchScreenTournoumentDetail {
   final int totalPlayers;
   final int enteredPlayers;
 
-  SearchScreenTournoumentDetail({
+  ExploreScreenTournoumentDetail({
     this.creator,
     this.title,
     this.description,
@@ -25,9 +25,9 @@ class SearchScreenTournoumentDetail {
     this.enteredPlayers,
   });
 }
-
-List<SearchScreenTournoumentDetail> searchScreenTournouments = [
-  SearchScreenTournoumentDetail(
+List<ExploreScreenTournoumentDetail> recents = [];
+List<ExploreScreenTournoumentDetail> searchScreenTournouments = [
+  ExploreScreenTournoumentDetail(
     creator: 'User1',
     isPublic: false,
     title: 'Pro FNCS ZoneWars',
@@ -39,7 +39,7 @@ List<SearchScreenTournoumentDetail> searchScreenTournouments = [
     imageUrl: 'images/forntite_regade_raider_cropped.png',
     bgColor: Color(0xFF8A3528),
   ),
-  SearchScreenTournoumentDetail(
+  ExploreScreenTournoumentDetail(
     creator: 'User2',
     isPublic: false,
     title: 'Custom Tournament',
@@ -51,7 +51,7 @@ List<SearchScreenTournoumentDetail> searchScreenTournouments = [
     imageUrl: 'images/Reyna_Valorant_cropped.png',
     bgColor: Color(0xFF1F173C), 
   ),
-  SearchScreenTournoumentDetail(
+  ExploreScreenTournoumentDetail(
     creator: 'User3',
     isPublic: true,
     title: 'ANCS Tournament Open',
@@ -62,7 +62,7 @@ List<SearchScreenTournoumentDetail> searchScreenTournouments = [
     imageUrl: 'images/fortnite-seeker_cropped.png',
     bgColor: Color(0xFF519BB1), 
   ),
-  SearchScreenTournoumentDetail(
+  ExploreScreenTournoumentDetail(
     creator: 'User4',
     isPublic: false,
     title: 'Public Box PvP',
@@ -74,7 +74,7 @@ List<SearchScreenTournoumentDetail> searchScreenTournouments = [
     imageUrl: 'images/rabbit_raider_cropped.png',
     bgColor: Color(0xFFE568A5), 
   ),
-  SearchScreenTournoumentDetail(
+  ExploreScreenTournoumentDetail(
     creator: 'User5',
     isPublic: false,
     title: 'Pro Creative Tournament',
@@ -86,7 +86,7 @@ List<SearchScreenTournoumentDetail> searchScreenTournouments = [
     imageUrl: 'images/fortnite_ghoul_trooper_cropped.png',
     bgColor: Color(0xFF75B0A6), 
   ),
-  SearchScreenTournoumentDetail(
+  ExploreScreenTournoumentDetail(
     creator: 'User6',
     isPublic: false,
     title: 'Pro Arena Scrims',
@@ -98,7 +98,7 @@ List<SearchScreenTournoumentDetail> searchScreenTournouments = [
     imageUrl: 'images/fortnite_torunoment_image_3.png',
     bgColor: Color(0xFF6A02F7), 
   ),   
-  SearchScreenTournoumentDetail(
+  ExploreScreenTournoumentDetail(
     creator: 'User7',
     isPublic: true,
     title: 'Boxfight & Zonewars',
@@ -110,7 +110,7 @@ List<SearchScreenTournoumentDetail> searchScreenTournouments = [
     imageUrl: 'images/fortnite_starFlare_cropped.png',
     bgColor: Color(0xFF9E0D28), 
   ),   
-  SearchScreenTournoumentDetail(
+  ExploreScreenTournoumentDetail(
     creator: 'User8',
     isPublic: true,
     title: 'Open Tournament',
