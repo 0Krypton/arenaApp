@@ -4,6 +4,7 @@ class SearchScreenTournoumentDetail {
   final String creator;
   final String title;
   final String description;
+  final String game;
   final double prize;
   final bool isPublic;
   final Color bgColor;
@@ -15,6 +16,7 @@ class SearchScreenTournoumentDetail {
     this.creator,
     this.title,
     this.description,
+    this.game,
     this.prize,
     this.isPublic,
     this.bgColor,
@@ -30,6 +32,7 @@ List<SearchScreenTournoumentDetail> searchScreenTournouments = [
     isPublic: false,
     title: 'Pro FNCS ZoneWars',
     description: 'Fortnite 16v16 Fncs ZoneWars\nwith Prizes',
+    game: 'fortnite',
     totalPlayers: 16,
     enteredPlayers: 9,
     prize: 9.99,
@@ -41,6 +44,7 @@ List<SearchScreenTournoumentDetail> searchScreenTournouments = [
     isPublic: false,
     title: 'Custom Tournament',
     description: 'First Pro Scrim with Great\nPrizes',
+    game: 'valorant',
     totalPlayers: 8,
     enteredPlayers: 3,
     prize: 19.99,
@@ -52,6 +56,7 @@ List<SearchScreenTournoumentDetail> searchScreenTournouments = [
     isPublic: true,
     title: 'ANCS Tournament Open',
     description: 'The beginning of ANCS\nTournament now Available!',
+    game: 'fortnite',
     enteredPlayers: 254,
     prize: 50,
     imageUrl: 'images/fortnite-seeker_cropped.png',
@@ -62,6 +67,7 @@ List<SearchScreenTournoumentDetail> searchScreenTournouments = [
     isPublic: false,
     title: 'Public Box PvP',
     description: 'Win the all two Round\nto get your prize',
+    game: 'fortnite',
     totalPlayers: 16,
     enteredPlayers: 4,
     prize: 5,
@@ -73,6 +79,7 @@ List<SearchScreenTournoumentDetail> searchScreenTournouments = [
     isPublic: false,
     title: 'Pro Creative Tournament',
     description: 'Best & hardship Battle for\nAll of you, so good luck :)',
+    game: 'fortnite',
     totalPlayers: 256,
     enteredPlayers: 93,
     prize: 50,
@@ -84,6 +91,7 @@ List<SearchScreenTournoumentDetail> searchScreenTournouments = [
     isPublic: false,
     title: 'Pro Arena Scrims',
     description: 'Play with best & pro players\nin the This Pro Scrim',
+    game: 'fortnite',
     totalPlayers: 100,
     enteredPlayers: 43,
     prize: 20,
@@ -95,6 +103,7 @@ List<SearchScreenTournoumentDetail> searchScreenTournouments = [
     isPublic: true,
     title: 'Boxfight & Zonewars',
     description: 'Play with best & pro players\nin the This Pro Scrim',
+    game: 'fortnite',
     totalPlayers: 16,
     enteredPlayers: 3,
     prize: 1.99,
@@ -106,6 +115,7 @@ List<SearchScreenTournoumentDetail> searchScreenTournouments = [
     isPublic: true,
     title: 'Open Tournament',
     description: 'The public tournoument with\nAwesome Prize',
+    game: 'valorant',
     totalPlayers: 8,
     enteredPlayers: 5,
     prize: 14.99,

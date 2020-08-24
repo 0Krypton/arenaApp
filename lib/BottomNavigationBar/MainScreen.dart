@@ -1,5 +1,6 @@
 import 'package:arena/Screens/HomeScreen/HomeScreen.dart';
 import 'package:arena/Screens/ProfileScreen/DashboardProfile.dart';
+import 'package:arena/Screens/SearchScreen/SearchScreen.dart';
 import 'package:arena/Screens/ShopScreen/ShopScreen.dart';
 import 'package:flutter/material.dart';
 import 'animated_bottom_bar.dart';
@@ -60,11 +61,7 @@ class _BottomNavBarState extends State<BottomNavBar>
         ),
       ),
       HomeScreen(),
-      Container(
-        child: Center(
-          child: Text('search'),
-        ),
-      ),
+      SearchScreen(),
       DashBoardProfile(
         duration: duration,
       ),
