@@ -10,7 +10,6 @@ class ExploreScreen extends StatefulWidget {
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
-
   List<ExploreScreenTournoumentDetail> searchTournouments =
       searchScreenTournouments;
 
@@ -49,6 +48,96 @@ class _ExploreScreenState extends State<ExploreScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Container(
+                  //   width: MediaQuery.of(context).size.width,
+                  //   height: 50,
+                  //   margin: EdgeInsets.only(
+                  //     left: 20,
+                  //     right: 20,
+                  //     top: 25,
+                  //     bottom: 5,
+                  //   ),
+                  //   child: ListView(
+                  //     physics: BouncingScrollPhysics(),
+                  //     scrollDirection: Axis.horizontal,
+                  //     children: [
+                  //       Container(
+                  //         color: Colors.red,
+                  //         width: 100,
+                  //         height: 50,
+                  //       ),
+                  //       Container(
+                  //         color: Colors.yellow,
+                  //         width: 100,
+                  //         height: 50,
+                  //       ),
+                  //       Container(
+                  //         color: Colors.red,
+                  //         width: 100,
+                  //         height: 50,
+                  //       ),
+                  //       Container(
+                  //         color: Colors.yellow,
+                  //         width: 100,
+                  //         height: 50,
+                  //       ),
+                  //       Container(
+                  //         color: Colors.red,
+                  //         width: 100,
+                  //         height: 50,
+                  //       ),
+                  //       Container(
+                  //         color: Colors.yellow,
+                  //         width: 100,
+                  //         height: 50,
+                  //       ),
+                  //       Container(
+                  //         color: Colors.red,
+                  //         width: 100,
+                  //         height: 50,
+                  //       ),
+                  //       Container(
+                  //         color: Colors.yellow,
+                  //         width: 100,
+                  //         height: 50,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  Container(
+                    margin: EdgeInsets.only(
+                      left: 10,
+                      right: 10,
+                      top: 15,
+                      bottom: 5,
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 70,
+                            child: Divider(
+                              color: Colors.black,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text('Suggestions'),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Container(
+                            width: 70,
+                            child: Divider(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(
@@ -82,5 +171,4 @@ class _ExploreScreenState extends State<ExploreScreen> {
       ),
     );
   }
-
 }
