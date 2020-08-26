@@ -64,3 +64,12 @@ TextStyle kSearchScreenTextTheme(Color color , double fontSize,FontWeight fontWe
     fontWeight: fontWeight,
    );
  }
+
+ ///////////////////////////////////////////////////////////////
+ TextStyle kTopScreenTextTheme(Color color , double fontSize,FontWeight fontWeight){
+   return GoogleFonts.nunito(
+     color: color,
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+   );
+ }

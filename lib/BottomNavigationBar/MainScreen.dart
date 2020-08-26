@@ -2,7 +2,9 @@ import 'package:arena/Screens/HomeScreen/HomeScreen.dart';
 import 'package:arena/Screens/ProfileScreen/DashboardProfile.dart';
 import 'package:arena/Screens/ExploreScreen/ExploreScreen.dart';
 import 'package:arena/Screens/ShopScreen/ShopScreen.dart';
+import 'package:arena/Screens/TopScreen/TopScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'animated_bottom_bar.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -11,7 +13,7 @@ class BottomNavBar extends StatefulWidget {
   final List<BarItem> barItems = [
     BarItem(
       text: 'Shop',
-      iconData: Icons.shopping_basket,
+      iconData: FontAwesomeIcons.shoppingBag,
       color: Colors.indigo,
     ),
     BarItem(
@@ -55,11 +57,7 @@ class _BottomNavBarState extends State<BottomNavBar>
   Widget build(BuildContext context) {
     screens = [
       ShopScreen(),
-      Container(
-        child: Center(
-          child: Text('top'),
-        ),
-      ),
+      TopScreen(),
       HomeScreen(),
       ExploreScreen(),
       DashBoardProfile(

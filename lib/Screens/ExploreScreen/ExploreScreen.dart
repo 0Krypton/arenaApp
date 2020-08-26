@@ -18,28 +18,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
     return MaterialApp(
       theme: ThemeData(primaryColor: Colors.cyan),
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 10,
-          title: Text(
-            'Explore',
-            style: kSearchScreenTextTheme(
-              Colors.black,
-              20,
-              FontWeight.w900,
-            ),
-          ),
-          actions: [
-            IconButton(
-              icon: Icon(
-                Icons.search,
-              ),
-              onPressed: () {
-                showSearch(context: context, delegate: Search());
-              },
-            )
-          ],
-        ),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Container(
@@ -48,6 +26,34 @@ class _ExploreScreenState extends State<ExploreScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 15,
+                      left: 20,
+                      right: 20,
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Explore',
+                          style: kSearchScreenTextTheme(
+                            Colors.black,
+                            20,
+                            FontWeight.w900,
+                          ),
+                        ),
+                        Spacer(),
+                        IconButton(
+                          icon: Icon(
+                            Icons.search,
+                          ),
+                          onPressed: () {
+                            showSearch(context: context, delegate: Search());
+                          },
+                        )
+                      ],
+                    ),
+                  ),
                   // Container(
                   //   width: MediaQuery.of(context).size.width,
                   //   height: 50,
@@ -104,11 +110,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   //     ],
                   //   ),
                   // ),
+
                   Container(
                     margin: EdgeInsets.only(
                       left: 10,
                       right: 10,
-                      top: 15,
                       bottom: 5,
                     ),
                     child: Center(
