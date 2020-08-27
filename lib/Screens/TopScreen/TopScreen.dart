@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:arena/Screens/TopScreen/TopScreenPlayers.dart';
+import 'package:arena/Screens/TopScreen/TopScreenPlayersProvider.dart';
 import 'package:arena/Themes/TextTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class TopScreen extends StatefulWidget {
   @override
@@ -15,192 +17,214 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 50,
-                ),
-                Stack(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(
-                        top: 60,
-                        right: 20,
-                        left: 20,
+      home: ChangeNotifierProvider(
+        create: (_) => TopScreenPlayersProvider(),
+        child: Scaffold(
+          body: SafeArea(
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Consumer<TopScreenPlayersProvider>(
+                builder: (context, playerProvider, child) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 50,
                       ),
-                      width: MediaQuery.of(context).size.width,
-                      height: 300,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withAlpha(50),
-                            blurRadius: 15,
-                            offset: Offset(10, -10),
+                      Stack(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(
+                              top: 60,
+                              right: 20,
+                              left: 20,
+                            ),
+                            width: MediaQuery.of(context).size.width,
+                            height: 300,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withAlpha(50),
+                                  blurRadius: 15,
+                                  offset: Offset(10, -10),
+                                ),
+                              ],
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(20),
+                              ),
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color(0xFFFF0099),
+                                  Color(0xFF0F0478),
+                                ],
+                              ),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(height: 100),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                          width: 20,
+                                          height: 20,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Color(0xFF00FF4C),
+                                          ),
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          'Wins',
+                                          style: kTopScreenTextTheme(
+                                            Colors.white,
+                                            15,
+                                            FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(width: 20),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          width: 20,
+                                          height: 20,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: Color(0xFFAB00FF),
+                                          ),
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          'Kills',
+                                          style: kTopScreenTextTheme(
+                                            Colors.white,
+                                            15,
+                                            FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(width: 20),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          width: 20,
+                                          height: 20,
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Color(0xFF00CBFF)),
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          'K/D',
+                                          style: kTopScreenTextTheme(
+                                            Colors.white,
+                                            15,
+                                            FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            top: 0,
+                            child: Container(
+                              height: 120,
+                              width: 120,
+                              margin: EdgeInsets.symmetric(
+                                  horizontal:
+                                      MediaQuery.of(context).size.width / 3),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFF0F0478),
+                                    Color(0xFFFF0099),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         ],
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xFFFF0099),
-                            Color(0xFF0F0478),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 70,
+                            child: Divider(
+                              color: Colors.black.withAlpha(90),
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          Text('Top 100'),
+                          SizedBox(width: 10),
+                          Container(
+                            width: 70,
+                            child: Divider(
+                              color: Colors.black.withAlpha(90),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 30,
+                        margin: EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            BuildRegionServers(
+                              regionName: 'NA-West',
+                            ),
+                            BuildRegionServers(
+                              regionName: 'NA-East',
+                            ),
+                            BuildRegionServers(
+                              regionName: 'Iran',
+                            ),
                           ],
                         ),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 100),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Color(0xFF00FF4C),
-                                    ),
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    'Wins',
-                                    style: kTopScreenTextTheme(
-                                      Colors.white,
-                                      15,
-                                      FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
+                      SizedBox(
+                        height: 10,
+                      ),
+                      playerProvider.selectedPlayerRegion != null
+                          ? BuildTop100Regions(
+                              varSelectedPlayerRegion:
+                                  playerProvider.selectedPlayerRegion,
+                            )
+                          : Center(
+                              child: Text(
+                                'Select a region',
+                                style: kTopScreenTextTheme(
+                                  Colors.black,
+                                  25,
+                                  FontWeight.bold,
+                                ),
                               ),
-                              SizedBox(width: 20),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Color(0xFFAB00FF),
-                                    ),
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    'Kills',
-                                    style: kTopScreenTextTheme(
-                                      Colors.white,
-                                      15,
-                                      FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(width: 20),
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Color(0xFF00CBFF)),
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    'K/D',
-                                    style: kTopScreenTextTheme(
-                                      Colors.white,
-                                      15,
-                                      FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                      top: 0,
-                      child: Container(
-                        height: 120,
-                        width: 120,
-                        margin: EdgeInsets.symmetric(
-                            horizontal: MediaQuery.of(context).size.width / 3),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          gradient: LinearGradient(
-                            colors: [
-                              Color(0xFF0F0478),
-                              Color(0xFFFF0099),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 70,
-                      child: Divider(
-                        color: Colors.black.withAlpha(90),
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Text('Top 100'),
-                    SizedBox(width: 10),
-                    Container(
-                      width: 70,
-                      child: Divider(
-                        color: Colors.black.withAlpha(90),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 30,
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      BuildRegionServers(
-                        regionName: 'NA-West',
-                      ),
-                      BuildRegionServers(
-                        regionName: 'NA-East',
-                      ),
-                      BuildRegionServers(
-                        regionName: 'Middle East',
-                      ),
+                            ),
                     ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                BuildTop100Regions(),
-              ],
+                  );
+                },
+              ),
             ),
           ),
         ),
@@ -212,8 +236,10 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
 class BuildTop100Regions extends StatelessWidget {
   const BuildTop100Regions({
     Key key,
+    this.varSelectedPlayerRegion,
   }) : super(key: key);
 
+  final List<PlayerStats> varSelectedPlayerRegion;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -221,9 +247,9 @@ class BuildTop100Regions extends StatelessWidget {
       height: MediaQuery.of(context).size.height - 160,
       child: ListView.builder(
           physics: BouncingScrollPhysics(),
-          itemCount: irPlayers.length,
+          itemCount: varSelectedPlayerRegion.length,
           itemBuilder: (context, index) {
-            PlayerStats playerStats = irPlayers[index];
+            PlayerStats playerStats = varSelectedPlayerRegion[index];
             return Container(
               height: 120,
               width: MediaQuery.of(context).size.width,
@@ -356,7 +382,10 @@ class BuildRegionServers extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Provider.of<TopScreenPlayersProvider>(context, listen: false)
+              .setPlayerRegion(regionName);
+        },
         child: Container(
           height: 25,
           margin: EdgeInsets.symmetric(horizontal: 5),
