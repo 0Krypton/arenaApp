@@ -311,7 +311,7 @@ class TopScreenPlayersProvider extends ChangeNotifier {
     PlayerStats(
       playerName: 'Bugha',
       wins: 1869,
-      earning: '-',
+      earning: '3,071,383',
       urlImage: 'images/bugha.jpg',
       rank: '#1',
       clan: 'Sentinels Esports',
@@ -319,7 +319,7 @@ class TopScreenPlayersProvider extends ChangeNotifier {
     PlayerStats(
       playerName: 'Clix',
       wins: 1823,
-      earning: '-',
+      earning: '236,425',
       urlImage: 'images/clix.jpg',
       rank: '#2',
       clan: 'NRG Esports',
@@ -327,7 +327,7 @@ class TopScreenPlayersProvider extends ChangeNotifier {
     PlayerStats(
       playerName: 'Benjyfishy',
       wins: 1726,
-      earning: '-',
+      earning: '461,194',
       urlImage: 'images/benjyfishy.jpg',
       rank: '#3',
       clan: 'NRG Esports',
@@ -335,7 +335,7 @@ class TopScreenPlayersProvider extends ChangeNotifier {
     PlayerStats(
       playerName: 'MrSavage',
       wins: 1687,
-      earning: '-',
+      earning: '237,408',
       urlImage: 'images/mrsavage.jpg',
       rank: '#4',
       clan: '100 Thieves',
@@ -343,7 +343,7 @@ class TopScreenPlayersProvider extends ChangeNotifier {
     PlayerStats(
       playerName: 'Mongraal',
       wins: 1687,
-      earning: '-',
+      earning: '612,804',
       urlImage: 'images/mongraal.jpg',
       rank: '#5',
       clan: 'FaZe Clan',
@@ -351,7 +351,7 @@ class TopScreenPlayersProvider extends ChangeNotifier {
     PlayerStats(
       playerName: 'Faze Megga',
       wins: 1577,
-      earning: '-',
+      earning: '348,499',
       urlImage: 'images/megga.jpg',
       rank: '#6',
       clan: 'FaZe Clan',
@@ -359,7 +359,7 @@ class TopScreenPlayersProvider extends ChangeNotifier {
     PlayerStats(
       playerName: 'Faze Sway',
       wins: 1577,
-      earning: '-',
+      earning: '3,000',
       urlImage: 'images/sway.jpg',
       rank: '#7',
       clan: 'FaZe Clan',
@@ -367,63 +367,7 @@ class TopScreenPlayersProvider extends ChangeNotifier {
   ];
   List<PlayerStats> get nawestPlayers => _nawestPlayers;
 
-  List<PlayerStats> _naeastPlayers = [
-    PlayerStats(
-      playerName: 'KNF GEИIUS',
-      wins: 554,
-      earning: '-',
-      urlImage: 'images/knf_genius.jpg',
-      rank: '#31',
-      clan: 'KNF Clan',
-    ),
-    PlayerStats(
-      playerName: 'Persian Shot',
-      wins: 529,
-      earning: '-',
-      urlImage: 'images/persian_shot.jpg',
-      rank: '#32',
-      clan: 'Punisher Clan',
-    ),
-    PlayerStats(
-      playerName: 'VexϟM.a.y',
-      wins: 521,
-      earning: '-',
-      rank: '#33',
-      clan: 'Vex Clan',
-    ),
-    PlayerStats(
-      playerName: 'P69YA_И4',
-      wins: 474,
-      earning: '-',
-      urlImage: 'images/pooya_n4.jpg',
-      rank: '#34',
-      clan: 'TRT & Rx Clan',
-    ),
-    PlayerStats(
-      playerName: 'Matthew ϟ',
-      wins: 428,
-      earning: '-',
-      urlImage: 'images/matthew.jpg',
-      rank: '#35',
-      clan: '6ix Clan',
-    ),
-    PlayerStats(
-      playerName: 'KNF Mostafa',
-      wins: 401,
-      earning: '-',
-      urlImage: 'images/knf_mostafa.jpg',
-      rank: '#36',
-      clan: 'KNF Clan',
-    ),
-    PlayerStats(
-      playerName: 'Ahour4',
-      wins: 224,
-      earning: '-',
-      urlImage: 'images/ahoura.jpg',
-      rank: '#37',
-      clan: '-',
-    ),
-  ];
+  List<PlayerStats> _naeastPlayers;
   List<PlayerStats> get naeastPlayers => _naeastPlayers;
 
   List<PlayerStats> selectedPlayerRegion;
