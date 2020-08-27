@@ -171,7 +171,11 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
                             ),
                           ),
                           SizedBox(width: 10),
-                          Text('Top 100'),
+                          Text(
+                            'Top 100',
+                            style: kTopScreenTextTheme(
+                                Colors.black, 20, FontWeight.bold),
+                          ),
                           SizedBox(width: 10),
                           Container(
                             width: 70,
@@ -243,132 +247,130 @@ class BuildTop100Regions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height - 160,
-      child:ListView.builder(
-              physics: BouncingScrollPhysics(),
-              itemCount: varSelectedPlayerRegion.length,
-              itemBuilder: (context, index) {
-                PlayerStats playerStats = varSelectedPlayerRegion[index];
-                return Container(
-                  height: 120,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withAlpha(50),
-                        blurRadius: 15,
-                        offset: Offset(5, -5),
-                      ),
-                    ],
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                  ),
-                  margin:
-                      EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 10),
-                  padding: EdgeInsets.only(left: 10, right: 10),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        top: 30,
-                        left: 10,
-                        child: Container(
-                          height: 60,
-                          width: 60,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withAlpha(50),
-                                blurRadius: 15,
-                                offset: Offset(0, 5),
-                              ),
-                            ],
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: playerStats.urlImage == null
-                                  ? AssetImage('images/profile_person.jpg')
-                                  : AssetImage(playerStats.urlImage),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        right: 10,
-                        child: Text(
-                          playerStats.rank,
-                          style: GoogleFonts.ptSansNarrow(
-                            color: Color(0xFFECECEC),
-                            fontSize: 90,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 30,
-                        left: 85,
-                        child: Text(
-                          playerStats.playerName,
-                          style: kTopScreenTextTheme(
-                            Colors.black,
-                            15,
-                            FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 50,
-                        left: 90,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              transform: Matrix4.rotationZ(pi / 4),
-                              color: Color(0xFF00E5FF),
-                              width: 10,
-                              height: 10,
-                            ),
-                            Text(
-                              playerStats.clan,
-                              style: kTopScreenTextTheme(
-                                Colors.black,
-                                15,
-                                FontWeight.w700,
-                              ),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height - 160,
+        child: ListView.builder(
+            physics: BouncingScrollPhysics(),
+            itemCount: varSelectedPlayerRegion.length,
+            itemBuilder: (context, index) {
+              PlayerStats playerStats = varSelectedPlayerRegion[index];
+              return Container(
+                height: 120,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withAlpha(50),
+                      blurRadius: 15,
+                      offset: Offset(5, -5),
+                    ),
+                  ],
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
+                margin:
+                    EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 10),
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      top: 30,
+                      left: 10,
+                      child: Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withAlpha(50),
+                              blurRadius: 15,
+                              offset: Offset(0, 5),
                             ),
                           ],
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: playerStats.urlImage == null
+                                ? AssetImage('images/profile_person.jpg')
+                                : AssetImage(playerStats.urlImage),
+                          ),
                         ),
                       ),
-                      Positioned(
-                        top: 85,
-                        left: 90,
-                        child: Row(
-                          children: [
-                            Icon(
-                              FontAwesomeIcons.trophy,
-                              size: 15,
-                              color: Color(0xFFC0CC11),
-                            ),
-                            SizedBox(width: 10),
-                            Text(playerStats.wins.toString()),
-                            SizedBox(width: 50),
-                            Icon(
-                              FontAwesomeIcons.dollarSign,
-                              size: 15,
-                              color: Color(0xFF009D10),
-                            ),
-                            SizedBox(width: 10),
-                            Text(playerStats.earning),
-                          ],
+                    ),
+                    Positioned(
+                      right: 10,
+                      child: Text(
+                        playerStats.rank,
+                        style: GoogleFonts.ptSansNarrow(
+                          color: Color(0xFFECECEC),
+                          fontSize: 90,
+                          fontWeight: FontWeight.w900,
                         ),
                       ),
-                    ],
-                  ),
-                );
-              })
-          
-    );
+                    ),
+                    Positioned(
+                      top: 30,
+                      left: 85,
+                      child: Text(
+                        playerStats.playerName,
+                        style: kTopScreenTextTheme(
+                          Colors.black,
+                          15,
+                          FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 50,
+                      left: 90,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            transform: Matrix4.rotationZ(pi / 4),
+                            color: Color(0xFF00E5FF),
+                            width: 10,
+                            height: 10,
+                          ),
+                          Text(
+                            playerStats.clan,
+                            style: kTopScreenTextTheme(
+                              Colors.black,
+                              15,
+                              FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      top: 85,
+                      left: 90,
+                      child: Row(
+                        children: [
+                          Icon(
+                            FontAwesomeIcons.trophy,
+                            size: 15,
+                            color: Color(0xFFC0CC11),
+                          ),
+                          SizedBox(width: 10),
+                          Text(playerStats.wins.toString()),
+                          SizedBox(width: 50),
+                          Icon(
+                            FontAwesomeIcons.dollarSign,
+                            size: 15,
+                            color: Color(0xFF009D10),
+                          ),
+                          SizedBox(width: 2),
+                          Text(playerStats.earning),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }));
   }
 }
 

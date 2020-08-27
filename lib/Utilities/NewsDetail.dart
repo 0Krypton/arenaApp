@@ -21,12 +21,12 @@ class News {
 }
 
 List<News> newsList = [
-  News(
-    title: 'Fortnite Ch2 S4\nAvailable Now!',
-    imageUrl: 'images/fortnites4.jpg',
-    bgColor: Color(0xFF0090cd),
-    isUpperBg: true,
-  ),
+  // News(
+  //   title: 'Fortnite Ch2 S4\nAvailable Now!',
+  //   imageUrl: 'images/fortnites4.jpg',
+  //   bgColor: Color(0xFF0090cd),
+  //   isUpperBg: true,
+  // ),
   News(
     title: 'Ninja\nReturn\nto Twitch',
     imageUrl: 'images/ninja_v3.png',

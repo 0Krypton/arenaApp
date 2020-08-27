@@ -275,7 +275,7 @@ class BuildNews extends StatelessWidget {
                 right: 25,
                 child: Container(
                   height: 150,
-                  child: Image.asset(newsList[index].imageUrl),
+                  child: Image.asset(newsList[index].imageUrl,fit: BoxFit.contain,),
                 ),
               ),
               newsList[index].isUpperBg
