@@ -28,9 +28,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 15,
-                      left: 20,
-                      right: 20,
+                      top: 10,
+                      left: 15,
+                      right: 15,
                     ),
                     child: Row(
                       children: [
@@ -38,8 +38,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           'Explore',
                           style: kSearchScreenTextTheme(
                             Colors.black,
-                            20,
-                            FontWeight.w900,
+                            25,
+                            FontWeight.w700,
                           ),
                         ),
                         Spacer(),

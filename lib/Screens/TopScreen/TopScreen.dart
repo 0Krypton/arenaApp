@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:arena/Screens/TopScreen/TopScreenPlayers.dart';
 import 'package:arena/Screens/TopScreen/TopScreenPlayersProvider.dart';
 import 'package:arena/Themes/TextTheme.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,8 +29,48 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 10,
+                          left: 15,
+                          right: 15,
+                        ),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Top',
+                              style: kTopScreenTextTheme(
+                                Colors.black,
+                                25,
+                                FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 10,
+                          left: 25,
+                          right: 15,
+                        ),
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                '* Notice all the data will upgrade when changes occured',
+                                style: kTopScreenTextTheme(
+                                  Colors.black54,
+                                  15,
+                                  FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       SizedBox(
-                        height: 50,
+                        height: 30,
                       ),
                       Stack(
                         children: [
@@ -40,100 +81,111 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
                               left: 20,
                             ),
                             width: MediaQuery.of(context).size.width,
-                            height: 300,
+                            height: 350,
                             decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withAlpha(50),
-                                  blurRadius: 15,
-                                  offset: Offset(10, -10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withAlpha(50),
+                                    blurRadius: 15,
+                                    offset: Offset(10, -10),
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
                                 ),
-                              ],
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(20),
-                              ),
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color(0xFFFF0099),
-                                  Color(0xFF0F0478),
+                                color: Colors.white),
+                          ),
+                          Positioned(
+                            top: 130,
+                            left: 50,
+                            child: Container(
+                              height: 230,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Krypton',
+                                    style: kTopScreenTextTheme(
+                                        Colors.black, 25, FontWeight.bold),
+                                  ),
+                                  SizedBox(height: 20),
+                                  Expanded(
+                                    child: LineChart(sampleData1()),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            width: 20,
+                                            height: 20,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Color(0xff3aa989),
+                                            ),
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            'Wins (x50)',
+                                            style: kTopScreenTextTheme(
+                                              Color(0xff3aa989),
+                                              15,
+                                              FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(width: 20),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            width: 20,
+                                            height: 20,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Color(0xFFAB00FF),
+                                            ),
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            'Kills (x100)',
+                                            style: kTopScreenTextTheme(
+                                              Color(0xFFAB00FF),
+                                              15,
+                                              FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(width: 20),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            width: 20,
+                                            height: 20,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Color(0xFF00CBFF),
+                                            ),
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            'K/D',
+                                            style: kTopScreenTextTheme(
+                                              Color(0xFF00CBFF),
+                                              15,
+                                              FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(height: 100),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: 20,
-                                          height: 20,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Color(0xFF00FF4C),
-                                          ),
-                                        ),
-                                        SizedBox(width: 5),
-                                        Text(
-                                          'Wins',
-                                          style: kTopScreenTextTheme(
-                                            Colors.white,
-                                            15,
-                                            FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(width: 20),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: 20,
-                                          height: 20,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Color(0xFFAB00FF),
-                                          ),
-                                        ),
-                                        SizedBox(width: 5),
-                                        Text(
-                                          'Kills',
-                                          style: kTopScreenTextTheme(
-                                            Colors.white,
-                                            15,
-                                            FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(width: 20),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: 20,
-                                          height: 20,
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Color(0xFF00CBFF)),
-                                        ),
-                                        SizedBox(width: 5),
-                                        Text(
-                                          'K/D',
-                                          style: kTopScreenTextTheme(
-                                            Colors.white,
-                                            15,
-                                            FontWeight.bold,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
                             ),
                           ),
                           Positioned(
@@ -185,9 +237,7 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      SizedBox(height: 10),
                       Container(
                         width: MediaQuery.of(context).size.width,
                         height: 30,
@@ -203,6 +253,9 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
                             ),
                             BuildRegionServers(
                               regionName: 'Iran',
+                            ),
+                            BuildRegionServers(
+                              regionName: 'Europe',
                             ),
                           ],
                         ),
@@ -234,6 +287,154 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  LineChartData sampleData1() {
+    return LineChartData(
+      lineTouchData: LineTouchData(
+        touchTooltipData: LineTouchTooltipData(
+          tooltipBgColor: Colors.grey.withAlpha(50),
+        ),
+        touchCallback: (LineTouchResponse touchResponse) {},
+        handleBuiltInTouches: true,
+      ),
+      gridData: FlGridData(
+        show: true,
+      ),
+      titlesData: FlTitlesData(
+        bottomTitles: SideTitles(
+          showTitles: true,
+          reservedSize: 22,
+          textStyle: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 12,
+          ),
+          margin: 10,
+          getTitles: (value) {
+            switch (value.toInt()) {
+              case 0:
+                return 'JUN';
+              case 1:
+                return 'JUL';
+              case 2:
+                return 'AUG';
+            }
+            return '';
+          },
+        ),
+        leftTitles: SideTitles(
+          showTitles: true,
+          textStyle: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+          getTitles: (value) {
+            switch (value.toInt()) {
+              case 1:
+                return '1';
+              case 2:
+                return '2';
+            }
+            return '';
+          },
+          margin: 15,
+          reservedSize: 30,
+        ),
+      ),
+      borderData: FlBorderData(
+        show: true,
+        border: const Border(
+          bottom: BorderSide(
+            color: Colors.black,
+            width: 4,
+          ),
+          left: BorderSide(
+            color: Colors.transparent,
+          ),
+          right: BorderSide(
+            color: Colors.transparent,
+          ),
+          top: BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
+      ),
+      minX: 0,
+      maxX: 2,
+      maxY: 2,
+      minY: 0,
+      lineBarsData: linesBarData1(),
+    );
+  }
+
+  List<LineChartBarData> linesBarData1() {
+    final LineChartBarData lineChartBarDataKD = LineChartBarData(
+      spots: [
+        FlSpot(0, 1.7),
+        FlSpot(1, 1.4),
+        FlSpot(2, 1.9),
+      ],
+      isCurved: true,
+      colors: const [
+        Color(0xff27b6fc),
+      ],
+      barWidth: 8,
+      dotData: FlDotData(
+        show: true,
+      ),
+      belowBarData: BarAreaData(
+        show: false,
+      ),
+    );
+
+    final LineChartBarData lineChartBarDataWin = LineChartBarData(
+      spots: [
+        FlSpot(0, 1),
+        FlSpot(1, 0.3),
+        FlSpot(2, 0.1),
+      ],
+      isCurved: true,
+      colors: [
+        const Color(0xff3aa989),
+      ],
+      barWidth: 8,
+      dotData: FlDotData(
+        show: true,
+      ),
+      belowBarData: BarAreaData(
+        show: false,
+      ),
+    );
+
+    final LineChartBarData lineChartBarDataKill = LineChartBarData(
+      spots: [
+        FlSpot(0, 1),
+        FlSpot(1, 1.2),
+        FlSpot(2, 0.6),
+      ],
+      isCurved: true,
+      colors: [
+        const Color(0xffaa4cfc),
+      ],
+      barWidth: 8,
+      dotData: FlDotData(
+        show: true,
+      ),
+      belowBarData: BarAreaData(
+        show: false,
+        colors: [
+          Color(0xffaa4cfc).withOpacity(0.3),
+        ],
+      ),
+    );
+
+    return [
+      lineChartBarDataKD,
+      lineChartBarDataKill,
+      lineChartBarDataWin,
+    ];
   }
 }
 

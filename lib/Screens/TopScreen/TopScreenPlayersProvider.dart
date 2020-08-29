@@ -325,30 +325,6 @@ class TopScreenPlayersProvider extends ChangeNotifier {
       clan: 'NRG Esports',
     ),
     PlayerStats(
-      playerName: 'Benjyfishy',
-      wins: 1726,
-      earning: '461,194',
-      urlImage: 'images/benjyfishy.jpg',
-      rank: '#3',
-      clan: 'NRG Esports',
-    ),
-    PlayerStats(
-      playerName: 'MrSavage',
-      wins: 1687,
-      earning: '237,408',
-      urlImage: 'images/mrsavage.jpg',
-      rank: '#4',
-      clan: '100 Thieves',
-    ),
-    PlayerStats(
-      playerName: 'Mongraal',
-      wins: 1687,
-      earning: '612,804',
-      urlImage: 'images/mongraal.jpg',
-      rank: '#5',
-      clan: 'FaZe Clan',
-    ),
-    PlayerStats(
       playerName: 'Faze Megga',
       wins: 1577,
       earning: '348,499',
@@ -370,6 +346,35 @@ class TopScreenPlayersProvider extends ChangeNotifier {
   List<PlayerStats> _naeastPlayers;
   List<PlayerStats> get naeastPlayers => _naeastPlayers;
 
+  List<PlayerStats> _europePlayers = [
+    PlayerStats(
+      playerName: 'Mongraal',
+      wins: 1687,
+      earning: '612,804',
+      urlImage: 'images/mongraal.jpg',
+      rank: '#1',
+      clan: 'FaZe Clan',
+    ),
+    PlayerStats(
+      playerName: 'Benjyfishy',
+      wins: 1726,
+      earning: '461,194',
+      urlImage: 'images/benjyfishy.jpg',
+      rank: '#2',
+      clan: 'NRG Esports',
+    ),
+    PlayerStats(
+      playerName: 'MrSavage',
+      wins: 1687,
+      earning: '237,408',
+      urlImage: 'images/mrsavage.jpg',
+      rank: '#3',
+      clan: '100 Thieves',
+    ),
+    
+  ];
+  List<PlayerStats> get europePlayers => _europePlayers;
+
   List<PlayerStats> selectedPlayerRegion;
 
   void setPlayerRegion(String regions) {
@@ -380,6 +385,8 @@ class TopScreenPlayersProvider extends ChangeNotifier {
       selectedPlayerRegion = nawestPlayers;
     } else if (regions.toUpperCase() == 'Na-east'.toUpperCase()) {
       selectedPlayerRegion = naeastPlayers;
+    } else if (regions.toUpperCase() == 'Europe'.toUpperCase()) {
+      selectedPlayerRegion = europePlayers;
     }
     notifyListeners();
   }
