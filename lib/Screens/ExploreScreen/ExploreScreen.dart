@@ -1,8 +1,9 @@
 import 'package:arena/Screens/ExploreScreen/BuildExploreScreenItems.dart';
+import 'package:arena/Screens/ExploreScreen/ExploreScreenProvider.dart';
 import 'package:arena/Screens/ExploreScreen/SearchScreen.dart';
 import 'package:arena/Themes/TextTheme.dart';
-import 'package:arena/Utilities/ExploreScreenItemDetail.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ExploreScreen extends StatefulWidget {
   @override
@@ -10,166 +11,169 @@ class ExploreScreen extends StatefulWidget {
 }
 
 class _ExploreScreenState extends State<ExploreScreen> {
-  List<ExploreScreenTournoumentDetail> searchTournouments =
-      searchScreenTournouments;
+  Widget buildBottomSheet(BuildContext context) {
+    return Container();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primaryColor: Colors.cyan),
-      home: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height - 120,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 10,
-                      left: 15,
-                      right: 15,
-                    ),
-                    child: Row(
+      home: ChangeNotifierProvider(
+        create: (_) => ExploreScreenProvider(),
+        child: Scaffold(
+          body: SafeArea(
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Consumer<ExploreScreenProvider>(
+                builder: (context, provider, child) {
+                  return Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height - 30,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Explore',
-                          style: kSearchScreenTextTheme(
-                            Colors.black,
-                            25,
-                            FontWeight.w700,
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 10,
+                            left: 15,
+                            right: 15,
+                          ),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Explore',
+                                style: kSearchScreenTextTheme(
+                                  Colors.black,
+                                  25,
+                                  FontWeight.w700,
+                                ),
+                              ),
+                              Spacer(),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.search,
+                                ),
+                                onPressed: () {
+                                  showSearch(
+                                      context: context,
+                                      delegate: Search(
+                                          items: provider.searchScreenTours));
+                                },
+                              )
+                            ],
                           ),
                         ),
-                        Spacer(),
-                        IconButton(
-                          icon: Icon(
-                            Icons.search,
-                          ),
-                          onPressed: () {
-                            showSearch(context: context, delegate: Search());
+                        GestureDetector(
+                          onTap: () {
+                            showModalBottomSheet(
+                                context: context, builder: buildBottomSheet);
                           },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 100,
+                            margin: EdgeInsets.only(
+                              left: 20,
+                              right: 20,
+                              top: 25,
+                              bottom: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.brown.withAlpha(90),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                            ),
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  right: 0,
+                                  top: 10,
+                                  child: Image.asset(
+                                    'images/fortnite_commondo_bg.png',
+                                    height: 90,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 20,
+                                  top: 25,
+                                  child: Text(
+                                    'Create Your\nOwn Tournoument',
+                                    style: kSearchScreenTextTheme(
+                                      Colors.white,
+                                      18,
+                                      FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(
+                            left: 10,
+                            right: 10,
+                            bottom: 5,
+                          ),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: 70,
+                                  child: Divider(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text('Suggestions'),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Container(
+                                  width: 70,
+                                  child: Divider(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 10,
+                              right: 10,
+                            ),
+                            child: Container(
+                              padding: EdgeInsets.only(
+                                left: 10,
+                                right: 10,
+                                top: 15,
+                                bottom: 5,
+                              ),
+                              width: MediaQuery.of(context).size.width,
+                              child: ListView.builder(
+                                physics: BouncingScrollPhysics(),
+                                itemCount: provider.searchScreenTours.length,
+                                itemBuilder: (context, index) {
+                                  return BuildSearchScreenItems(
+                                      searchTournoument:
+                                          provider.searchScreenTours[index]);
+                                },
+                              ),
+                            ),
+                          ),
                         )
                       ],
                     ),
-                  ),
-                  // Container(
-                  //   width: MediaQuery.of(context).size.width,
-                  //   height: 50,
-                  //   margin: EdgeInsets.only(
-                  //     left: 20,
-                  //     right: 20,
-                  //     top: 25,
-                  //     bottom: 5,
-                  //   ),
-                  //   child: ListView(
-                  //     physics: BouncingScrollPhysics(),
-                  //     scrollDirection: Axis.horizontal,
-                  //     children: [
-                  //       Container(
-                  //         color: Colors.red,
-                  //         width: 100,
-                  //         height: 50,
-                  //       ),
-                  //       Container(
-                  //         color: Colors.yellow,
-                  //         width: 100,
-                  //         height: 50,
-                  //       ),
-                  //       Container(
-                  //         color: Colors.red,
-                  //         width: 100,
-                  //         height: 50,
-                  //       ),
-                  //       Container(
-                  //         color: Colors.yellow,
-                  //         width: 100,
-                  //         height: 50,
-                  //       ),
-                  //       Container(
-                  //         color: Colors.red,
-                  //         width: 100,
-                  //         height: 50,
-                  //       ),
-                  //       Container(
-                  //         color: Colors.yellow,
-                  //         width: 100,
-                  //         height: 50,
-                  //       ),
-                  //       Container(
-                  //         color: Colors.red,
-                  //         width: 100,
-                  //         height: 50,
-                  //       ),
-                  //       Container(
-                  //         color: Colors.yellow,
-                  //         width: 100,
-                  //         height: 50,
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-
-                  Container(
-                    margin: EdgeInsets.only(
-                      left: 10,
-                      right: 10,
-                      bottom: 5,
-                    ),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 70,
-                            child: Divider(
-                              color: Colors.black,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text('Suggestions'),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Container(
-                            width: 70,
-                            child: Divider(
-                              color: Colors.black,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 10,
-                        right: 10,
-                      ),
-                      child: Container(
-                        padding: EdgeInsets.only(
-                          left: 10,
-                          right: 10,
-                          top: 15,
-                          bottom: 5,
-                        ),
-                        width: MediaQuery.of(context).size.width,
-                        child: ListView.builder(
-                          physics: BouncingScrollPhysics(),
-                          itemCount: searchTournouments.length,
-                          itemBuilder: (context, index) {
-                            return BuildSearchScreenItems(
-                                searchTournoument: searchTournouments[index]);
-                          },
-                        ),
-                      ),
-                    ),
-                  )
-                ],
+                  );
+                },
               ),
             ),
           ),

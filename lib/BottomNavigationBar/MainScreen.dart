@@ -46,12 +46,9 @@ class _BottomNavBarState extends State<BottomNavBar>
     with TickerProviderStateMixin {
   int selectedBarIndex = 2;
 
-
   static final Duration duration = const Duration(milliseconds: 300);
 
-
   var screens = [];
-
 
   @override
   Widget build(BuildContext context) {
@@ -65,22 +62,20 @@ class _BottomNavBarState extends State<BottomNavBar>
       ),
     ];
 
-    
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: screens[selectedBarIndex],
       bottomNavigationBar: AnimatedBottomBar(
-              barItems: widget.barItems,
-              animationDuration: const Duration(milliseconds: 200),
-              onBarTap: (index) {
-                setState(
-                  () {
-                    selectedBarIndex = index ;
-                  },
-                );
-              },
-            ),
+        barItems: widget.barItems,
+        animationDuration: const Duration(milliseconds: 200),
+        onBarTap: (index) {
+          setState(
+            () {
+              selectedBarIndex = index;
+            },
+          );
+        },
+      ),
     );
   }
 }

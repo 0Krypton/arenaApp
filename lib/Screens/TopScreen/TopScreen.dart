@@ -151,7 +151,7 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
                                           ),
                                           SizedBox(width: 5),
                                           Text(
-                                            'Kills (x100)',
+                                            'Kills (x1000)',
                                             style: kTopScreenTextTheme(
                                               Color(0xFFAB00FF),
                                               15,

@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Search extends SearchDelegate<Widget> {
-  final List<ExploreScreenTournoumentDetail> items = searchScreenTournouments;
+  final List<ExploreScreenTournoumentDetail> items;
+  Search({this.items});
   ExploreScreenTournoumentDetail item = ExploreScreenTournoumentDetail();
 
   @override

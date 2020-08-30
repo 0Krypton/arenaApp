@@ -25,6 +25,7 @@ class ExploreScreenTournoumentDetail {
     this.enteredPlayers,
   });
 }
+
 List<ExploreScreenTournoumentDetail> recents = [];
 List<ExploreScreenTournoumentDetail> searchScreenTournouments = [
   ExploreScreenTournoumentDetail(
@@ -49,7 +50,7 @@ List<ExploreScreenTournoumentDetail> searchScreenTournouments = [
     enteredPlayers: 3,
     prize: 19.99,
     imageUrl: 'images/Reyna_Valorant_cropped.png',
-    bgColor: Color(0xFF1F173C), 
+    bgColor: Color(0xFF1F173C),
   ),
   ExploreScreenTournoumentDetail(
     creator: 'User3',
@@ -60,7 +61,7 @@ List<ExploreScreenTournoumentDetail> searchScreenTournouments = [
     enteredPlayers: 254,
     prize: 50,
     imageUrl: 'images/fortnite-seeker_cropped.png',
-    bgColor: Color(0xFF519BB1), 
+    bgColor: Color(0xFF519BB1),
   ),
   ExploreScreenTournoumentDetail(
     creator: 'User4',
@@ -72,7 +73,7 @@ List<ExploreScreenTournoumentDetail> searchScreenTournouments = [
     enteredPlayers: 4,
     prize: 5,
     imageUrl: 'images/rabbit_raider_cropped.png',
-    bgColor: Color(0xFFE568A5), 
+    bgColor: Color(0xFFE568A5),
   ),
   ExploreScreenTournoumentDetail(
     creator: 'User5',
@@ -84,7 +85,7 @@ List<ExploreScreenTournoumentDetail> searchScreenTournouments = [
     enteredPlayers: 93,
     prize: 50,
     imageUrl: 'images/fortnite_ghoul_trooper_cropped.png',
-    bgColor: Color(0xFF75B0A6), 
+    bgColor: Color(0xFF75B0A6),
   ),
   ExploreScreenTournoumentDetail(
     creator: 'User6',
@@ -96,8 +97,8 @@ List<ExploreScreenTournoumentDetail> searchScreenTournouments = [
     enteredPlayers: 43,
     prize: 20,
     imageUrl: 'images/fortnite_torunoment_image_3.png',
-    bgColor: Color(0xFF6A02F7), 
-  ),   
+    bgColor: Color(0xFF6A02F7),
+  ),
   ExploreScreenTournoumentDetail(
     creator: 'User7',
     isPublic: true,
@@ -108,8 +109,8 @@ List<ExploreScreenTournoumentDetail> searchScreenTournouments = [
     enteredPlayers: 3,
     prize: 1.99,
     imageUrl: 'images/fortnite_starFlare_cropped.png',
-    bgColor: Color(0xFF9E0D28), 
-  ),   
+    bgColor: Color(0xFF9E0D28),
+  ),
   ExploreScreenTournoumentDetail(
     creator: 'User8',
     isPublic: true,
@@ -120,6 +121,6 @@ List<ExploreScreenTournoumentDetail> searchScreenTournouments = [
     enteredPlayers: 5,
     prize: 14.99,
     imageUrl: 'images/Phoenix_valorant_cropped.png',
-    bgColor: Color(0xFFFACC56), 
+    bgColor: Color(0xFFFACC56),
   ),
 ];

@@ -12,9 +12,9 @@ class BuildSearchScreenItems extends StatelessWidget {
   final ExploreScreenTournoumentDetail searchTournoument;
 
   String logoImage(String game) {
-    if (game == 'fortnite')
+    if (game.toLowerCase() == 'fortnite')
         return 'images/fortnite_logo.png';
-    else if (game == 'valorant')
+    else if (game.toLowerCase() == 'valorant')
         return 'images/valorant_logo.png';
     
   }
