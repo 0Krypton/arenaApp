@@ -1,3 +1,7 @@
+import 'package:arena/Animations/FadeInXCustom.dart';
+import 'package:arena/Animations/FadeInYCustom.dart';
+import 'package:arena/Animations/fadeInX.dart';
+import 'package:arena/Animations/fadeInY.dart';
 import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/Utilities/StoreItemDetail.dart';
 import 'package:flutter/material.dart';
@@ -51,12 +55,10 @@ class StoreItemDetailPage extends StatelessWidget {
               children: <Widget>[
                 Positioned(
                   top: -20,
-                  child: Container(
-                    width: 400,
-                    height: 450,
-                    padding: EdgeInsets.all(20),
-                    child: Hero(
-                      tag: storeItem.itemCount,
+                  child: FadeInYCustom(1,50.0, Container(
+                      width: 400,
+                      height: 450,
+                      padding: EdgeInsets.all(20),
                       child: Image.asset(
                         storeItem.itemImageUrl,
                         fit: BoxFit.contain,
@@ -67,44 +69,44 @@ class StoreItemDetailPage extends StatelessWidget {
                 Center(
                   child: Column(
                     children: <Widget>[
-                      Hero(
-                        tag: storeItem.name,
-                        child: Container(
-                          margin: EdgeInsets.only(top: 200, bottom: 20),
-                          padding: EdgeInsets.symmetric(
-                            vertical: 30,
-                            horizontal: 20,
+                      Container(
+                        margin: EdgeInsets.only(top: 200, bottom: 20),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 30,
+                          horizontal: 20,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(15),
                           ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15),
-                            ),
-                          ),
-                          width: MediaQuery.of(context).size.width - 2 * 20,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Center(
+                        ),
+                        width: MediaQuery.of(context).size.width - 2 * 20,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              FadeInYCustom(1.2,40,Center(
                                   child: Text(
                                     storeItem.name,
                                     style: kShopScreenItemNameTheme(
                                         storeItem.bgBeginColor, 40),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              FadeInXCustom(1.2,-50, Text(
                                   '${storeItem.itemCount} Items :',
                                   style: kShopScreenItemNameTheme(
                                       storeItem.bgBeginColor, 25),
                                 ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Padding(
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              FadeInXCustom(1.4,-50, Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 20),
                                   child: Text(
                                     storeItem.description,
@@ -112,16 +114,17 @@ class StoreItemDetailPage extends StatelessWidget {
                                         storeItem.bgBeginColor, 25),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: 50,
-                                ),
-                                Text(
+                              ),
+                              SizedBox(
+                                height: 50,
+                              ),
+                              FadeInXCustom(1.6,-50,Text(
                                   'Price :   \$ ${storeItem.price}',
                                   style: kShopScreenItemNameTheme(
                                       storeItem.bgBeginColor, 25),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

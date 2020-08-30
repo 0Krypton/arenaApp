@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:arena/Animations/fadeInX.dart';
+import 'package:arena/Animations/fadeInY.dart';
 import 'package:arena/Screens/TopScreen/TopScreenPlayers.dart';
 import 'package:arena/Screens/TopScreen/TopScreenPlayersProvider.dart';
 import 'package:arena/Themes/TextTheme.dart';
@@ -35,38 +37,38 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
                           left: 15,
                           right: 15,
                         ),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Top',
-                              style: kTopScreenTextTheme(
-                                Colors.black,
-                                25,
-                                FontWeight.w700,
-                              ),
-                            ),
-                          ],
+                        child: Text(
+                          'Top',
+                          style: kTopScreenTextTheme(
+                            Colors.black,
+                            25,
+                            FontWeight.w700,
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          top: 10,
-                          left: 25,
-                          right: 15,
-                        ),
-                        child: Row(
-                          children: [
-                            Flexible(
-                              child: Text(
-                                '* Notice all the data will upgrade when changes occured',
-                                style: kTopScreenTextTheme(
-                                  Colors.black54,
-                                  15,
-                                  FontWeight.w700,
+                      SizedBox(height: 20),
+                      FadeInY(
+                        0.5,
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 10,
+                            left: 25,
+                            right: 15,
+                          ),
+                          child: Row(
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  '* Notice all the data will upgrade when changes occured',
+                                  style: kTopScreenTextTheme(
+                                    Colors.black54,
+                                    15,
+                                    FontWeight.w700,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -74,26 +76,29 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
                       ),
                       Stack(
                         children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                              top: 60,
-                              right: 20,
-                              left: 20,
-                            ),
-                            width: MediaQuery.of(context).size.width,
-                            height: 350,
-                            decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withAlpha(50),
-                                    blurRadius: 15,
-                                    offset: Offset(10, -10),
+                          FadeInX(
+                            0.7,
+                            Container(
+                              margin: EdgeInsets.only(
+                                top: 60,
+                                right: 20,
+                                left: 20,
+                              ),
+                              width: MediaQuery.of(context).size.width,
+                              height: 350,
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withAlpha(50),
+                                      blurRadius: 15,
+                                      offset: Offset(10, -10),
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20),
                                   ),
-                                ],
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20),
-                                ),
-                                color: Colors.white),
+                                  color: Colors.white),
+                            ),
                           ),
                           Positioned(
                             top: 130,
@@ -104,83 +109,96 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    'Krypton',
-                                    style: kTopScreenTextTheme(
-                                        Colors.black, 25, FontWeight.bold),
+                                  FadeInX(
+                                    1.2,
+                                    Text(
+                                      'Krypton',
+                                      style: kTopScreenTextTheme(
+                                          Colors.black, 25, FontWeight.bold),
+                                    ),
                                   ),
                                   SizedBox(height: 20),
                                   Expanded(
-                                    child: LineChart(sampleData1()),
+                                    child:
+                                        FadeInX(1.5, LineChart(sampleData1())),
                                   ),
                                   SizedBox(height: 10),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: 20,
-                                            height: 20,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Color(0xff3aa989),
+                                      FadeInX(
+                                        1.7,
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 20,
+                                              height: 20,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Color(0xff3aa989),
+                                              ),
                                             ),
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            'Wins (x50)',
-                                            style: kTopScreenTextTheme(
-                                              Color(0xff3aa989),
-                                              15,
-                                              FontWeight.bold,
+                                            SizedBox(width: 5),
+                                            Text(
+                                              'Wins (x50)',
+                                              style: kTopScreenTextTheme(
+                                                Color(0xff3aa989),
+                                                15,
+                                                FontWeight.bold,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(width: 20),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: 20,
-                                            height: 20,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Color(0xFFAB00FF),
+                                      FadeInX(
+                                        1.9,
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 20,
+                                              height: 20,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Color(0xFFAB00FF),
+                                              ),
                                             ),
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            'Kills (x1000)',
-                                            style: kTopScreenTextTheme(
-                                              Color(0xFFAB00FF),
-                                              15,
-                                              FontWeight.bold,
+                                            SizedBox(width: 5),
+                                            Text(
+                                              'Kills (x1000)',
+                                              style: kTopScreenTextTheme(
+                                                Color(0xFFAB00FF),
+                                                15,
+                                                FontWeight.bold,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(width: 20),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: 20,
-                                            height: 20,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Color(0xFF00CBFF),
+                                      FadeInX(
+                                        2.1,
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 20,
+                                              height: 20,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Color(0xFF00CBFF),
+                                              ),
                                             ),
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            'K/D',
-                                            style: kTopScreenTextTheme(
-                                              Color(0xFF00CBFF),
-                                              15,
-                                              FontWeight.bold,
+                                            SizedBox(width: 5),
+                                            Text(
+                                              'K/D',
+                                              style: kTopScreenTextTheme(
+                                                Color(0xFF00CBFF),
+                                                15,
+                                                FontWeight.bold,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -190,19 +208,22 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
                           ),
                           Positioned(
                             top: 0,
-                            child: Container(
-                              height: 120,
-                              width: 120,
-                              margin: EdgeInsets.symmetric(
-                                  horizontal:
-                                      MediaQuery.of(context).size.width / 3),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xFF0F0478),
-                                    Color(0xFFFF0099),
-                                  ],
+                            child: FadeInY(
+                              0.9,
+                              Container(
+                                height: 120,
+                                width: 120,
+                                margin: EdgeInsets.symmetric(
+                                    horizontal:
+                                        MediaQuery.of(context).size.width / 3),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFF0F0478),
+                                      Color(0xFFFF0099),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -212,52 +233,58 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
                       SizedBox(
                         height: 20,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 70,
-                            child: Divider(
-                              color: Colors.black.withAlpha(90),
-                            ),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            'Top 100',
-                            style: kTopScreenTextTheme(
-                                Colors.black, 20, FontWeight.bold),
-                          ),
-                          SizedBox(width: 10),
-                          Container(
-                            width: 70,
-                            child: Divider(
-                              color: Colors.black.withAlpha(90),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 30,
-                        margin: EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
+                      FadeInY(
+                        2.4,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            BuildRegionServers(
-                              regionName: 'NA-West',
+                            Container(
+                              width: 70,
+                              child: Divider(
+                                color: Colors.black.withAlpha(90),
+                              ),
                             ),
-                            BuildRegionServers(
-                              regionName: 'NA-East',
+                            SizedBox(width: 10),
+                            Text(
+                              'Top 100',
+                              style: kTopScreenTextTheme(
+                                  Colors.black, 20, FontWeight.bold),
                             ),
-                            BuildRegionServers(
-                              regionName: 'Iran',
-                            ),
-                            BuildRegionServers(
-                              regionName: 'Europe',
+                            SizedBox(width: 10),
+                            Container(
+                              width: 70,
+                              child: Divider(
+                                color: Colors.black.withAlpha(90),
+                              ),
                             ),
                           ],
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      FadeInX(
+                        2.6,
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 30,
+                          margin: EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              BuildRegionServers(
+                                regionName: 'NA-West',
+                              ),
+                              BuildRegionServers(
+                                regionName: 'NA-East',
+                              ),
+                              BuildRegionServers(
+                                regionName: 'Iran',
+                              ),
+                              BuildRegionServers(
+                                regionName: 'Europe',
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(

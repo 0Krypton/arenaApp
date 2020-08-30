@@ -1,3 +1,5 @@
+import 'package:arena/Animations/fadeInX.dart';
+import 'package:arena/Animations/fadeInY.dart';
 import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/Utilities/FunkoPopDetail.dart';
 import 'package:flutter/material.dart';
@@ -55,52 +57,57 @@ class _FunkoPopDetailPageState extends State<FunkoPopDetailPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Container(
-                        width: 300,
-                        child: Text(
-                          widget.funkoPop.title,
-                          style: kShopScreenFunkoPopTheme.copyWith(
-                              color: Colors.black,
-                              fontSize: 30,
-                              fontWeight: FontWeight.w100),
+                      FadeInX(1,Container(
+                          width: 300,
+                          child: Text(
+                            widget.funkoPop.title,
+                            style: kShopScreenFunkoPopTheme.copyWith(
+                                color: Colors.black,
+                                fontSize: 30,
+                                fontWeight: FontWeight.w100),
+                          ),
                         ),
                       ),
                       SizedBox(height: 16),
-                      _buildRating(),
+                      FadeInX(1.2, _buildRating()),
                       SizedBox(height: 24),
-                      Text(
-                        "DETAILS",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                      FadeInX(1.4,Text(
+                          "DETAILS",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                       SizedBox(height: 16),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Text(
-                          widget.funkoPop.price,
-                          style: kShopScreenFunkoPopPriceTheme.copyWith(
-                              color: Colors.black.withOpacity(0.8),
-                              fontSize: 15),
+                      FadeInX(1.6, Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Text(
+                            widget.funkoPop.price,
+                            style: kShopScreenFunkoPopPriceTheme.copyWith(
+                                color: Colors.black.withOpacity(0.8),
+                                fontSize: 15),
+                          ),
                         ),
                       ),
                       SizedBox(height: 24),
-                      Text(
-                        "COLOR OPTIONS",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                      FadeInX(1.8, Text(
+                          "COLOR OPTIONS",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                       SizedBox(height: 16),
-                      Row(
-                        children: <Widget>[
-                          _buildColorOption(widget.funkoPop.bgColor),
-                          // _buildColorOption(Colors.green),
-                          // _buildColorOption(Colors.orange),
-                          // _buildColorOption(Colors.red),
-                        ],
+                      FadeInX(2, Row(
+                          children: <Widget>[
+                            _buildColorOption(widget.funkoPop.bgColor),
+                            // _buildColorOption(Colors.green),
+                            // _buildColorOption(Colors.orange),
+                            // _buildColorOption(Colors.red),
+                          ],
+                        ),
                       )
                     ],
                   ),
@@ -114,9 +121,10 @@ class _FunkoPopDetailPageState extends State<FunkoPopDetailPage> {
             Positioned(
               left: 110,
               bottom: 90,
-              child: Image.asset(
-                widget.funkoPop.imageUrl,
-                width: MediaQuery.of(context).size.width * .85,
+              child: FadeInY(0.5, Image.asset(
+                  widget.funkoPop.imageUrl,
+                  width: MediaQuery.of(context).size.width * .85,
+                ),
               ),
             ),
           ],

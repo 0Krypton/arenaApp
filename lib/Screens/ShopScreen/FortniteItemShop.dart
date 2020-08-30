@@ -54,16 +54,16 @@ class _FortniteItemShopState extends State<FortniteItemShop> {
         ),
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         child: Container(
           height: MediaQuery.of(context).size.height,
-          padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-          margin: EdgeInsets.symmetric(vertical: 40),
+          padding: EdgeInsets.symmetric(horizontal: 20),
           child: ListView(
             physics: BouncingScrollPhysics(),
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left: 8.0,top: 30),
+                padding: const EdgeInsets.only(left: 8.0),
                 child: Text(
                   dailyItemList.length == 0 ? '' : 'Daily Items',
                   style: kShopScreenItemNameTheme(Colors.black, 20),
@@ -153,15 +153,15 @@ class ItemList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 250,
-        child: GridView.count(
-    crossAxisCount: 3,
-    childAspectRatio: 1,
-    children: list
-        .map(
-          (item) => Image.network(item['full_background']),
-        )
-        .toList(),
-        ),
-      );
+      child: GridView.count(
+        crossAxisCount: 3,
+        childAspectRatio: 1,
+        children: list
+            .map(
+              (item) => Image.network(item['full_background']),
+            )
+            .toList(),
+      ),
+    );
   }
 }

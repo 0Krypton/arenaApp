@@ -1,3 +1,5 @@
+import 'package:arena/Animations/FadeInXCustom.dart';
+import 'package:arena/Animations/FadeInYCustom.dart';
 import 'package:arena/Screens/ExploreScreen/BuildExploreScreenItems.dart';
 import 'package:arena/Screens/ExploreScreen/ExploreScreenProvider.dart';
 import 'package:arena/Screens/ExploreScreen/SearchScreen.dart';
@@ -64,108 +66,111 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             ],
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            showModalBottomSheet(
-                                context: context, builder: buildBottomSheet);
-                          },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 100,
-                            margin: EdgeInsets.only(
-                              left: 20,
-                              right: 20,
-                              top: 25,
-                              bottom: 5,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.brown.withAlpha(90),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
+                        FadeInYCustom(1,-50,GestureDetector(
+                            onTap: () {
+                              showModalBottomSheet(
+                                  context: context, builder: buildBottomSheet);
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              height: 100,
+                              margin: EdgeInsets.only(
+                                left: 20,
+                                right: 20,
+                                top: 25,
+                                bottom: 5,
                               ),
-                            ),
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  right: 0,
-                                  top: 10,
-                                  child: Image.asset(
-                                    'images/fortnite_commondo_bg.png',
-                                    height: 90,
-                                    fit: BoxFit.contain,
-                                  ),
+                              decoration: BoxDecoration(
+                                color: Colors.brown.withAlpha(90),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(15),
                                 ),
-                                Positioned(
-                                  left: 20,
-                                  top: 25,
-                                  child: Text(
-                                    'Create Your\nOwn Tournoument',
-                                    style: kSearchScreenTextTheme(
-                                      Colors.white,
-                                      18,
-                                      FontWeight.bold,
+                              ),
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    right: 0,
+                                    top: 10,
+                                    child: Image.asset(
+                                      'images/fortnite_commondo_bg.png',
+                                      height: 90,
+                                      fit: BoxFit.contain,
                                     ),
                                   ),
-                                ),
-                              ],
+                                  Positioned(
+                                    left: 20,
+                                    top: 25,
+                                    child: Text(
+                                      'Create Your\nOwn Tournoument',
+                                      style: kSearchScreenTextTheme(
+                                        Colors.white,
+                                        18,
+                                        FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: 10,
-                            right: 10,
-                            bottom: 5,
-                          ),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: 70,
-                                  child: Divider(
-                                    color: Colors.black,
+                        FadeInYCustom(1.2,-50,Container(
+                            margin: EdgeInsets.only(
+                              left: 10,
+                              right: 10,
+                              top: 5,
+                            ),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 70,
+                                    child: Divider(
+                                      color: Colors.black,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text('Suggestions'),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Container(
-                                  width: 70,
-                                  child: Divider(
-                                    color: Colors.black,
+                                  SizedBox(
+                                    width: 5,
                                   ),
-                                ),
-                              ],
+                                  Text('Suggestions'),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Container(
+                                    width: 70,
+                                    child: Divider(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                         Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 10,
-                              right: 10,
-                            ),
-                            child: Container(
-                              padding: EdgeInsets.only(
+                          child: FadeInXCustom(1,-50, Padding(
+                              padding: const EdgeInsets.only(
                                 left: 10,
                                 right: 10,
-                                top: 15,
-                                bottom: 5,
                               ),
-                              width: MediaQuery.of(context).size.width,
-                              child: ListView.builder(
-                                physics: BouncingScrollPhysics(),
-                                itemCount: provider.searchScreenTours.length,
-                                itemBuilder: (context, index) {
-                                  return BuildSearchScreenItems(
-                                      searchTournoument:
-                                          provider.searchScreenTours[index]);
-                                },
+                              child: Container(
+                                padding: EdgeInsets.only(
+                                  left: 10,
+                                  right: 10,
+                                  top: 15,
+                                  bottom: 5,
+                                ),
+                                width: MediaQuery.of(context).size.width,
+                                child: ListView.builder(
+                                  physics: BouncingScrollPhysics(),
+                                  itemCount: provider.searchScreenTours.length,
+                                  itemBuilder: (context, index) {
+                                    return BuildSearchScreenItems(
+                                        searchTournoument:
+                                            provider.searchScreenTours[index]);
+                                  },
+                                ),
                               ),
                             ),
                           ),
