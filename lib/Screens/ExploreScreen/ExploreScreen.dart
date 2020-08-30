@@ -14,7 +14,19 @@ class ExploreScreen extends StatefulWidget {
 
 class _ExploreScreenState extends State<ExploreScreen> {
   Widget buildBottomSheet(BuildContext context) {
-    return Container();
+    return Container(
+      color: Colors.black54,
+      child: Container(
+        height: 500,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -66,7 +78,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             ],
                           ),
                         ),
-                        FadeInYCustom(1,-50,GestureDetector(
+                        FadeInYCustom(
+                          1,
+                          -50,
+                          GestureDetector(
                             onTap: () {
                               showModalBottomSheet(
                                   context: context, builder: buildBottomSheet);
@@ -81,7 +96,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                 bottom: 5,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.brown.withAlpha(90),
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(15),
                                 ),
@@ -95,6 +109,25 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                       'images/fortnite_commondo_bg.png',
                                       height: 90,
                                       fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 30,
+                                    top: 10,
+                                    child: Image.asset(
+                                      'images/valorant_background.png',
+                                      height: 90,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      color: Colors.blueGrey.withOpacity(0.5),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(15),
+                                      ),
                                     ),
                                   ),
                                   Positioned(
@@ -114,7 +147,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             ),
                           ),
                         ),
-                        FadeInYCustom(1.2,-50,Container(
+                        FadeInYCustom(
+                          1.2,
+                          -50,
+                          Container(
                             margin: EdgeInsets.only(
                               left: 10,
                               right: 10,
@@ -149,7 +185,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
                           ),
                         ),
                         Expanded(
-                          child: FadeInXCustom(1,-50, Padding(
+                          child: FadeInXCustom(
+                            1,
+                            -50,
+                            Padding(
                               padding: const EdgeInsets.only(
                                 left: 10,
                                 right: 10,
