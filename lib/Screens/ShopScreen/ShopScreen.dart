@@ -3,6 +3,7 @@ import 'package:arena/Animations/fadeInY.dart';
 import 'package:arena/Colors/colors.dart';
 import 'package:arena/CustomClipper/ShopScreenClipBG.dart';
 import 'package:arena/Screens/ShopScreen/Store_Item_Detail_Page.dart';
+import 'package:arena/Screens/ShopScreen/sliding_card.dart';
 import 'package:arena/Screens/loading_screen.dart';
 
 import 'package:arena/Themes/TextTheme.dart';
@@ -33,6 +34,23 @@ class _ShopScreenState extends State<ShopScreen> {
 
   List<FunkoPopDetail> funkoPops = listFunkoPop;
   List<Store> storeItems = listStoreItem;
+  PageController pageController;
+  double pageOffset = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController(viewportFraction: 0.8);
+    pageController.addListener(() {
+      setState(() => pageOffset = pageController.page); //<-- add listener and set state
+    });
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +73,9 @@ class _ShopScreenState extends State<ShopScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text('Items', style: kShopScreenLabelTextStyle),
+                      Text('Items',
+                          style: kShopScreenLabelTextStyle.copyWith(
+                              fontWeight: FontWeight.w700)),
                       IconButton(
                         icon: Icon(
                           Icons.shopping_cart,
@@ -66,7 +86,9 @@ class _ShopScreenState extends State<ShopScreen> {
                     ],
                   ),
                 ),
-                FadeInY(0.5, Padding(
+                FadeInY(
+                  0.5,
+                  Padding(
                     padding: const EdgeInsets.only(left: 20.0, top: 5),
                     child: Row(
                       children: <Widget>[
@@ -79,8 +101,8 @@ class _ShopScreenState extends State<ShopScreen> {
                           child: AnimatedContainer(
                             duration: Duration(milliseconds: 500),
                             margin: EdgeInsets.symmetric(horizontal: 2),
-                            padding:
-                                EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 2),
                             decoration: BoxDecoration(
                               color: selectedGame == Game.Fortnite
                                   ? kActiveGameItem
@@ -108,8 +130,8 @@ class _ShopScreenState extends State<ShopScreen> {
                           },
                           child: AnimatedContainer(
                             duration: Duration(milliseconds: 500),
-                            padding:
-                                EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 2),
                             margin: EdgeInsets.symmetric(horizontal: 2),
                             decoration: BoxDecoration(
                               color: selectedGame == Game.ApexLegends
@@ -138,8 +160,8 @@ class _ShopScreenState extends State<ShopScreen> {
                           },
                           child: AnimatedContainer(
                             duration: Duration(milliseconds: 500),
-                            padding:
-                                EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 15, vertical: 2),
                             margin: EdgeInsets.symmetric(horizontal: 2),
                             decoration: BoxDecoration(
                               color: selectedGame == Game.Valorant
@@ -164,7 +186,9 @@ class _ShopScreenState extends State<ShopScreen> {
                     ),
                   ),
                 ),
-                FadeInY(0.7, Padding(
+                FadeInY(
+                  0.7,
+                  Padding(
                     padding: const EdgeInsets.only(left: 30.0, top: 20),
                     child: Text(
                       'Funko Pops',
@@ -175,55 +199,86 @@ class _ShopScreenState extends State<ShopScreen> {
                     ),
                   ),
                 ),
-                FadeInX(1,Container(
-                    width: 400,
-                    height: 400,
-                    padding: EdgeInsets.all(32),
-                    child: Swiper(
-                      itemCount: funkoPops.length,
-                      itemWidth: width - 62 * 2,
-                      itemHeight: height - 62 * 2,
-                      layout: SwiperLayout.STACK,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (context, a, b) =>
-                                    FunkoPopDetailPage(
-                                  funkoPops[index],
-                                ),
-                              ),
-                            );
-                          },
-                          child: Stack(
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: _buildBackground(index, width - 62 * 2,
-                                    kShopScreenFunkoPopTheme),
-                              ),
-                              Positioned(
-                                bottom: 50,
-                                left: 50,
-                                child: Image.asset(
-                                  funkoPops[index].imageUrl,
-                                  width: 300,
-                                  height: 300,
-                                ),
-                              ),
-                            ],
+                SizedBox(height: 20),
+                FadeInX(
+                    1,
+                    SizedBox(
+                      height: 450,
+                      width: 500, //<-- set height of the card
+                      child: PageView(
+                        controller: pageController,
+                        children: [
+                          SlidingCard(
+                            //<-- new widget
+                            funkoPop: funkoPops[0],
+                            offset:pageOffset-1,
                           ),
-                        );
-                      },
+                          SlidingCard(
+                            //<-- new widget
+                            funkoPop: funkoPops[1],
+                            offset:pageOffset-2,
+                          ),
+                          SlidingCard(
+                            //<-- new widget
+                            funkoPop: funkoPops[2],
+                            offset:pageOffset-2,
+                          ),
+                          SlidingCard(
+                            //<-- new widget
+                            funkoPop: funkoPops[3],
+                            offset:pageOffset-3,
+                          ),
+                        ],
+                      ),
+                    )
+                    // Container(
+                    //   width: 400,
+                    //   height: 400,
+                    //   padding: EdgeInsets.all(32),
+                    //   child: Swiper(
+                    //     itemCount: funkoPops.length,
+                    //     itemWidth: width - 62 * 2,
+                    //     itemHeight: height - 62 * 2,
+                    //     layout: SwiperLayout.STACK,
+                    //     itemBuilder: (context, index) {
+                    //       return InkWell(
+                    //         onTap: () {
+                    //           Navigator.push(
+                    //             context,
+                    //             PageRouteBuilder(
+                    //               pageBuilder: (context, a, b) =>
+                    //                   FunkoPopDetailPage(
+                    //                 funkoPops[index],
+                    //               ),
+                    //             ),
+                    //           );
+                    //         },
+                    //         child: Stack(
+                    //           children: <Widget>[
+                    //             Padding(
+                    //               padding: const EdgeInsets.only(top: 8.0),
+                    //               child: _buildBackground(index, width - 62 * 2,
+                    //                   kShopScreenFunkoPopTheme),
+                    //             ),
+                    //             Positioned(
+                    //               bottom: 50,
+                    //               left: 50,
+                    //               child: Image.asset(
+                    //                 funkoPops[index].imageUrl,
+                    //                 width: 300,
+                    //                 height: 300,
+                    //               ),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       );
+                    //     },
+                    //   ),
+                    // ),
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                FadeInY(1.2, Padding(
+                FadeInY(
+                  1.2,
+                  Padding(
                     padding: const EdgeInsets.only(left: 30.0, top: 20),
                     child: Text(
                       'Store',
@@ -234,7 +289,9 @@ class _ShopScreenState extends State<ShopScreen> {
                     ),
                   ),
                 ),
-                FadeInX(1.5, Padding(
+                FadeInX(
+                  1.5,
+                  Padding(
                     padding: const EdgeInsets.only(
                       left: 10.0,
                     ),
@@ -307,7 +364,8 @@ class _ShopScreenState extends State<ShopScreen> {
                                         child: Text(
                                           listStoreItem[index].name,
                                           style: kShopScreenItemNameTheme(
-                                              storeItems[index].bgBeginColor, 25),
+                                              storeItems[index].bgBeginColor,
+                                              25),
                                         ),
                                       ),
                                       Positioned(
@@ -316,7 +374,8 @@ class _ShopScreenState extends State<ShopScreen> {
                                         child: Text(
                                           '\$ ${listStoreItem[index].price}',
                                           style: kShopScreenItemNameTheme(
-                                              storeItems[index].bgBeginColor, 25),
+                                              storeItems[index].bgBeginColor,
+                                              25),
                                         ),
                                       ),
                                     ],
@@ -342,7 +401,9 @@ class _ShopScreenState extends State<ShopScreen> {
                 SizedBox(
                   height: 10,
                 ),
-                FadeInX(1.8, InkWell(
+                FadeInX(
+                  1.8,
+                  InkWell(
                     onTap: () {
                       Navigator.pushNamed(context, LoadingScreen.id);
                     },
@@ -381,7 +442,8 @@ class _ShopScreenState extends State<ShopScreen> {
                               top: 30,
                               child: Text(
                                 'Show Item Shop',
-                                style: kShopScreenItemNameTheme(Colors.white, 20),
+                                style:
+                                    kShopScreenItemNameTheme(Colors.white, 20),
                               ),
                             ),
                           ],
