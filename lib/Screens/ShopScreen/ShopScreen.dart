@@ -5,16 +5,12 @@ import 'package:arena/CustomClipper/ShopScreenClipBG.dart';
 import 'package:arena/Screens/ShopScreen/Store_Item_Detail_Page.dart';
 import 'package:arena/Screens/ShopScreen/sliding_card.dart';
 import 'package:arena/Screens/loading_screen.dart';
-
 import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/Utilities/FunkoPopDetail.dart';
 import 'package:arena/Utilities/StoreItemDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'Funko_Pop_Detail_Page.dart';
 
 enum Game {
   Fortnite,
@@ -42,7 +38,8 @@ class _ShopScreenState extends State<ShopScreen> {
     super.initState();
     pageController = PageController(viewportFraction: 0.8);
     pageController.addListener(() {
-      setState(() => pageOffset = pageController.page); //<-- add listener and set state
+      setState(() =>
+          pageOffset = pageController.page); //<-- add listener and set state
     });
   }
 
@@ -201,81 +198,66 @@ class _ShopScreenState extends State<ShopScreen> {
                 ),
                 SizedBox(height: 20),
                 FadeInX(
-                    1,
-                    SizedBox(
-                      height: 450,
-                      width: 500, //<-- set height of the card
-                      child: PageView(
-                        controller: pageController,
-                        children: [
-                          SlidingCard(
-                            //<-- new widget
-                            funkoPop: funkoPops[0],
-                            offset:pageOffset-1,
-                          ),
-                          SlidingCard(
-                            //<-- new widget
-                            funkoPop: funkoPops[1],
-                            offset:pageOffset-2,
-                          ),
-                          SlidingCard(
-                            //<-- new widget
-                            funkoPop: funkoPops[2],
-                            offset:pageOffset-2,
-                          ),
-                          SlidingCard(
-                            //<-- new widget
-                            funkoPop: funkoPops[3],
-                            offset:pageOffset-3,
-                          ),
-                        ],
-                      ),
-                    )
-                    // Container(
-                    //   width: 400,
-                    //   height: 400,
-                    //   padding: EdgeInsets.all(32),
-                    //   child: Swiper(
-                    //     itemCount: funkoPops.length,
-                    //     itemWidth: width - 62 * 2,
-                    //     itemHeight: height - 62 * 2,
-                    //     layout: SwiperLayout.STACK,
-                    //     itemBuilder: (context, index) {
-                    //       return InkWell(
-                    //         onTap: () {
-                    //           Navigator.push(
-                    //             context,
-                    //             PageRouteBuilder(
-                    //               pageBuilder: (context, a, b) =>
-                    //                   FunkoPopDetailPage(
-                    //                 funkoPops[index],
-                    //               ),
-                    //             ),
-                    //           );
-                    //         },
-                    //         child: Stack(
-                    //           children: <Widget>[
-                    //             Padding(
-                    //               padding: const EdgeInsets.only(top: 8.0),
-                    //               child: _buildBackground(index, width - 62 * 2,
-                    //                   kShopScreenFunkoPopTheme),
-                    //             ),
-                    //             Positioned(
-                    //               bottom: 50,
-                    //               left: 50,
-                    //               child: Image.asset(
-                    //                 funkoPops[index].imageUrl,
-                    //                 width: 300,
-                    //                 height: 300,
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       );
-                    //     },
-                    //   ),
-                    // ),
+                  1,
+                  SizedBox(
+                    height: 450,
+                    width: 500, //<-- set height of the card
+                    child: PageView.builder(
+                      controller: pageController,
+                      itemCount: funkoPops.length,
+                      itemBuilder: (context, index) {
+                        return SlidingCard(
+                          funkoPop: funkoPops[index],
+                          offset: pageOffset - index,
+                        );
+                      },
                     ),
+                  ),
+                  // Container(
+                  //   width: 400,
+                  //   height: 400,
+                  //   padding: EdgeInsets.all(32),
+                  //   child: Swiper(
+                  //     itemCount: funkoPops.length,
+                  //     itemWidth: width - 62 * 2,
+                  //     itemHeight: height - 62 * 2,
+                  //     layout: SwiperLayout.STACK,
+                  //     itemBuilder: (context, index) {
+                  //       return InkWell(
+                  //         onTap: () {
+                  //           Navigator.push(
+                  //             context,
+                  //             PageRouteBuilder(
+                  //               pageBuilder: (context, a, b) =>
+                  //                   FunkoPopDetailPage(
+                  //                 funkoPops[index],
+                  //               ),
+                  //             ),
+                  //           );
+                  //         },
+                  //         child: Stack(
+                  //           children: <Widget>[
+                  //             Padding(
+                  //               padding: const EdgeInsets.only(top: 8.0),
+                  //               child: _buildBackground(index, width - 62 * 2,
+                  //                   kShopScreenFunkoPopTheme),
+                  //             ),
+                  //             Positioned(
+                  //               bottom: 50,
+                  //               left: 50,
+                  //               child: Image.asset(
+                  //                 funkoPops[index].imageUrl,
+                  //                 width: 300,
+                  //                 height: 300,
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
+                ),
                 FadeInY(
                   1.2,
                   Padding(

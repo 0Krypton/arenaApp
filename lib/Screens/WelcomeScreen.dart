@@ -4,6 +4,7 @@ import 'package:arena/Screens/Login&Registration/LoginScreen.dart';
 import 'package:arena/Screens/Login&Registration/RegistrationScreen.dart';
 import 'package:arena/Screens/ShopScreen/ShopScreen.dart';
 import 'package:arena/Screens/loading_screen.dart';
+import 'package:arena/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -76,6 +77,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, BottomNavBar.id);
+                  },
+                ),
+                FlatButton(
+                  child: Text(
+                    'Go to Splash Screen',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, SplashScreen.id);
                   },
                 ),
               ],

@@ -3,6 +3,7 @@ import 'package:arena/Animations/FadeInYCustom.dart';
 import 'package:arena/Colors/colors.dart';
 import 'package:arena/Screens/Intro_Screen.dart';
 import 'package:arena/model/login_model.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -45,6 +46,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
             children: <Widget>[
+              Container(
+                width: 120,
+                height: 120,
+                child: FlareActor(
+                  'assets/arena_logo.flr',
+                  animation: 'logo_play',
+                  alignment: Alignment.center,
+                ),
+              ),
               Center(
                 child: FadeInYCustom(
                   0.5,
@@ -58,13 +68,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 100),
+              SizedBox(height: 30),
               FadeInYCustom(
                 0.5,
                 -50.0,
                 Container(
                   decoration: BoxDecoration(
-                    color: kBgColorAccent,
+                    // color: kBgColorAccent,
+                    gradient: LinearGradient(
+                      colors: [
+                        kGradientBegin,
+                        kGradientEnd,
+                      ],
+                    ),
                     borderRadius: BorderRadius.all(
                       Radius.circular(20.0),
                     ),
@@ -274,7 +290,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               color: kBgColors,
                               borderRadius: BorderRadius.circular(15.0),
                               elevation: 15.0,
-                              shadowColor: kBgColors,
+                              shadowColor: kShadowColor,
                               child: MaterialButton(
                                 minWidth: MediaQuery.of(context).size.width,
                                 height: 40.0,

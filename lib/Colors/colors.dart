@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 // Login and RegistrationScreen Colors
 
 const Color kBgColors = Colors.white;
-const Color kBgColorAccent = Colors.grey;
-const Color kLoginTitleColor = Colors.black;
-
+const Color kBgColorAccent = Color(0xFF53a9bc);
+const Color kLoginTitleColor = Color(0xFF53a9bc);
+const Color kShadowColor = Color(0xFf055dab);
+const Color kGradientBegin = Color(0xFf055dab);
+const Color kGradientEnd = Color(0xFF53a9bc);
 //
 
 

@@ -3,6 +3,7 @@ import 'package:arena/Animations/FadeInYCustom.dart';
 import 'package:arena/Colors/colors.dart';
 import 'package:arena/Screens/Login&Registration/RegistrationScreen.dart';
 import 'package:arena/model/login_model.dart';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -44,6 +45,15 @@ class _LoginScreenState extends State<LoginScreen> {
           child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
             children: <Widget>[
+              Container(
+                width: 120,
+                height: 120,
+                child: FlareActor(
+                  'assets/arena_logo.flr',
+                  animation: 'logo_play',
+                  alignment: Alignment.center,
+                ),
+              ),
               Center(
                 child: FadeInYCustom(
                   0.5,
@@ -57,19 +67,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: 100),
+              SizedBox(
+                height: 30,
+              ),
               FadeInYCustom(
                 0.5,
                 -50.0,
                 Container(
                   decoration: BoxDecoration(
-                    color: kBgColorAccent,
+                    // color: kBgColorAccent,
+                    gradient: LinearGradient(
+                      colors: [
+                        kGradientBegin,
+                        kGradientEnd,
+                      ],
+                    ),
                     borderRadius: BorderRadius.all(
                       Radius.circular(20.0),
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withAlpha(50),
+                        color: kShadowColor.withAlpha(70),
                         offset: Offset(-1, -1),
                         spreadRadius: 5,
                         blurRadius: 10,
@@ -241,7 +259,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: kBgColors,
                               borderRadius: BorderRadius.circular(15.0),
                               elevation: 15.0,
-                              shadowColor: kBgColors,
+                              shadowColor: kShadowColor,
                               child: MaterialButton(
                                 minWidth: MediaQuery.of(context).size.width,
                                 height: 40.0,
@@ -272,7 +290,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Text(
                                 'Don\'t have an account? ',
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 11.0),
+                                    color: Colors.white70, fontSize: 13.0),
                               ),
                             ),
                             FadeInYCustom(
@@ -281,8 +299,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               GestureDetector(
                                 child: Text(
                                   ' Register Now',
-                                  style:
-                                      TextStyle(color: kBgColors, fontSize: 13),
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 13),
                                 ),
                                 onTap: () {
                                   Navigator.pushNamed(

@@ -5,6 +5,7 @@ import 'package:arena/Screens/Login&Registration/RegistrationScreen.dart';
 import 'package:arena/Screens/ShopScreen/ShopItemDetailPage.dart';
 import 'package:arena/Screens/WelcomeScreen.dart';
 import 'package:arena/Screens/loading_screen.dart';
+import 'package:arena/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'Screens/ShopScreen/ShopScreen.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         ShopScreen.id: (context) => ShopScreen(),
         ShopItemDetailPage.id: (context) => ShopItemDetailPage(),
         BottomNavBar.id: (context) => BottomNavBar(),
+        SplashScreen.id: (context) => SplashScreen(),
       },
     );
   }

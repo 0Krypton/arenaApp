@@ -23,12 +23,10 @@ class SlidingCard extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ClipRRect(
-            //<--clipping image
             borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
             child: Stack(
               children: [
                 Image.asset(
-                  //<-- main image
                   funkoPop.bgImageUrl,
                   height: 250,
                   width: 600,
@@ -43,7 +41,6 @@ class SlidingCard extends StatelessWidget {
                 Positioned(
                   top: 50,
                   child: Image.asset(
-                    //<-- main image
                     funkoPop.bgUpperImageUrl,
                     height: 250,
                     width: 250,
@@ -57,7 +54,7 @@ class SlidingCard extends StatelessWidget {
           Expanded(
             child: CardContent(
               funkoPop: funkoPop,
-            ), //<-- will be replaced soon :)
+            ),
           ),
         ],
       ),
@@ -93,13 +90,11 @@ class CardContent extends StatelessWidget {
                     ),
                   ),
                   Spacer(),
-                  Expanded(
-                    child: Text(
-                      funkoPop.price ?? '',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                      ),
+                  Text(
+                    funkoPop.price ?? '',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
                     ),
                   ),
                 ],
