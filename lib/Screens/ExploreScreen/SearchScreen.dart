@@ -9,7 +9,9 @@ class Search extends SearchDelegate<Widget> {
   final List<ExploreScreenTournoumentDetail> items;
   Search({this.items});
   ExploreScreenTournoumentDetail item = ExploreScreenTournoumentDetail();
+  var suggestionList;
 
+  
   @override
   List<Widget> buildActions(BuildContext context) {
     //actions for appbar
@@ -42,18 +44,23 @@ class Search extends SearchDelegate<Widget> {
   @override
   Widget buildResults(BuildContext context) {
     //show some result based on the selection
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: BuildSearchScreenItems(
-        searchTournoument: item,
-      ),
+    return ListView.builder(
+      itemCount: suggestionList.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: BuildSearchScreenItems(
+            searchTournoument: suggestionList[index],
+          ),
+        );
+      },
     );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
     //show whe someone search for something
-    final suggestionList = query.isEmpty
+    suggestionList = query.isEmpty
         ? recents
         : items
             .where(
@@ -79,6 +86,7 @@ class Search extends SearchDelegate<Widget> {
                 recents.add(suggestionList[index]);
               }
               item = suggestionList[index];
+              print(suggestionList[index].title);
               showResults(context);
             },
             child: Container(
@@ -103,7 +111,6 @@ class Search extends SearchDelegate<Widget> {
                     image: DecorationImage(
                       image: AssetImage(
                         suggestionList[index].imageUrl,
-                        
                       ),
                       fit: BoxFit.contain,
                     ),
@@ -157,10 +164,11 @@ class Search extends SearchDelegate<Widget> {
                       size: 15,
                       color: suggestionList[index].bgColor,
                     ),
+                    SizedBox(height: 5),
                     Text(
                       '\$ ${suggestionList[index].prize}',
                       style: kSearchScreenTextTheme(
-                          suggestionList[index].bgColor, 10, FontWeight.bold),
+                          suggestionList[index].bgColor, 12, FontWeight.bold),
                     ),
                   ],
                 ),

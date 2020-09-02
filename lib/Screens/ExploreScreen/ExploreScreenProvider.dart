@@ -1,9 +1,8 @@
 import 'package:arena/Utilities/ExploreScreenItemDetail.dart';
 import 'package:flutter/material.dart';
 
-class ExploreScreenProvider extends ChangeNotifier{
- 
- List<ExploreScreenTournoumentDetail> _searchScreenTournouments = [
+class ExploreScreenProvider extends ChangeNotifier {
+  List<ExploreScreenTournoumentDetail> _searchScreenTournouments = [
     ExploreScreenTournoumentDetail(
       creator: 'User1',
       isPublic: false,
@@ -99,17 +98,21 @@ class ExploreScreenProvider extends ChangeNotifier{
       imageUrl: 'images/Phoenix_valorant_cropped.png',
       bgColor: Color(0xFFFACC56),
     ),
- ];
+  ];
 
- List<ExploreScreenTournoumentDetail> get searchScreenTours => _searchScreenTournouments;
+  List<ExploreScreenTournoumentDetail> get searchScreenTours =>
+      _searchScreenTournouments;
 
-  void addSearchScreenRecents (ExploreScreenTournoumentDetail exploreScreenTournoumentDetail){
+  void addSearchScreenRecents(
+      ExploreScreenTournoumentDetail exploreScreenTournoumentDetail) {
     recents.add(exploreScreenTournoumentDetail);
     notifyListeners();
   }
 
-  void add (ExploreScreenTournoumentDetail tournoumentDetail){
+  void add(ExploreScreenTournoumentDetail tournoumentDetail) {
     _searchScreenTournouments.add(tournoumentDetail);
     notifyListeners();
   }
+
+  int get searchScreenToursLength => _searchScreenTournouments.length;
 }

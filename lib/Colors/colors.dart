@@ -28,3 +28,12 @@ const Color kActiveGameItem = Colors.pink;
 const Color kInactiveGameItem = Colors.transparent;
 
 //
+// Login and RegistrationScreen Colors
+
+const Color kBgColorCreateTournoument = Color(0xFF101016);
+const Color kBgColorAccentCreateTournoument = Color(0xFF53a9bc);
+const Color kLabelTitleColorCreateTournoument = Color(0xFF53a9bc);
+const Color kShadowColorCreateTournoument = Color(0xFf055dab);
+const Color kGradientBeginCreateTournoument = Color(0xFf055dab);
+const Color kGradientEndCreateTournoument = Color(0xFF53a9bc);
+//
