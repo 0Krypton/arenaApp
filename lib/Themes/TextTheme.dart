@@ -21,12 +21,8 @@ TextStyle kShopScreenItemNameTheme(Color textColor, double sizeFont) {
   );
 }
 
-
 final TextStyle kStoreItemDetailPageTitle = GoogleFonts.nunito(
-  color: Colors.white,
-  fontSize: 25,
-  fontWeight: FontWeight.w800
-);
+    color: Colors.white, fontSize: 25, fontWeight: FontWeight.w800);
 
 /////////////////////////////////////////////////////////////////
 
@@ -48,28 +44,42 @@ TextStyle kHomeScreenNewsTitleTheme(Color textColor, double sizeFont) {
 }
 
 ///////////////////////////////////////////////////////////////
- TextStyle kFortniteStatsTextTheme(Color color , double fontSize,FontWeight fontWeight){
-   return GoogleFonts.nunito(
-     color: color,
+TextStyle kFortniteStatsTextTheme(
+    Color color, double fontSize, FontWeight fontWeight) {
+  return GoogleFonts.nunito(
+    color: color,
     fontSize: fontSize,
     fontWeight: fontWeight,
-   );
- }
+  );
+}
 
- ///////////////////////////////////////////////////////////////
-TextStyle kSearchScreenTextTheme(Color color , double fontSize,FontWeight fontWeight){
-   return GoogleFonts.nunito(
-     color: color,
+///////////////////////////////////////////////////////////////
+TextStyle kSearchScreenTextTheme(
+    Color color, double fontSize, FontWeight fontWeight) {
+  return GoogleFonts.nunito(
+    color: color,
     fontSize: fontSize,
     fontWeight: fontWeight,
-   );
- }
+  );
+}
 
- ///////////////////////////////////////////////////////////////
- TextStyle kTopScreenTextTheme(Color color , double fontSize,FontWeight fontWeight){
-   return GoogleFonts.nunito(
-     color: color,
+///////////////////////////////////////////////////////////////
+TextStyle kTopScreenTextTheme(
+    Color color, double fontSize, FontWeight fontWeight) {
+  return GoogleFonts.nunito(
+    color: color,
     fontSize: fontSize,
     fontWeight: fontWeight,
-   );
- }
+  );
+}
+
+//////////////////////////////////////////////////////////////////
+
+TextStyle kShopScreenStoreTextTheme(
+    Color color, double fontSize, FontWeight fontWeight) {
+  return GoogleFonts.nunito(
+    color: color,
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+  );
+}

@@ -58,6 +58,13 @@ flutter:
   assets:
     - images/
     - assets/
+    - bundleimages/deep freeze bundle/
+    - bundleimages/dark_fire_bundle/
+    - bundleimages/Derby Dynamo Challenge Pack/
+    - bundleimages/metal team leader pack/
+    - bundleimages/psycho_bundle/
+    - bundleimages/shadow rising pack/
+    - bundleimages/street serpent pack/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

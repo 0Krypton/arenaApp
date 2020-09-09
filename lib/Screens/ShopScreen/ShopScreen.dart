@@ -1,12 +1,15 @@
+import 'package:arena/Animations/FadeInXCustom.dart';
 import 'package:arena/Animations/fadeInX.dart';
 import 'package:arena/Animations/fadeInY.dart';
 import 'package:arena/Colors/colors.dart';
 import 'package:arena/CustomClipper/ShopScreenClipBG.dart';
 import 'package:arena/Screens/ShopScreen/Store_Item_Detail_Page.dart';
+import 'package:arena/Screens/ShopScreen/shop_item_card.dart';
 import 'package:arena/Screens/ShopScreen/sliding_card.dart';
 import 'package:arena/Screens/loading_screen.dart';
 import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/Utilities/FunkoPopDetail.dart';
+import 'package:arena/Utilities/ShopScreenItemInfo.dart';
 import 'package:arena/Utilities/StoreItemDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -31,15 +34,23 @@ class _ShopScreenState extends State<ShopScreen> {
   List<FunkoPopDetail> funkoPops = listFunkoPop;
   List<Store> storeItems = listStoreItem;
   PageController pageController;
+  PageController itemsController;
+  double itemOffset = 0;
   double pageOffset = 0;
 
   @override
   void initState() {
     super.initState();
-    pageController = PageController(viewportFraction: 0.8);
+    pageController = PageController(viewportFraction: 0.9);
     pageController.addListener(() {
       setState(() =>
           pageOffset = pageController.page); //<-- add listener and set state
+    });
+    itemsController = PageController(viewportFraction: 0.9);
+    itemsController.addListener(() {
+      setState(() {
+        itemOffset = itemsController.page;
+      });
     });
   }
 
@@ -61,6 +72,7 @@ class _ShopScreenState extends State<ShopScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SafeArea(
+          bottom: false,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -271,103 +283,24 @@ class _ShopScreenState extends State<ShopScreen> {
                     ),
                   ),
                 ),
-                FadeInX(
+                SizedBox(
+                  height: 10,
+                ),
+                FadeInXCustom(
                   1.5,
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 10.0,
-                    ),
-                    child: SizedBox(
-                      height: 350,
-                      child: ListView.builder(
-                        itemCount: storeItems.length,
-                        scrollDirection: Axis.horizontal,
-                        physics: BouncingScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => StoreItemDetailPage(
-                                    storeItem: storeItems[index],
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Stack(
-                              children: <Widget>[
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      left: 10, top: 100, right: 10),
-                                  width: 300,
-                                  height: 250,
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                        colors: [
-                                          storeItems[index].bgBeginColor,
-                                          storeItems[index].bgEndColor,
-                                        ],
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(30),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 100,
-                                  left: 70,
-                                  child: Image.asset(
-                                    storeItems[index].itemImageUrl,
-                                    fit: BoxFit.contain,
-                                    height: 250,
-                                    width: 250,
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(
-                                    left: 35,
-                                    top: 126,
-                                  ),
-                                  width: 250,
-                                  height: 200,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(20),
-                                    ),
-                                  ),
-                                  child: Stack(
-                                    children: <Widget>[
-                                      Positioned(
-                                        top: 20,
-                                        left: 20,
-                                        child: Text(
-                                          listStoreItem[index].name,
-                                          style: kShopScreenItemNameTheme(
-                                              storeItems[index].bgBeginColor,
-                                              25),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        bottom: 20,
-                                        right: 20,
-                                        child: Text(
-                                          '\$ ${listStoreItem[index].price}',
-                                          style: kShopScreenItemNameTheme(
-                                              storeItems[index].bgBeginColor,
-                                              25),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
+                  -40,
+                  SizedBox(
+                    height: 450,
+                    width: 500,
+                    child: PageView.builder(
+                      controller: itemsController,
+                      itemCount: shopScreenItems.length,
+                      itemBuilder: (context, index) {
+                        return ShopItemCard(
+                          items: shopScreenItems[index],
+                          offset: itemOffset - index,
+                        );
+                      },
                     ),
                   ),
                 ),
