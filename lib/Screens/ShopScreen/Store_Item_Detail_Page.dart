@@ -1,9 +1,11 @@
 import 'package:arena/Animations/FadeInXCustom.dart';
 import 'package:arena/Animations/FadeInYCustom.dart';
+import 'package:arena/Screens/ShopScreen/ShopScreenItemProvider.dart';
 import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/Utilities/ShopScreenItemInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class StoreItemDetailPage extends StatelessWidget {
   final ShopScreenItemInfo storeItem;
@@ -129,29 +131,44 @@ class StoreItemDetailPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(bottom: 20),
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  height: 60,
-                  width: MediaQuery.of(context).size.width - 2 * 20,
-                  decoration: BoxDecoration(
-                    color: storeItem.color,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Add to Cart',
-                        style: kShopScreenItemNameTheme(
-                          Colors.white,
-                          20,
-                        ),
+                GestureDetector(
+                  onTap: () {
+                    Provider.of<ShopScreenItemProvider>(context, listen: false)
+                        .addToCart(
+                      InCartItemInfo(
+                        bgSkinImage: storeItem.bgSkinImage,
+                        color: storeItem.color,
+                        desc: storeItem.desc,
+                        price: storeItem.price,
+                        title: storeItem.title,
+                        length: 1,
                       ),
-                    ],
+                    );
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 20),
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    height: 60,
+                    width: MediaQuery.of(context).size.width - 2 * 20,
+                    decoration: BoxDecoration(
+                      color: storeItem.color,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Add to Cart',
+                          style: kShopScreenItemNameTheme(
+                            Colors.white,
+                            20,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 )
               ],

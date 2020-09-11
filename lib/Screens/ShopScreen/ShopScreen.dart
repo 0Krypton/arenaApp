@@ -3,7 +3,7 @@ import 'package:arena/Animations/fadeInX.dart';
 import 'package:arena/Animations/fadeInY.dart';
 import 'package:arena/Colors/colors.dart';
 import 'package:arena/CustomClipper/ShopScreenClipBG.dart';
-import 'package:arena/Screens/ShopScreen/Store_Item_Detail_Page.dart';
+import 'package:arena/Screens/ShopScreen/CartShopScreen.dart';
 import 'package:arena/Screens/ShopScreen/shop_item_card.dart';
 import 'package:arena/Screens/ShopScreen/sliding_card.dart';
 import 'package:arena/Screens/loading_screen.dart';
@@ -14,6 +14,9 @@ import 'package:arena/Utilities/StoreItemDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import 'ShopScreenItemProvider.dart';
 
 enum Game {
   Fortnite,
@@ -64,6 +67,7 @@ class _ShopScreenState extends State<ShopScreen> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    final shopScreenItems = Provider.of<ShopScreenItemProvider>(context);
 
     return Container(
       decoration: BoxDecoration(
@@ -82,15 +86,19 @@ class _ShopScreenState extends State<ShopScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text('Items',
-                          style: kShopScreenLabelTextStyle.copyWith(
-                              fontWeight: FontWeight.w700)),
+                      Text(
+                        'Items',
+                        style: kShopScreenLabelTextStyle.copyWith(
+                            fontWeight: FontWeight.w700),
+                      ),
                       IconButton(
                         icon: Icon(
                           Icons.shopping_cart,
                           color: kShopScreenTextColor,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(CartScreen.id);
+                        },
                       )
                     ],
                   ),
@@ -294,10 +302,10 @@ class _ShopScreenState extends State<ShopScreen> {
                     width: 500,
                     child: PageView.builder(
                       controller: itemsController,
-                      itemCount: shopScreenItems.length,
+                      itemCount: shopScreenItems.storeItems.length,
                       itemBuilder: (context, index) {
                         return ShopItemCard(
-                          items: shopScreenItems[index],
+                          items: shopScreenItems.storeItems[index],
                           offset: itemOffset - index,
                         );
                       },
@@ -404,7 +412,7 @@ class _ShopScreenState extends State<ShopScreen> {
             Positioned(
               bottom: 20,
               left: 30,
-              child: Text(funkoPops[index].price,
+              child: Text(funkoPops[index].price.toString(),
                   style: kShopScreenFunkoPopPriceTheme),
             ),
           ],

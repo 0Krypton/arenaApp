@@ -4,6 +4,8 @@ import 'package:arena/Screens/ExploreScreen/ExploreScreenProvider.dart';
 import 'package:arena/Screens/Intro_Screen.dart';
 import 'package:arena/Screens/Login&Registration/LoginScreen.dart';
 import 'package:arena/Screens/Login&Registration/RegistrationScreen.dart';
+import 'package:arena/Screens/ShopScreen/CartShopScreen.dart';
+import 'package:arena/Screens/ShopScreen/ShopScreenItemProvider.dart';
 import 'package:arena/Screens/WelcomeScreen.dart';
 import 'package:arena/Screens/loading_screen.dart';
 import 'package:arena/splash_screen.dart';
@@ -21,11 +23,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => ExploreScreenProvider())
+        ChangeNotifierProvider(create: (context) => ExploreScreenProvider()),
+        ChangeNotifierProvider(create: (context) => ShopScreenItemProvider()),
       ],
       child: MaterialApp(
         title: 'Arena App',
-        initialRoute: WelcomeScreen.id,
+        initialRoute: BottomNavBar.id,
         routes: {
           CreateTournoument.id: (context) => CreateTournoument(),
           WelcomeScreen.id: (context) => WelcomeScreen(),
@@ -36,6 +39,7 @@ class MyApp extends StatelessWidget {
           ShopScreen.id: (context) => ShopScreen(),
           BottomNavBar.id: (context) => BottomNavBar(),
           SplashScreen.id: (context) => SplashScreen(),
+          CartScreen.id : (context) => CartScreen(),
         },
       ),
     );

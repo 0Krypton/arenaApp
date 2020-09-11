@@ -91,7 +91,7 @@ class CardContent extends StatelessWidget {
                   ),
                   Spacer(),
                   Text(
-                    funkoPop.price ?? '',
+                    '\$ ${funkoPop.price.toString()}' ?? '',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,

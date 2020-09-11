@@ -2,9 +2,13 @@ import 'package:arena/Animations/fadeInX.dart';
 import 'package:arena/Animations/fadeInY.dart';
 import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/Utilities/FunkoPopDetail.dart';
+import 'package:arena/Utilities/ShopScreenItemInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import 'ShopScreenItemProvider.dart';
 
 class FunkoPopDetailPage extends StatefulWidget {
   final FunkoPopDetail funkoPop;
@@ -57,7 +61,9 @@ class _FunkoPopDetailPageState extends State<FunkoPopDetailPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      FadeInX(1,Container(
+                      FadeInX(
+                        1,
+                        Container(
                           width: 300,
                           child: Text(
                             widget.funkoPop.title,
@@ -71,7 +77,9 @@ class _FunkoPopDetailPageState extends State<FunkoPopDetailPage> {
                       SizedBox(height: 16),
                       FadeInX(1.2, _buildRating()),
                       SizedBox(height: 24),
-                      FadeInX(1.4,Text(
+                      FadeInX(
+                        1.4,
+                        Text(
                           "DETAILS",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -80,10 +88,12 @@ class _FunkoPopDetailPageState extends State<FunkoPopDetailPage> {
                         ),
                       ),
                       SizedBox(height: 16),
-                      FadeInX(1.6, Padding(
+                      FadeInX(
+                        1.6,
+                        Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text(
-                            widget.funkoPop.price,
+                            widget.funkoPop.price.toString(),
                             style: kShopScreenFunkoPopPriceTheme.copyWith(
                                 color: Colors.black.withOpacity(0.8),
                                 fontSize: 15),
@@ -91,7 +101,9 @@ class _FunkoPopDetailPageState extends State<FunkoPopDetailPage> {
                         ),
                       ),
                       SizedBox(height: 24),
-                      FadeInX(1.8, Text(
+                      FadeInX(
+                        1.8,
+                        Text(
                           "COLOR OPTIONS",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -100,7 +112,9 @@ class _FunkoPopDetailPageState extends State<FunkoPopDetailPage> {
                         ),
                       ),
                       SizedBox(height: 16),
-                      FadeInX(2, Row(
+                      FadeInX(
+                        2,
+                        Row(
                           children: <Widget>[
                             _buildColorOption(widget.funkoPop.bgColor),
                             // _buildColorOption(Colors.green),
@@ -121,7 +135,9 @@ class _FunkoPopDetailPageState extends State<FunkoPopDetailPage> {
             Positioned(
               left: 110,
               bottom: 90,
-              child: FadeInY(0.5, Image.asset(
+              child: FadeInY(
+                0.5,
+                Image.asset(
                   widget.funkoPop.imageUrl,
                   width: MediaQuery.of(context).size.width * .85,
                 ),
@@ -208,7 +224,7 @@ class _FunkoPopDetailPageState extends State<FunkoPopDetailPage> {
                     style: GoogleFonts.nunito(
                         color: Colors.black54, fontWeight: FontWeight.w700)),
                 Text(
-                  widget.funkoPop.price,
+                  widget.funkoPop.price.toString(),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 28,
@@ -216,21 +232,36 @@ class _FunkoPopDetailPageState extends State<FunkoPopDetailPage> {
                 ),
               ],
             ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                vertical: 16,
-                horizontal: 50,
-              ),
-              decoration: BoxDecoration(
-                color: widget.funkoPop.bgColor,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(50),
+            GestureDetector(
+              onTap: () {
+                Provider.of<ShopScreenItemProvider>(context, listen: false)
+                    .addToCart(
+                  InCartItemInfo(
+                    bgSkinImage: widget.funkoPop.imageUrl,
+                    color: widget.funkoPop.bgColor,
+                    desc: widget.funkoPop.desc,
+                    price: widget.funkoPop.price,
+                    title: widget.funkoPop.title,
+                    length: 1,
+                  ),
+                );
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 50,
                 ),
-              ),
-              child: Text(
-                "ADD CART",
-                style: TextStyle(
-                  color: Colors.white,
+                decoration: BoxDecoration(
+                  color: widget.funkoPop.bgColor,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(50),
+                  ),
+                ),
+                child: Text(
+                  "ADD CART",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
