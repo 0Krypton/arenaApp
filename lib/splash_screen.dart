@@ -11,7 +11,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   bool isPlaying = false;
   @override
   void initState() {
@@ -32,8 +31,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void dispose() {
     super.dispose();
-      isPlaying = true;
+    isPlaying = true;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +52,6 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
           ),
-          
         ],
       ),
     );

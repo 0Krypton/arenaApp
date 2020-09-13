@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Arena App',
-        initialRoute: BottomNavBar.id,
+        initialRoute: WelcomeScreen.id,
         routes: {
           CreateTournoument.id: (context) => CreateTournoument(),
           WelcomeScreen.id: (context) => WelcomeScreen(),
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           ShopScreen.id: (context) => ShopScreen(),
           BottomNavBar.id: (context) => BottomNavBar(),
           SplashScreen.id: (context) => SplashScreen(),
-          CartScreen.id : (context) => CartScreen(),
+          CartScreen.id: (context) => CartScreen(),
         },
       ),
     );
