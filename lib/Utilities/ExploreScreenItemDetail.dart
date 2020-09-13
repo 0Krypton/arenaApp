@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 
 class ExploreScreenTournoumentDetail {
   final String creator;
+  final dynamic id;
   final String title;
   final String description;
   final String game;
   final double prize;
   final bool isPublic;
-  final Color bgColor;
+  final dynamic bgColor;
   final String imageUrl;
   final int totalPlayers;
-  final int enteredPlayers;
+  int enteredPlayers;
 
   ExploreScreenTournoumentDetail({
     this.creator,
@@ -23,6 +24,7 @@ class ExploreScreenTournoumentDetail {
     this.imageUrl,
     this.totalPlayers,
     this.enteredPlayers,
+    this.id,
   });
 }
 

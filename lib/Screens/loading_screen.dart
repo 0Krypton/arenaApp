@@ -1,3 +1,4 @@
+import 'package:arena/Colors/colors.dart';
 import 'package:arena/Screens/ShopScreen/FortniteItemShop.dart';
 import 'package:arena/services/networking.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: SpinKitDoubleBounce(color: Color(0xFF008CCB).withOpacity(0.6), size: 50.0),
+        child: SpinKitDoubleBounce(color: kGradientEnd.withOpacity(0.6), size: 50.0),
       ),
     );
   }

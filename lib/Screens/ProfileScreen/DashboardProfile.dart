@@ -219,7 +219,7 @@ class DashBoardProfile extends StatelessWidget {
                               .toList(),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

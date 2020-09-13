@@ -109,7 +109,7 @@ class Search extends SearchDelegate<Widget> {
                     color: suggestionList[index].bgColor.withOpacity(0.5),
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: AssetImage(
+                      image: NetworkImage(
                         suggestionList[index].imageUrl,
                       ),
                       fit: BoxFit.contain,

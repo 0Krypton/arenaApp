@@ -35,7 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       ],
-      leading: null,
     );
     return Container(
       child: Scaffold(
@@ -131,7 +130,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   -50.0,
                   Container(
                     height: (MediaQuery.of(context).size.height -
-                            MediaQuery.of(context).padding.bottom - appBar.preferredSize.height) *
+                            MediaQuery.of(context).padding.bottom -
+                            appBar.preferredSize.height) *
                         0.5,
                     width: MediaQuery.of(context).size.width,
                     padding: EdgeInsets.symmetric(horizontal: 10),

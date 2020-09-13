@@ -1,7 +1,11 @@
+import 'package:arena/Colors/colors.dart';
+import 'package:arena/Screens/ExploreScreen/ExploreScreenProvider.dart';
 import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/Utilities/ExploreScreenItemDetail.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class BuildSearchScreenItems extends StatelessWidget {
   const BuildSearchScreenItems({
@@ -30,8 +34,9 @@ class BuildSearchScreenItems extends StatelessWidget {
           Positioned(
             left: 20,
             bottom: 0,
-            child: Image.asset(
-              searchTournoument.imageUrl,
+            child: Image.network(
+              searchTournoument.imageUrl.trim() ??
+                  'images/fortnite-seeker_cropped.png',
               fit: BoxFit.cover,
               height: 150,
             ),
@@ -179,13 +184,50 @@ class BuildSearchScreenItems extends StatelessWidget {
                         ),
                       ),
                       child: Center(
-                        child: Text(
-                          'Enter Now',
-                          style: kSearchScreenTextTheme(
-                            Colors.white,
-                            10,
-                            FontWeight.w800,
-                          ),
+                        child: FlatButton(
+                          onPressed: () async {
+                            Provider.of<ExploreScreenProvider>(context,
+                                    listen: false)
+                                .toggleIsLoading();
+
+                            try {
+                              await Provider.of<ExploreScreenProvider>(
+                                context,
+                                listen: false,
+                              ).enterToTournoument(
+                                searchTournoument.id,
+                                Provider.of<ExploreScreenProvider>(
+                                  context,
+                                  listen: false,
+                                ).isEntered,
+                              );
+                            } catch (e) {
+                              Scaffold.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Oops Something went Wrong!'),
+                                ),
+                              );
+                            }
+
+                            Provider.of<ExploreScreenProvider>(context,
+                                    listen: false)
+                                .toggleIsLoading();
+                          },
+                          child: Provider.of<ExploreScreenProvider>(context,
+                                      listen: false)
+                                  .isLoading
+                              ? SpinKitCircle(
+                                  size: 15,
+                                  color: Colors.white,
+                                )
+                              : Text(
+                                  'Enter Now',
+                                  style: kSearchScreenTextTheme(
+                                    Colors.white,
+                                    10,
+                                    FontWeight.w800,
+                                  ),
+                                ),
                         ),
                       ),
                     ),

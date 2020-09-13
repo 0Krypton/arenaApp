@@ -17,7 +17,8 @@ class ShopItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.only(left: 8, right: 8, bottom: 24),
-      elevation: 8,
+      elevation: 10,
+      shadowColor: items.color,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(32)), //<--custom shape
       child: Column(

@@ -25,7 +25,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   route() {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => BottomNavBar()));
+      context,
+      MaterialPageRoute(
+        builder: (context) => BottomNavBar(),
+      ),
+    );
   }
 
   @override
