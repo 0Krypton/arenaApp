@@ -29,7 +29,7 @@ class ExploreScreenTournoumentDetail {
 }
 
 List<ExploreScreenTournoumentDetail> recents = [];
-List<ExploreScreenTournoumentDetail> searchScreenTournouments = [
+List<ExploreScreenTournoumentDetail> _searchScreenTournouments = [
   ExploreScreenTournoumentDetail(
     creator: 'User1',
     isPublic: false,

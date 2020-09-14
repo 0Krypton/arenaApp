@@ -21,7 +21,7 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: ChangeNotifierProvider(
-        create: (_) => TopScreenPlayersProvider(),
+        builder: (_) => TopScreenPlayersProvider(),
         child: Scaffold(
           body: SafeArea(
             child: SingleChildScrollView(

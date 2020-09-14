@@ -2,7 +2,7 @@ import 'package:arena/Utilities/ShopScreenItemInfo.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ShopScreenItemProvider extends ChangeNotifier {
+class ShopScreenItemProvider with ChangeNotifier {
   List<ShopScreenItemInfo> _storeItems = [
     ShopScreenItemInfo(
       off: false,

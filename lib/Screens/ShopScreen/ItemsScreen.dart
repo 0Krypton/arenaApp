@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyItemsScreen extends StatefulWidget {
@@ -79,88 +78,89 @@ class _MyItemsScreenState extends State<MyItemsScreen> {
                       Container(
                         height: 500,
                         padding: const EdgeInsets.only(left: 32),
-                        child: Swiper(
-                          itemCount: featuredItemList.length,
-                          itemWidth: MediaQuery.of(context).size.width - 2 * 64,
-                          layout: SwiperLayout.STACK,
-//                  pagination: SwiperPagination(
-//                    builder: DotSwiperPaginationBuilder(activeSize: 10, space: 5),
-//                  ),
-                          itemBuilder: (context, index) {
-                            return Stack(
-                              children: <Widget>[
-                                Column(
-                                  children: <Widget>[
-                                    SizedBox(height: 100),
-                                    Card(
-                                      elevation: 8,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(32),
-                                      ),
-                                      color: Color(0xFF434285),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(32.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.stretch,
-                                          children: <Widget>[
-                                            SizedBox(height: 100),
-                                            Text(
-                                              featuredItemList[index]['name'],
-                                              style: GoogleFonts.acme(
-                                                  fontSize: 20.0,
-                                                  color: Colors.white),
-                                              textAlign: TextAlign.left,
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 20.0,
-                                                  left: 8.0,
-                                                  right: 8.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: <Widget>[
-                                                  Text(
-                                                    '${featuredItemList[index]['price']}',
-                                                    style: GoogleFonts.acme(
-                                                        fontSize: 20.0,
-                                                        color: Colors.white),
-                                                    textAlign: TextAlign.left,
-                                                  ),
-                                                  Text(
-                                                    featuredItemList[index]
-                                                        ['type'],
-                                                    style: GoogleFonts.acme(
-                                                        fontSize: 25.0,
-                                                        color: Colors.white),
-                                                    textAlign: TextAlign.left,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                      child: Image.network(
-                                          featuredItemList[index]['image']),
-                                      width: 220,
-                                      height: 220,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            );
-                          },
-                        ),
+                        child: Container()
+//                         Swiper(
+//                           itemCount: featuredItemList.length,
+//                           itemWidth: MediaQuery.of(context).size.width - 2 * 64,
+//                           layout: SwiperLayout.STACK,
+// //                  pagination: SwiperPagination(
+// //                    builder: DotSwiperPaginationBuilder(activeSize: 10, space: 5),
+// //                  ),
+//                           itemBuilder: (context, index) {
+//                             return Stack(
+//                               children: <Widget>[
+//                                 Column(
+//                                   children: <Widget>[
+//                                     SizedBox(height: 100),
+//                                     Card(
+//                                       elevation: 8,
+//                                       shape: RoundedRectangleBorder(
+//                                         borderRadius: BorderRadius.circular(32),
+//                                       ),
+//                                       color: Color(0xFF434285),
+//                                       child: Padding(
+//                                         padding: const EdgeInsets.all(32.0),
+//                                         child: Column(
+//                                           crossAxisAlignment:
+//                                               CrossAxisAlignment.stretch,
+//                                           children: <Widget>[
+//                                             SizedBox(height: 100),
+//                                             Text(
+//                                               featuredItemList[index]['name'],
+//                                               style: GoogleFonts.acme(
+//                                                   fontSize: 20.0,
+//                                                   color: Colors.white),
+//                                               textAlign: TextAlign.left,
+//                                             ),
+//                                             Padding(
+//                                               padding: EdgeInsets.only(
+//                                                   top: 20.0,
+//                                                   left: 8.0,
+//                                                   right: 8.0),
+//                                               child: Row(
+//                                                 mainAxisAlignment:
+//                                                     MainAxisAlignment
+//                                                         .spaceBetween,
+//                                                 children: <Widget>[
+//                                                   Text(
+//                                                     '${featuredItemList[index]['price']}',
+//                                                     style: GoogleFonts.acme(
+//                                                         fontSize: 20.0,
+//                                                         color: Colors.white),
+//                                                     textAlign: TextAlign.left,
+//                                                   ),
+//                                                   Text(
+//                                                     featuredItemList[index]
+//                                                         ['type'],
+//                                                     style: GoogleFonts.acme(
+//                                                         fontSize: 25.0,
+//                                                         color: Colors.white),
+//                                                     textAlign: TextAlign.left,
+//                                                   ),
+//                                                 ],
+//                                               ),
+//                                             ),
+//                                           ],
+//                                         ),
+//                                       ),
+//                                     ),
+//                                   ],
+//                                 ),
+//                                 Row(
+//                                   mainAxisAlignment: MainAxisAlignment.center,
+//                                   children: <Widget>[
+//                                     Container(
+//                                       child: Image.network(
+//                                           featuredItemList[index]['image']),
+//                                       width: 220,
+//                                       height: 220,
+//                                     ),
+//                                   ],
+//                                 )
+//                               ],
+//                             );
+//                           },
+//                         ),
                       ),
                     ],
                   ),
@@ -211,86 +211,87 @@ class ItemShop extends StatelessWidget {
           Container(
             height: 500,
             padding: const EdgeInsets.only(left: 32),
-            child: Swiper(
-              itemCount: typeItemList.length,
-              itemWidth: MediaQuery.of(context).size.width - 2 * 64,
-              layout: SwiperLayout.STACK,
-//                  pagination: SwiperPagination(
-//                    builder: DotSwiperPaginationBuilder(activeSize: 10, space: 5),
-//                  ),
-              itemBuilder: (context, index) {
-                return Stack(
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        SizedBox(height: 100),
-                        Card(
-                          elevation: 8,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(32),
-                          ),
-                          color: Color(0xFF434285),
-                          child: Padding(
-                            padding: const EdgeInsets.all(32.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: <Widget>[
-                                SizedBox(height: 100),
-                                Text(
-                                  typeItemList[index]['name'],
-                                  style: GoogleFonts.acme(
-                                      fontSize: 20.0, color: Colors.white),
-                                  textAlign: TextAlign.left,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      top: 20.0, left: 8.0, right: 8.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Text(
-                                        '${typeItemList[index]['price']}',
-                                        style: GoogleFonts.acme(
-                                            fontSize: 20.0,
-                                            color: Colors.white),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      Text(
-                                        typeItemList[index]['type'],
-                                        style: GoogleFonts.acme(
-                                            fontSize: 25.0,
-                                            color: Colors.white),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        ItemImage(
-                          typeItemList: typeItemList,
-                          index: index,
-                        ),
-//                        Container(
-//                          child: Image.network(
-//                              typeItemList[index]['image']),
-//                          width: 200,
-//                          height: 200,
-//                        ),
-                      ],
-                    )
-                  ],
-                );
-              },
-            ),
+            child: Container()
+//             Swiper(
+//               itemCount: typeItemList.length,
+//               itemWidth: MediaQuery.of(context).size.width - 2 * 64,
+//               layout: SwiperLayout.STACK,
+// //                  pagination: SwiperPagination(
+// //                    builder: DotSwiperPaginationBuilder(activeSize: 10, space: 5),
+// //                  ),
+//               itemBuilder: (context, index) {
+//                 return Stack(
+//                   children: <Widget>[
+//                     Column(
+//                       children: <Widget>[
+//                         SizedBox(height: 100),
+//                         Card(
+//                           elevation: 8,
+//                           shape: RoundedRectangleBorder(
+//                             borderRadius: BorderRadius.circular(32),
+//                           ),
+//                           color: Color(0xFF434285),
+//                           child: Padding(
+//                             padding: const EdgeInsets.all(32.0),
+//                             child: Column(
+//                               crossAxisAlignment: CrossAxisAlignment.stretch,
+//                               children: <Widget>[
+//                                 SizedBox(height: 100),
+//                                 Text(
+//                                   typeItemList[index]['name'],
+//                                   style: GoogleFonts.acme(
+//                                       fontSize: 20.0, color: Colors.white),
+//                                   textAlign: TextAlign.left,
+//                                 ),
+//                                 Padding(
+//                                   padding: EdgeInsets.only(
+//                                       top: 20.0, left: 8.0, right: 8.0),
+//                                   child: Row(
+//                                     mainAxisAlignment:
+//                                         MainAxisAlignment.spaceBetween,
+//                                     children: <Widget>[
+//                                       Text(
+//                                         '${typeItemList[index]['price']}',
+//                                         style: GoogleFonts.acme(
+//                                             fontSize: 20.0,
+//                                             color: Colors.white),
+//                                         textAlign: TextAlign.left,
+//                                       ),
+//                                       Text(
+//                                         typeItemList[index]['type'],
+//                                         style: GoogleFonts.acme(
+//                                             fontSize: 25.0,
+//                                             color: Colors.white),
+//                                         textAlign: TextAlign.left,
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               ],
+//                             ),
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                     Row(
+//                       mainAxisAlignment: MainAxisAlignment.center,
+//                       children: <Widget>[
+//                         ItemImage(
+//                           typeItemList: typeItemList,
+//                           index: index,
+//                         ),
+// //                        Container(
+// //                          child: Image.network(
+// //                              typeItemList[index]['image']),
+// //                          width: 200,
+// //                          height: 200,
+// //                        ),
+//                       ],
+//                     )
+//                   ],
+//                 );
+//               },
+//             ),
           ),
         ],
       ),

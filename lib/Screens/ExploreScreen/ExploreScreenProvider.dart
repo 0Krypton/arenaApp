@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class ExploreScreenProvider extends ChangeNotifier {
+  List<ExploreScreenTournoumentDetail> _enteredTours = [];
+
+  List<ExploreScreenTournoumentDetail> get enteredTours => _enteredTours;
+
   List<ExploreScreenTournoumentDetail> _searchScreenTournouments = [
     // ExploreScreenTournoumentDetail(
     //   creator: 'User1',
@@ -101,19 +105,13 @@ class ExploreScreenProvider extends ChangeNotifier {
     //   imageUrl: 'images/Phoenix_valorant_cropped.png',
     //   bgColor: Color(0xFFFACC56),
     // ),
-    // ExploreScreenTournoumentDetail(
-    //   title: '',
-    //   description: '',
-    //   prize: 0.0,
-    //   isPublic: false,
-    //   game: 'fortnite',
-    //   totalPlayers: 0,
-    //   enteredPlayers: 0,
-    //   creator: 'Unknown',
-    //   imageUrl: 'images/fortnite-seeker_cropped.png',
-    //   bgColor: Color(0xFF656464),
-    // )
   ];
+
+  final String authToken;
+  final String userEmail;
+  final String userId;
+  ExploreScreenProvider(this.authToken, this.userEmail, this.userId,
+      this._searchScreenTournouments);
 
   bool _isEntered = false;
   bool _isLoading = false;
@@ -142,7 +140,8 @@ class ExploreScreenProvider extends ChangeNotifier {
   }
 
   Future fetchAndSetProduct() async {
-    const url = 'https://arena-9e2f5.firebaseio.com/requestedTours.json';
+    var url =
+        'https://arena-9e2f5.firebaseio.com/requestedTours.json?auth=$authToken';
 
     try {
       final response = await http.get(url);
@@ -171,10 +170,101 @@ class ExploreScreenProvider extends ChangeNotifier {
         );
       });
 
-      print(1);
+      print('### Tournouments Fetched ###');
       _searchScreenTournouments = loadedTours;
       notifyListeners();
     } catch (e) {
+      throw e;
+    }
+  }
+
+  Future fetchEnteredTournouments() async {
+    var url =
+        'https://arena-9e2f5.firebaseio.com/Tournouments.json?auth=$authToken';
+
+    var itemUrl =
+        'https://arena-9e2f5.firebaseio.com/requestedTours.json?auth=$authToken';
+
+    try {
+      final toursResponse = await http.get(itemUrl);
+      final extractedTours =
+          json.decode(toursResponse.body) as Map<String, dynamic>;
+
+      final response = await http.get(url);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+
+      List<ExploreScreenTournoumentDetail> loadedTours = [];
+      extractedTours.forEach((tournoumentId, tourData) {
+        extractedData.forEach((key, value) {
+          // print('key : $key ');
+          var values = (value.values).toList();
+
+          for (int i = 0; i < values.length; i++) {
+            if (values[i]['userId'] == userId && key == tournoumentId) {
+              // print(values[i]['userId']);
+              loadedTours.add(
+                ExploreScreenTournoumentDetail(
+                  bgColor: Color.fromARGB(
+                    tourData['colorA'],
+                    tourData['colorR'],
+                    tourData['colorG'],
+                    tourData['colorB'],
+                  ),
+                  creator: tourData['creator'],
+                  description: tourData['description'],
+                  enteredPlayers:
+                      int.parse(tourData['entered_players'].toString()),
+                  id: tournoumentId,
+                  game: tourData['game'],
+                  imageUrl: tourData['image_url'],
+                  isPublic: tourData['isPublic'],
+                  prize: double.parse(tourData['prize'].toString()),
+                  title: tourData['title'],
+                  totalPlayers: tourData['total_players'],
+                ),
+              );
+              notifyListeners();
+              // print(key);
+              // print(tournoumentId);
+              // final tour = extractedTours[tournoumentId == key];
+              // print(tourData['id']);
+            }
+          }
+          // print("length ${keys.length}");
+          // print(keys[0]['userId']);
+        });
+      });
+      _enteredTours = loadedTours;
+      notifyListeners();
+    }
+    // try {
+    //   final response = await http.get(url);
+    //   final extractedData = json.decode(response.body) as Map<String, dynamic>;
+    //   List<ExploreScreenTournoumentDetail> loadedTours = [];
+    //   print(extractedData);
+
+    //   extractedData.forEach((key, value) {
+    //     print('key : $key ');
+    //     var values = (value.values).toList();
+
+    //     for (int i = 0; i < values.length; i++) {
+    //       if (values[i]['userId'] == userId) {
+    //         print(values[i]['userId']);
+    //         print(key);
+    //         int tour = _searchScreenTournouments
+    //             .indexWhere((element) => element.id == key);
+
+    //         print(_searchScreenTournouments[tour].id);
+    //       }
+    //     }
+    //     print("length ${keys.length}");
+    //     print(keys[0]['userId']);
+    //   });
+
+    //_enteredTours = loadedTours;
+    // notifyListeners();
+    // }
+    catch (e) {
       throw e;
     }
   }
@@ -184,62 +274,89 @@ class ExploreScreenProvider extends ChangeNotifier {
         _searchScreenTournouments.indexWhere((element) => element.id == id);
 
     if (tourIndex >= 0) {
-      final url = 'https://arena-9e2f5.firebaseio.com/requestedTours/$id.json';
+      final url =
+          'https://arena-9e2f5.firebaseio.com/Tournouments/$id/$userId.json?auth=$authToken';
+      //  'https://arena-9e2f5.firebaseio.com/Tournouments/${_searchScreenTournouments[tourIndex].creator}${_searchScreenTournouments[tourIndex].game}${_searchScreenTournouments[tourIndex].title}/$userId.json?auth=$authToken';
 
       if (_searchScreenTournouments[tourIndex].enteredPlayers <
           _searchScreenTournouments[tourIndex].totalPlayers) {
         toggleEnter();
-
-        int enteredNumber = _searchScreenTournouments[tourIndex].enteredPlayers;
-        if (boolIsEntered) {
-          enteredNumber += 1;
-          if (enteredNumber < 0) enteredNumber = 0;
-          _searchScreenTournouments[tourIndex].enteredPlayers = enteredNumber;
-          await http
-              .patch(
-            url,
-            body: json.encode(
-              {
-                'entered_players': enteredNumber,
-              },
-            ),
-          )
-              .then(
-            (response) {
-              if (response.statusCode >= 400) {
-                throw 'Oops Something went wrong!';
-              }
-              notifyListeners();
+        await http
+            .put(
+          url,
+          body: json.encode(
+            {
+              'email': '$userEmail',
+              'userId': '$userId',
             },
-          );
-        } else {
-          enteredNumber -= 1;
-          if (enteredNumber < 0) enteredNumber = 0;
-          _searchScreenTournouments[tourIndex].enteredPlayers = enteredNumber;
-          await http
-              .patch(
-            url,
-            body: json.encode({
-              'entered_players': enteredNumber,
-            }),
-          )
-              .then(
-            (response) {
-              if (response.statusCode >= 400) {
-                throw 'Oops Something went wrong!';
-              }
-              notifyListeners();
-            },
-          );
-        }
-
-        notifyListeners();
+          ),
+        )
+            .then(
+          (response) {
+            print(response.statusCode);
+            if (response.statusCode >= 400) {
+              throw 'Oops Something went wrong!';
+            } else if (response.statusCode == 200) {
+              throw 'Succesful';
+            }
+          },
+        );
       }
+      // if (_searchScreenTournouments[tourIndex].enteredPlayers <
+      //     _searchScreenTournouments[tourIndex].totalPlayers) {
+      //   toggleEnter();
+
+      //   int enteredNumber = _searchScreenTournouments[tourIndex].enteredPlayers;
+      //   if (boolIsEntered) {
+      //     enteredNumber += 1;
+      //     if (enteredNumber < 0) enteredNumber = 0;
+      //     _searchScreenTournouments[tourIndex].enteredPlayers = enteredNumber;
+      //     await http
+      //         .put(
+      //       url,
+      //       body: json.encode(
+      //         {
+      //           'entered_players': ['$authToken'],
+      //         },
+      //       ),
+      //     )
+      //         .then(
+      //       (response) {
+      //         if (response.statusCode >= 400) {
+      //           throw 'Oops Something went wrong!';
+      //         }
+      //         notifyListeners();
+      //       },
+      //     );
+      //   } else {
+      //     enteredNumber -= 1;
+      //     if (enteredNumber < 0) enteredNumber = 0;
+      //     _searchScreenTournouments[tourIndex].enteredPlayers = enteredNumber;
+      //     await http
+      //         .patch(
+      //       url,
+      //       body: json.encode({
+      //         'entered_players': enteredNumber,
+      //       }),
+      //     )
+      //         .then(
+      //       (response) {
+      //         if (response.statusCode >= 400) {
+      //           throw 'Oops Something went wrong!';
+      //         }
+      //         notifyListeners();
+      //       },
+      //     );
+      //   }
+
+      //   notifyListeners();
+      // }
     }
   }
 
   Future<void> add(ExploreScreenTournoumentDetail tournoumentDetail) async {
-    const url = 'https://arena-9e2f5.firebaseio.com/requestedTours.json';
+    final url =
+        'https://arena-9e2f5.firebaseio.com/requestedTours.json?auth=$authToken';
 
     try {
       final response = await http.post(
@@ -276,7 +393,7 @@ class ExploreScreenProvider extends ChangeNotifier {
         bgColor: tournoumentDetail.bgColor,
       );
       _searchScreenTournouments.add(tour);
-      print(tour.id);
+      print("Tournoument Created with id ${tour.id}");
       notifyListeners();
     } catch (error) {
       print(error);

@@ -83,3 +83,14 @@ TextStyle kShopScreenStoreTextTheme(
     fontWeight: fontWeight,
   );
 }
+
+//////////////////////////////////////////////////////////////////
+
+TextStyle kLoginTextTheme({
+    Color color, double fontSize, FontWeight fontWeight}) {
+  return GoogleFonts.nunito(
+    color: color,
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+  );
+}

@@ -1,7 +1,6 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:liquid_swipe/liquid_swipe.dart';
 
 class IntroScreen extends StatefulWidget {
   static const id = 'Intro_Screen';
@@ -59,14 +58,15 @@ class _IntroScreenState extends State<IntroScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: LiquidSwipe(
-          initialPage: 0,
-          pages: pages,
-          enableLoop: false,
-          waveType: WaveType.liquidReveal,
-          positionSlideIcon: 0.5,
-          fullTransitionValue: 400,
-        ),
+        child: Container()
+        // LiquidSwipe(
+        //   initialPage: 0,
+        //   pages: pages,
+        //   enableLoop: false,
+        //   waveType: WaveType.liquidReveal,
+        //   positionSlideIcon: 0.5,
+        //   fullTransitionValue: 400,
+        // ),
       ),
     );
   }

@@ -280,12 +280,17 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                         itemCount:
                                             list.searchScreenTours.length,
                                         itemBuilder: (context, index) {
-                                          return BuildSearchScreenItems(
-                                            key: ValueKey(
-                                                list.searchScreenTours[index]),
-                                            searchTournoument:
-                                                list.searchScreenTours[index],
-                                          );
+                                          return list.searchScreenTours
+                                                      .length ==
+                                                  0
+                                              ? Text('Oops')
+                                              : BuildSearchScreenItems(
+                                                  key: ValueKey(
+                                                      list.searchScreenTours[
+                                                          index]),
+                                                  searchTournoument: list
+                                                      .searchScreenTours[index],
+                                                );
                                         },
                                       );
                                     },

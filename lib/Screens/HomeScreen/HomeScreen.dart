@@ -2,12 +2,17 @@ import 'package:arena/Animations/FadeInXCustom.dart';
 import 'package:arena/Animations/FadeInYCustom.dart';
 import 'package:arena/Animations/fadeInX.dart';
 import 'package:arena/Animations/fadeInY.dart';
+import 'package:arena/Colors/colors.dart';
+import 'package:arena/Screens/ExploreScreen/ExploreScreenProvider.dart';
 import 'package:arena/Screens/HomeScreen/FortniteStatsScreen.dart';
 import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/Utilities/NewsDetail.dart';
 import 'package:arena/Utilities/ProfileGamesPlayed.dart';
 import 'package:arena/Utilities/TournumentDetail.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -135,6 +140,137 @@ class _HomeScreenState extends State<HomeScreen> {
                         0.5,
                     width: MediaQuery.of(context).size.width,
                     padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: FutureBuilder(
+                      future: Provider.of<ExploreScreenProvider>(context,
+                              listen: false)
+                          .fetchEnteredTournouments(),
+                      builder: (context, snapShot) {
+                        if (snapShot.hasError) {
+                          return Center(
+                            child: Text(
+                              'Go to Explorer and Join to the one of our Tournouments xD',
+                              style: kSearchScreenTextTheme(
+                                Colors.black,
+                                20,
+                                FontWeight.bold,
+                              ),
+                            ),
+                          );
+                        } else if (snapShot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(
+                            child: Container(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    'Loading...',
+                                    style: kSearchScreenTextTheme(
+                                      Colors.black,
+                                      20,
+                                      FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  SpinKitCircle(
+                                    size: 50,
+                                    color: kGradientEnd,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        } else if (snapShot.connectionState ==
+                            ConnectionState.done) {
+                          return Container(
+                            padding: EdgeInsets.only(
+                              left: 10,
+                              right: 10,
+                              top: 15,
+                              bottom: 5,
+                            ),
+                            width: MediaQuery.of(context).size.width,
+                            child: Consumer<ExploreScreenProvider>(
+                              builder: (context, list, child) {
+                                return ListView.builder(
+                                  physics: BouncingScrollPhysics(),
+                                  itemCount: list.enteredTours.length,
+                                  itemBuilder: (context, index) {
+                                    return list.enteredTours.length == 0
+                                        ? Text('Oops')
+                                        : ListTile(
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                              vertical: 10,
+                                              horizontal: 15,
+                                            ),
+                                            leading: Container(
+                                              height: 80,
+                                              width: 80,
+                                              decoration: BoxDecoration(
+                                                color: list
+                                                    .enteredTours[index].bgColor
+                                                    .withOpacity(0.5),
+                                                shape: BoxShape.circle,
+                                                image: DecorationImage(
+                                                  image: NetworkImage(
+                                                    list.enteredTours[index]
+                                                        .imageUrl,
+                                                  ),
+                                                  fit: BoxFit.contain,
+                                                ),
+                                              ),
+                                            ),
+                                            title: Text(
+                                              list.enteredTours[index].title,
+                                              style: kHomeScreenNewsTitleTheme(
+                                                list.enteredTours[index]
+                                                    .bgColor,
+                                                15,
+                                              ),
+                                            ),
+                                            subtitle: Text(
+                                              list.enteredTours[index]
+                                                  .description,
+                                              overflow: TextOverflow.fade,
+                                              style: kHomeScreenNewsTitleTheme(
+                                                list.enteredTours[index]
+                                                    .bgColor,
+                                                12,
+                                              ),
+                                            ),
+                                            trailing: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Icon(
+                                                  FontAwesomeIcons.trophy,
+                                                  size: 15,
+                                                  color: list
+                                                      .enteredTours[index]
+                                                      .bgColor,
+                                                ),
+                                                SizedBox(height: 5),
+                                                Text(
+                                                  '\$ ${list.enteredTours[index].prize}',
+                                                  style: kSearchScreenTextTheme(
+                                                      list.enteredTours[index]
+                                                          .bgColor,
+                                                      12,
+                                                      FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                  },
+                                );
+                              },
+                            ),
+                          );
+                        }
+                      },
+                    ),
                   ),
                 ),
               ],

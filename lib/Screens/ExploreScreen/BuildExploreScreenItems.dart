@@ -204,7 +204,7 @@ class BuildSearchScreenItems extends StatelessWidget {
                             } catch (e) {
                               Scaffold.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text('Oops Something went Wrong!'),
+                                  content: Text(e.toString()),
                                 ),
                               );
                             }
