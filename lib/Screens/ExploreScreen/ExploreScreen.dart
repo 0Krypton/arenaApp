@@ -53,6 +53,8 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('loaded Explore Screen');
+
     return MaterialApp(
       theme: ThemeData(primaryColor: kBgColorAccentCreateTournoument),
       home: Scaffold(

@@ -1,14 +1,10 @@
 import 'package:arena/Animations/FadeInXCustom.dart';
 import 'package:arena/Animations/FadeInYCustom.dart';
-import 'package:arena/Animations/fadeInX.dart';
-import 'package:arena/Animations/fadeInY.dart';
 import 'package:arena/Colors/colors.dart';
 import 'package:arena/Screens/ExploreScreen/ExploreScreenProvider.dart';
 import 'package:arena/Screens/HomeScreen/FortniteStatsScreen.dart';
 import 'package:arena/Themes/TextTheme.dart';
-import 'package:arena/Utilities/NewsDetail.dart';
 import 'package:arena/Utilities/ProfileGamesPlayed.dart';
-import 'package:arena/Utilities/TournumentDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,6 +18,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    print('loaded HomeScreen');
+
     final appBar = AppBar(
       backgroundColor: Colors.white,
       elevation: 0,

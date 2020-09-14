@@ -234,6 +234,8 @@ class ExploreScreenProvider extends ChangeNotifier {
           // print(keys[0]['userId']);
         });
       });
+      print('### User Entered Tournouments Fetched ###');
+
       _enteredTours = loadedTours;
       notifyListeners();
     }

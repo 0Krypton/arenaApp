@@ -2,10 +2,12 @@ import 'dart:math';
 
 import 'package:arena/Colors/colors.dart';
 import 'package:arena/Screens/HomeScreen/HomeScreen.dart';
+import 'package:arena/Screens/Login&Registration/LoginScreen.dart';
 import 'package:arena/Screens/ProfileScreen/DashboardProfile.dart';
 import 'package:arena/Screens/ExploreScreen/ExploreScreen.dart';
 import 'package:arena/Screens/ShopScreen/ShopScreen.dart';
 import 'package:arena/Screens/TopScreen/TopScreen.dart';
+import 'package:arena/services/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -163,22 +165,31 @@ class _BottomNavBarState extends State<BottomNavBar>
                         ),
                         SizedBox(
                             height: MediaQuery.of(context).size.height / 4),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Icon(
-                              Icons.exit_to_app,
-                              size: animationController.value * 24,
-                            ),
-                            SizedBox(width: 5),
-                            Text(
-                              'Logout',
-                              style: GoogleFonts.nunito(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w800,
-                                  fontSize: animationController.value * 14),
-                            ),
-                          ],
+                        GestureDetector(
+                          onTap: () {
+                            print('Tapped LogOut');
+                            toggle();
+                            Provider.of<Auth>(context, listen: false).logout();
+                            // Navigator.pushReplacementNamed(
+                            //     context, LoginScreen.id);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Icon(
+                                Icons.exit_to_app,
+                                size: animationController.value * 24,
+                              ),
+                              SizedBox(width: 5),
+                              Text(
+                                'Logout',
+                                style: GoogleFonts.nunito(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: animationController.value * 14),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
