@@ -133,7 +133,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         height: 120,
                         child: FlareActor(
                           'assets/arena_logo.flr',
-                          // animation: 'logo_play',
+                          animation: 'logo_play',
                           alignment: Alignment.center,
                         ),
                       ),
@@ -207,7 +207,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                         key: _formEmail,
                                         child: TextFormField(
                                           cursorColor: kBgColors,
-                                          style: TextStyle(color: Colors.black),
+                                          style: TextStyle(color: Colors.white),
                                           keyboardType:
                                               TextInputType.emailAddress,
                                           onSaved: (value) {
@@ -281,7 +281,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       Form(
                                         //key: ,
                                         child: TextFormField(
-                                          style: TextStyle(color: Colors.black),
+                                          style: TextStyle(color: Colors.white),
                                           textAlignVertical:
                                               TextAlignVertical.center,
                                           //validator: ,
@@ -327,7 +327,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                         key: _formPassword,
                                         child: TextFormField(
                                           cursorColor: kBgColors,
-                                          style: TextStyle(color: Colors.black),
+                                          style: TextStyle(color: Colors.white),
                                           textAlignVertical:
                                               TextAlignVertical.center,
                                           onSaved: (value) {

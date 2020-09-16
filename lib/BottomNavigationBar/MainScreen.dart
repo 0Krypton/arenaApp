@@ -50,7 +50,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   int selectedBarIndex = 2;
 
   static final Duration duration = const Duration(milliseconds: 300);
@@ -63,6 +63,11 @@ class _BottomNavBarState extends State<BottomNavBar>
     super.initState();
     animationController = AnimationController(vsync: this, duration: duration);
     animationController.addListener(() {});
+  }
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
   final double maxSlide = -100.0;
@@ -169,9 +174,8 @@ class _BottomNavBarState extends State<BottomNavBar>
                           onTap: () {
                             print('Tapped LogOut');
                             toggle();
+                            Navigator.of(context).pushReplacementNamed(LoginScreen.id);
                             Provider.of<Auth>(context, listen: false).logout();
-                            // Navigator.pushReplacementNamed(
-                            //     context, LoginScreen.id);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,

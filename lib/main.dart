@@ -41,7 +41,16 @@ class MyApp extends StatelessWidget {
         builder: (context, auth, _) {
           return MaterialApp(
             title: 'Arena App',
-            initialRoute: auth.isAuth ? BottomNavBar.id : LoginScreen.id,
+            home: auth.isAuth
+                ? BottomNavBar()
+                : FutureBuilder(
+                    future: auth.tryAutoLogin(),
+                    builder: (context, authResultSnapShot) =>
+                        authResultSnapShot.connectionState ==
+                                ConnectionState.waiting
+                            ? SplashScreen()
+                            : LoginScreen(),
+                  ),
             routes: {
               CreateTournoument.id: (context) => CreateTournoument(),
               WelcomeScreen.id: (context) => WelcomeScreen(),

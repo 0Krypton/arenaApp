@@ -86,8 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
         errorMessage = 'The user account has been disabled by an administrator';
       }
       _showDialog(errorMessage);
-    }
-    catch(error) {
+    } catch (error) {
       const errorMessage =
           'Could not authenticate, please try Again or check your internet Connection.';
       _showDialog(errorMessage);
@@ -132,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 120,
                         child: FlareActor(
                           'assets/arena_logo.flr',
-                          // animation: 'logo_play',
+                          animation: 'logo_play',
                           alignment: Alignment.center,
                         ),
                       ),
@@ -216,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           child: TextFormField(
                                             cursorColor: kBgColors,
                                             style:
-                                                TextStyle(color: Colors.black),
+                                                TextStyle(color: Colors.white),
                                             keyboardType:
                                                 TextInputType.emailAddress,
                                             onSaved: (value) {
@@ -296,7 +295,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           child: TextFormField(
                                             cursorColor: kBgColors,
                                             style:
-                                                TextStyle(color: Colors.black),
+                                                TextStyle(color: Colors.white),
                                             textAlignVertical:
                                                 TextAlignVertical.center,
                                             onSaved: (value) {

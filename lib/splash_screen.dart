@@ -11,32 +11,32 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool isPlaying = false;
-  @override
-  void initState() {
-    super.initState();
-    startTime();
-  }
+  // bool isPaused = false;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   startTime();
+  // }
 
-  startTime() async {
-    var duration = new Duration(seconds: 6);
-    return Timer(duration, route);
-  }
+  // startTime() async {
+  //   var duration = new Duration(seconds: 6);
+  //   return Timer(duration, route);
+  // }
 
-  route() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => BottomNavBar(),
-      ),
-    );
-  }
+  // route() {
+  //   Navigator.pushReplacement(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => BottomNavBar(),
+  //     ),
+  //   );
+  // }
 
-  @override
-  void dispose() {
-    super.dispose();
-    isPlaying = true;
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   isPaused = true;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 'assets/arena_logo.flr',
                 animation: 'play',
                 alignment: Alignment.center,
-                isPaused: isPlaying,
               ),
             ),
           ),

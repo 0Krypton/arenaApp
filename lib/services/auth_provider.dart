@@ -71,7 +71,8 @@ class Auth with ChangeNotifier {
       final userData = json.encode({
         'token': _token,
         'userId': _userId,
-        'expiryData': _expiryDate.toIso8601String()
+        'email': _userEmail,
+        'expiryDate': _expiryDate.toIso8601String()
       });
       prefs.setString('userData', userData);
     } catch (error) {
@@ -114,7 +115,8 @@ class Auth with ChangeNotifier {
       final userData = json.encode({
         'token': _token,
         'userId': _userId,
-        'expiryData': _expiryDate.toIso8601String()
+        'email': _userEmail,
+        'expiryDate': _expiryDate.toIso8601String()
       });
       prefs.setString('userData', userData);
     } catch (error) {
@@ -129,20 +131,21 @@ class Auth with ChangeNotifier {
     }
     final extractedUserData =
         json.decode(prefs.getString('userData')) as Map<String, Object>;
-    final expiryData = DateTime.parse(extractedUserData['expiryDate']);
+    final expiryDate = DateTime.parse(extractedUserData['expiryDate']);
 
-    if (expiryData.isBefore(DateTime.now())) {
+    if (expiryDate.isBefore(DateTime.now())) {
       return false;
     }
     _token = extractedUserData['token'];
     _userId = extractedUserData['userId'];
-    _expiryDate = expiryData;
+    _userEmail = extractedUserData['email'];
+    _expiryDate = expiryDate;
     notifyListeners();
     _autoLogout();
     return true;
   }
 
-  void logout() {
+  void logout() async {
     _token = null;
     _userId = null;
     _userEmail = null;
@@ -151,6 +154,10 @@ class Auth with ChangeNotifier {
       _authTimer.cancel();
     }
     notifyListeners();
+
+    final prefs = await SharedPreferences.getInstance();
+
+    prefs.clear();
   }
 
   void _autoLogout() {
