@@ -44,6 +44,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
     } catch (e) {
       Scaffold.of(context).showSnackBar(
         SnackBar(
+          backgroundColor: Colors.red[700],
           content:
               Text('Oops something went Wrong!\nPlease check your connection'),
         ),
@@ -54,6 +55,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
     print('loaded Explore Screen');
+    
 
     return MaterialApp(
       theme: ThemeData(primaryColor: kBgColorAccentCreateTournoument),
@@ -97,9 +99,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                 context: context,
                                 delegate: Search(
                                     items: Provider.of<ExploreScreenProvider>(
-                                            context,
-                                            listen: false)
-                                        .searchScreenTours),
+                                  context,
+                                  listen: false,
+                                ).searchScreenTours),
                               );
                             },
                           )
@@ -288,8 +290,9 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                               ? Text('Oops')
                                               : BuildSearchScreenItems(
                                                   key: ValueKey(
-                                                      list.searchScreenTours[
-                                                          index]),
+                                                    list.searchScreenTours[
+                                                        index],
+                                                  ),
                                                   searchTournoument: list
                                                       .searchScreenTours[index],
                                                 );

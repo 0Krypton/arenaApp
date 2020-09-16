@@ -43,6 +43,23 @@ TextStyle kHomeScreenNewsTitleTheme(Color textColor, double sizeFont) {
   );
 }
 
+TextStyle kHomeScreenTitle(Color textColor, double sizeFont,FontWeight fontWeight) {
+  return GoogleFonts.nunito(
+    color: textColor,
+    fontSize: sizeFont,
+    fontWeight: fontWeight,
+  );
+}
+
+///////////////////////////////////////////////////////////////
+TextStyle kHomeSuggestionTours(Color textColor, double sizeFont,FontWeight fontWeight) {
+  return GoogleFonts.nunito(
+    color: textColor,
+    fontSize: sizeFont,
+    fontWeight: fontWeight,
+  );
+}
+
 ///////////////////////////////////////////////////////////////
 TextStyle kFortniteStatsTextTheme(
     Color color, double fontSize, FontWeight fontWeight) {
@@ -86,8 +103,8 @@ TextStyle kShopScreenStoreTextTheme(
 
 //////////////////////////////////////////////////////////////////
 
-TextStyle kLoginTextTheme({
-    Color color, double fontSize, FontWeight fontWeight}) {
+TextStyle kLoginTextTheme(
+    {Color color, double fontSize, FontWeight fontWeight}) {
   return GoogleFonts.nunito(
     color: color,
     fontSize: fontSize,

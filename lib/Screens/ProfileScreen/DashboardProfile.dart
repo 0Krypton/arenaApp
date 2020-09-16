@@ -1,6 +1,8 @@
 import 'package:arena/Animations/FadeInXCustom.dart';
 import 'package:arena/Animations/FadeInYCustom.dart';
 import 'package:arena/Utilities/ProfileGamesPlayed.dart';
+import 'package:arena/services/auth_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +11,7 @@ class DashBoardProfile extends StatelessWidget {
   final Duration duration;
   final Function onPressed;
 
-  const DashBoardProfile({
+  DashBoardProfile({
     Key key,
     this.duration,
     this.onPressed,

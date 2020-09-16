@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "504476689177",
+    "firebase_url": "https://arena-9e2f5.firebaseio.com",
+    "project_id": "arena-9e2f5",
+    "storage_bucket": "arena-9e2f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504476689177:android:32a3d33ddbb57eaf6c1b88",
+        "android_client_info": {
+          "package_name": "com.arena.arena"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504476689177-ju7klsjn2nekn22l37vqk2r7vuc0bm97.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEA-VQ_aDI0QN5x7o1Wk1QGx5rCiS5iZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504476689177-ju7klsjn2nekn22l37vqk2r7vuc0bm97.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

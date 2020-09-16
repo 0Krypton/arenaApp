@@ -37,6 +37,8 @@ dependencies:
   fl_chart: ^0.11.0
   simple_animations: ^2.2.1
   shared_preferences: ^0.5.10
+  cloud_firestore: ^0.13.5
+  firebase_auth: ^0.16.0
 
 dev_dependencies:
   flutter_test:

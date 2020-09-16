@@ -4,18 +4,22 @@ import 'package:arena/Utilities/http_exception.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Auth with ChangeNotifier {
   String _token;
   DateTime _expiryDate;
   String _userId;
   String _userEmail;
+  String _userName;
 
   Timer _authTimer;
 
   bool get isAuth {
     return token != null;
   }
+
+  String get userName => _userName;
 
   String get token {
     if (_expiryDate != null &&
@@ -26,15 +30,11 @@ class Auth with ChangeNotifier {
     return null;
   }
 
-  String get userEmail {
-    return _userEmail;
-  }
+  String get userEmail => _userEmail;
 
-  String get userId {
-    return _userId;
-  }
+  String get userId => _userId;
 
-  Future<void> signup(String email, String password) async {
+  Future<void> signup(String email, String password, String userName) async {
     const url =
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyChekhvdyaNPQrjGlzect7DfOiDyJivtfk';
 
@@ -56,6 +56,15 @@ class Auth with ChangeNotifier {
         throw HttpException(responseData['error']['message']);
       }
 
+      await Firestore.instance
+          .collection('users')
+          .document(responseData['localId'])
+          .setData({
+            'username':userName,
+            'email':email,
+          });
+
+      _userName = userName;
       _token = responseData['idToken'];
       _userId = responseData['localId'];
       _userEmail = responseData['email'];
@@ -149,6 +158,7 @@ class Auth with ChangeNotifier {
     _token = null;
     _userId = null;
     _userEmail = null;
+    _userName = null;
     _expiryDate = null;
     if (_authTimer != null) {
       _authTimer.cancel();

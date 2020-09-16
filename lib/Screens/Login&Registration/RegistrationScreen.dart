@@ -25,12 +25,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   bool _isHidden = true;
   final _formPassword = GlobalKey<FormState>();
   final _formEmail = GlobalKey<FormState>();
+  final _formUserName = GlobalKey<FormState>();
 
   bool _isLoading = false;
 
   Map<String, String> _authData = {
     'email': '',
     'password': '',
+    'username': '',
   };
 
   void _toggleVisibility() {
@@ -59,12 +61,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   Future<void> _submit() async {
     if (!_formEmail.currentState.validate() ||
-        !_formPassword.currentState.validate()) {
+        !_formPassword.currentState.validate() ||
+        !_formUserName.currentState.validate()) {
       return; //if state is Invalid
     }
 
     _formEmail.currentState.save();
     _formPassword.currentState.save();
+    _formUserName.currentState.save();
 
     setState(() {
       _isLoading = true;
@@ -74,6 +78,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       await Provider.of<Auth>(context, listen: false).signup(
         _authData['email'],
         _authData['password'],
+        _authData['username'],
       );
       Navigator.of(context).pushReplacementNamed(BottomNavBar.id);
     } on HttpException catch (error) {
@@ -92,8 +97,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             'We have blocked all requests from this device due to unusual activity. Try again later.';
       }
       _showDialog(errorMessage);
-    }
-    catch(error) {
+    } catch (error) {
       var errorMessage =
           'Could not authenticate, please try Again or check your internet Connection.';
       _showDialog(errorMessage);
@@ -279,16 +283,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                       1.1,
                                       50.0,
                                       Form(
-                                        //key: ,
+                                        key: _formUserName,
                                         child: TextFormField(
                                           style: TextStyle(color: Colors.white),
                                           textAlignVertical:
                                               TextAlignVertical.center,
-                                          //validator: ,
+                                          validator: (v) {
+                                            if (v.isEmpty) {
+                                              return 'UserName is Invalid';
+                                            } else if (v.length < 3) {
+                                              return 'UserName must be greater than 3 charachters';
+                                            }
+                                          },
                                           cursorColor: kBgColors,
                                           textAlign: TextAlign.center,
                                           onSaved: (value) {
-                                            username = value.trim();
+                                            _authData['username'] =
+                                                value.trim();
                                           },
                                           keyboardType: TextInputType.text,
                                           decoration: InputDecoration(
@@ -405,9 +416,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                             // Navigator.popAndPushNamed(
                                             //     context, IntroScreen.id);
                                           },
-                                          child: Text('Register',
-                                              style: TextStyle(
-                                                  color: kBgColorAccent)),
+                                          child: Text(
+                                            'Register',
+                                            style: TextStyle(
+                                                color: kBgColorAccent),
+                                          ),
                                         ),
                                       ),
                                     )

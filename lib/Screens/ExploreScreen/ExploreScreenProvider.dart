@@ -356,6 +356,30 @@ class ExploreScreenProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> leaveTournoument(String id) async {
+    final url =
+        'https://arena-9e2f5.firebaseio.com/Tournouments/$id/$userId.json?auth=$authToken';
+    //  'https://arena-9e2f5.firebaseio.com/Tournouments/${_searchScreenTournouments[tourIndex].creator}${_searchScreenTournouments[tourIndex].game}${_searchScreenTournouments[tourIndex].title}/$userId.json?auth=$authToken';
+
+    await http.delete(
+      url,
+    );
+    _enteredTours.removeWhere((element) => element.id == id);
+    notifyListeners();
+    //     .then(
+    //   (response) {
+    //     _enteredTours.removeWhere((element) => element.id == id);
+    //     notifyListeners();
+    //     print(response.statusCode);
+    //     if (response.statusCode >= 400) {
+    //       throw 'Oops Something went wrong!';
+    //     } else if (response.statusCode == 200) {
+    //       throw 'Succesful';
+    //     }
+    //   },
+    // );
+  }
+
   Future<void> add(ExploreScreenTournoumentDetail tournoumentDetail) async {
     final url =
         'https://arena-9e2f5.firebaseio.com/requestedTours.json?auth=$authToken';

@@ -3,8 +3,10 @@ import 'package:arena/Animations/FadeInYCustom.dart';
 import 'package:arena/Colors/colors.dart';
 import 'package:arena/Screens/ExploreScreen/ExploreScreenProvider.dart';
 import 'package:arena/Screens/HomeScreen/FortniteStatsScreen.dart';
+import 'package:arena/Screens/HomeScreen/HomeSuggestionTours.dart';
 import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/Utilities/ProfileGamesPlayed.dart';
+import 'package:arena/services/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -39,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.black,
           ),
           onPressed: () {
-            print('1');
+            print(Provider.of<Auth>(context).userId);
           },
         ),
       ],
@@ -95,7 +97,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     height: (MediaQuery.of(context).size.height -
                             appBar.preferredSize.height -
-                            MediaQuery.of(context).padding.top) *
+                            MediaQuery.of(context).padding.top -
+                            MediaQuery.of(context).padding.bottom) *
                         0.05,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -151,10 +154,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         if (snapShot.hasError) {
                           return Center(
                             child: Text(
-                              'Go to Explorer and Join to the one of our Tournouments xD',
+                              'Go to Explorer and Join to the one of\nour Tournouments xD',
                               style: kSearchScreenTextTheme(
                                 Colors.black,
-                                20,
+                                15,
                                 FontWeight.bold,
                               ),
                             ),
@@ -202,68 +205,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   itemBuilder: (context, index) {
                                     return list.enteredTours.length == 0
                                         ? Text('Oops')
-                                        : ListTile(
-                                            contentPadding:
-                                                EdgeInsets.symmetric(
+                                        : Container(
+                                            margin: EdgeInsets.symmetric(
                                               vertical: 10,
-                                              horizontal: 15,
                                             ),
-                                            leading: Container(
-                                              height: 80,
-                                              width: 80,
-                                              decoration: BoxDecoration(
-                                                color: list
-                                                    .enteredTours[index].bgColor
-                                                    .withOpacity(0.5),
-                                                shape: BoxShape.circle,
-                                                image: DecorationImage(
-                                                  image: NetworkImage(
-                                                    list.enteredTours[index]
-                                                        .imageUrl,
-                                                  ),
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              ),
-                                            ),
-                                            title: Text(
-                                              list.enteredTours[index].title,
-                                              style: kHomeScreenNewsTitleTheme(
-                                                list.enteredTours[index]
-                                                    .bgColor,
-                                                15,
-                                              ),
-                                            ),
-                                            subtitle: Text(
-                                              list.enteredTours[index]
-                                                  .description,
-                                              overflow: TextOverflow.fade,
-                                              style: kHomeScreenNewsTitleTheme(
-                                                list.enteredTours[index]
-                                                    .bgColor,
-                                                12,
-                                              ),
-                                            ),
-                                            trailing: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  FontAwesomeIcons.trophy,
-                                                  size: 15,
-                                                  color: list
-                                                      .enteredTours[index]
-                                                      .bgColor,
-                                                ),
-                                                SizedBox(height: 5),
-                                                Text(
-                                                  '\$ ${list.enteredTours[index].prize}',
-                                                  style: kSearchScreenTextTheme(
-                                                      list.enteredTours[index]
-                                                          .bgColor,
-                                                      12,
-                                                      FontWeight.bold),
-                                                ),
-                                              ],
+                                            child: TourSuggestionItem(
+                                              tournoumentDetail:
+                                                  list.enteredTours[index],
                                             ),
                                           );
                                   },

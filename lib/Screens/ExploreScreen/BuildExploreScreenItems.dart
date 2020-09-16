@@ -204,6 +204,7 @@ class BuildSearchScreenItems extends StatelessWidget {
                             } catch (e) {
                               Scaffold.of(context).showSnackBar(
                                 SnackBar(
+                                  backgroundColor: searchTournoument.bgColor,
                                   content: Text(e.toString()),
                                 ),
                               );
