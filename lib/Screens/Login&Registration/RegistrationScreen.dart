@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:arena/Animations/FadeInXCustom.dart';
 import 'package:arena/Animations/FadeInYCustom.dart';
 import 'package:arena/BottomNavigationBar/MainScreen.dart';
@@ -5,9 +7,11 @@ import 'package:arena/Colors/colors.dart';
 import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/Utilities/http_exception.dart';
 import 'package:arena/services/auth_provider.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -21,6 +25,34 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   String email;
   String password;
   String username;
+
+  File _imageProfile;
+  File _imageBg;
+
+  void _imageProfilePick() async {
+    final image = await ImagePicker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 100,
+      maxHeight: 150,
+      maxWidth: 150,
+    );
+
+    setState(() {
+      _imageProfile = image;
+    });
+  }
+
+  void _imageBgPick() async {
+    final image = await ImagePicker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 80,
+      maxHeight: 300,
+    );
+
+    setState(() {
+      _imageBg = image;
+    });
+  }
 
   bool _isHidden = true;
   final _formPassword = GlobalKey<FormState>();
@@ -79,6 +111,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         _authData['email'],
         _authData['password'],
         _authData['username'],
+        _imageBg,
+        _imageProfile,
       );
       Navigator.of(context).pushReplacementNamed(BottomNavBar.id);
     } on HttpException catch (error) {
@@ -137,7 +171,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         height: 120,
                         child: FlareActor(
                           'assets/arena_logo.flr',
-                          animation: 'logo_play',
+                          // animation: 'logo_play',
                           alignment: Alignment.center,
                         ),
                       ),
@@ -179,6 +213,63 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           child: SingleChildScrollView(
                             child: Column(
                               children: <Widget>[
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FadeInYCustom(
+                                      0.6,
+                                      -50,
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Profile',
+                                            style: kHomeScreenTitle(
+                                              Colors.white,
+                                              15,
+                                              FontWeight.w900,
+                                            ),
+                                          ),
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.add_a_photo,
+                                              size: 25,
+                                            ),
+                                            color: Colors.white,
+                                            onPressed: () {
+                                              _imageProfilePick();
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    FadeInYCustom(
+                                      0.6,
+                                      -50,
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'BG',
+                                            style: kHomeScreenTitle(
+                                              Colors.white,
+                                              15,
+                                              FontWeight.w900,
+                                            ),
+                                          ),
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.add_photo_alternate,
+                                              size: 25,
+                                            ),
+                                            color: Colors.white,
+                                            onPressed: () {
+                                              _imageBgPick();
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                                 SizedBox(
                                   height: 20.0,
                                 ),

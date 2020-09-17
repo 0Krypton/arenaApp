@@ -1,13 +1,19 @@
+import 'dart:io';
+
 import 'package:arena/Animations/FadeInXCustom.dart';
 import 'package:arena/Animations/FadeInYCustom.dart';
+import 'package:arena/Colors/colors.dart';
+import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/Utilities/ProfileGamesPlayed.dart';
 import 'package:arena/services/auth_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
-class DashBoardProfile extends StatelessWidget {
+class DashBoardProfile extends StatefulWidget {
   final Duration duration;
   final Function onPressed;
 
@@ -16,6 +22,52 @@ class DashBoardProfile extends StatelessWidget {
     this.duration,
     this.onPressed,
   }) : super(key: key);
+
+  @override
+  _DashBoardProfileState createState() => _DashBoardProfileState();
+}
+
+class _DashBoardProfileState extends State<DashBoardProfile> {
+  File _imageProfile;
+  File _imageBg;
+
+  void _imageProfilePick() async {
+    final image = await ImagePicker.pickImage(
+      source: ImageSource.camera,
+      imageQuality: 50,
+      maxHeight: 150,
+      maxWidth: 150,
+    );
+
+    setState(() {
+      _imageProfile = image;
+    });
+    final userId = Provider.of<Auth>(context, listen: false).userId;
+    final ref =
+        FirebaseStorage.instance.ref().child('user_profile_images').child(
+              userId + '.jpg',
+            );
+
+    await ref.putFile(image).onComplete;
+  }
+
+  void _imageBgPick() async {
+    final image = await ImagePicker.pickImage(
+      source: ImageSource.camera,
+      imageQuality: 50,
+      maxHeight: 150,
+    );
+
+    setState(() {
+      _imageBg = image;
+    });
+    final userId = Provider.of<Auth>(context, listen: false).userId;
+    final ref = FirebaseStorage.instance.ref().child('user_bg_images').child(
+          userId + '.jpg',
+        );
+
+    await ref.putFile(image).onComplete;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +82,18 @@ class DashBoardProfile extends StatelessWidget {
                   width: double.infinity,
                   height: 150,
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('images/bgImage.jpg'),
-                      fit: BoxFit.cover,
+                    gradient: LinearGradient(
+                      colors: [
+                        kGradientBegin,
+                        kGradientEnd,
+                      ],
                     ),
+                    image: _imageBg != null
+                        ? DecorationImage(
+                            image: FileImage(_imageBg),
+                            fit: BoxFit.fill,
+                          )
+                        : null,
                   ),
                 ),
                 Positioned(
@@ -46,7 +106,7 @@ class DashBoardProfile extends StatelessWidget {
                       size: 25,
                     ),
                     onTap: () {
-                      onPressed();
+                      widget.onPressed();
                     },
                   ),
                 ),
@@ -62,10 +122,18 @@ class DashBoardProfile extends StatelessWidget {
                       width: 150,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: AssetImage('images/bgProfile.jpg'),
-                          fit: BoxFit.fill,
+                        gradient: LinearGradient(
+                          colors: [
+                            kGradientEnd,
+                            kGradientBegin,
+                          ],
                         ),
+                        image: _imageProfile != null
+                            ? DecorationImage(
+                                image: FileImage(_imageProfile),
+                                fit: BoxFit.fill,
+                              )
+                            : null,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.4),
@@ -85,12 +153,73 @@ class DashBoardProfile extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 20.0),
                 child: Column(
                   children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FadeInYCustom(
+                          1.2,
+                          -50,
+                          Row(
+                            children: [
+                              Text(
+                                'Profile',
+                                style: kHomeScreenTitle(
+                                  kGradientEnd,
+                                  15,
+                                  FontWeight.w900,
+                                ),
+                              ),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.add_a_photo,
+                                  size: 25,
+                                ),
+                                color: kGradientBegin,
+                                onPressed: () {
+                                  _imageProfilePick();
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        FadeInYCustom(
+                          1.2,
+                          -50,
+                          Row(
+                            children: [
+                              Text(
+                                'BG',
+                                style: kHomeScreenTitle(
+                                  kGradientEnd,
+                                  15,
+                                  FontWeight.w900,
+                                ),
+                              ),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.add_photo_alternate,
+                                  size: 25,
+                                ),
+                                color: kGradientBegin,
+                                onPressed: () {
+                                  _imageBgPick();
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                     FadeInYCustom(
                       1.2,
                       -50,
                       Center(
                         child: Text(
-                          'Krypton',
+                          Provider.of<Auth>(
+                                context,
+                                listen: true,
+                              ).userName ??
+                              '',
                           style: GoogleFonts.nunito(
                               color: Colors.black,
                               fontSize: 25,
@@ -98,9 +227,7 @@ class DashBoardProfile extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    SizedBox(height: 10),
                     FadeInYCustom(
                       1.4,
                       -50,
@@ -148,9 +275,7 @@ class DashBoardProfile extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    SizedBox(height: 10),
                     FadeInYCustom(
                       1.6,
                       -50,
@@ -182,9 +307,7 @@ class DashBoardProfile extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
+                    SizedBox(height: 10.0),
                     Expanded(
                       flex: 1,
                       child: FadeInXCustom(

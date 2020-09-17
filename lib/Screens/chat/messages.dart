@@ -51,11 +51,13 @@ class Messages extends StatelessWidget {
         }
         final chatDocs = chatSnapShot.data.documents;
         var userId = Provider.of<Auth>(context, listen: false).userId;
+        // var userName = Provider.of<Auth>(context, listen: true).userName;
         return ListView.builder(
           reverse: true,
           itemCount: chatDocs.length,
           itemBuilder: (context, index) => MessageBubleShape(
             messageText: chatDocs[index]['text'],
+            user_name: chatDocs[index]['username'],
             isMessageFromMe: chatDocs[index]['userId'] == userId,
             key: ValueKey(chatDocs[index].documentID),
           ),

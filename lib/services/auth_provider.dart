@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:async';
+import 'dart:io';
 import 'package:arena/Utilities/http_exception.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,7 +36,13 @@ class Auth with ChangeNotifier {
 
   String get userId => _userId;
 
-  Future<void> signup(String email, String password, String userName) async {
+  Future<void> signup(
+    String email,
+    String password,
+    String userName,
+    File imageBg,
+    File imageProfile,
+  ) async {
     const url =
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyChekhvdyaNPQrjGlzect7DfOiDyJivtfk';
 
@@ -55,14 +63,38 @@ class Auth with ChangeNotifier {
       if (responseData['error'] != null) {
         throw HttpException(responseData['error']['message']);
       }
+      ////uploading bg image
+      final refBgImage =
+          FirebaseStorage.instance.ref().child('user_bg_images').child(
+                responseData['localId'] + '.jpg',
+              );
+      await refBgImage.putFile(imageBg).onComplete;
+
+      ///
+      //uploading profile image
+      final refProfileImage =
+          FirebaseStorage.instance.ref().child('user_profile_images').child(
+                responseData['localId'] + '.jpg',
+              );
+
+      await refProfileImage.putFile(imageProfile).onComplete;
+
+      ///
+      final profileImageUrl = await refProfileImage.getDownloadURL();
+      final bgImageUrl = await refBgImage.getDownloadURL();
 
       await Firestore.instance
           .collection('users')
           .document(responseData['localId'])
-          .setData({
-            'username':userName,
-            'email':email,
-          });
+          .setData(
+        {
+          'username': userName,
+          'email': email,
+          'password':password,
+          'bgImage': bgImageUrl,
+          'profileImage': profileImageUrl,
+        },
+      );
 
       _userName = userName;
       _token = responseData['idToken'];
@@ -81,6 +113,7 @@ class Auth with ChangeNotifier {
         'token': _token,
         'userId': _userId,
         'email': _userEmail,
+        'username': _userName,
         'expiryDate': _expiryDate.toIso8601String()
       });
       prefs.setString('userData', userData);
@@ -109,9 +142,18 @@ class Auth with ChangeNotifier {
       if (responseData['error'] != null) {
         throw HttpException(responseData['error']['message']);
       }
+
+      final userFireStore = await Firestore.instance
+          .collection('users')
+          .document(responseData['localId'])
+          .get();
+
+      _userName = userFireStore.data['username'];
+
       _token = responseData['idToken'];
       _userId = responseData['localId'];
       _userEmail = responseData['email'];
+
       _expiryDate = DateTime.now().add(
         Duration(
           seconds: int.parse(responseData['expiresIn']),
@@ -125,6 +167,7 @@ class Auth with ChangeNotifier {
         'token': _token,
         'userId': _userId,
         'email': _userEmail,
+        'username': _userName,
         'expiryDate': _expiryDate.toIso8601String()
       });
       prefs.setString('userData', userData);
@@ -148,6 +191,7 @@ class Auth with ChangeNotifier {
     _token = extractedUserData['token'];
     _userId = extractedUserData['userId'];
     _userEmail = extractedUserData['email'];
+    _userName = extractedUserData['username'];
     _expiryDate = expiryDate;
     notifyListeners();
     _autoLogout();

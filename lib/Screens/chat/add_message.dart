@@ -1,6 +1,6 @@
 import 'package:arena/Colors/colors.dart';
-import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/services/auth_provider.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,11 +22,15 @@ class _AddMessageState extends State<AddMessage> {
   void _send() {
     //FocusScope.of(context).unfocus();
     // print("${Provider.of<Auth>(context,listen:false).userId}");
+
+    final userId = Provider.of<Auth>(context, listen: false).userId;
+
     Firestore.instance.collection('chats/${widget.tournoumentId}/messages').add(
       {
         'text': _enteredMessage,
         'createdAt': Timestamp.now(),
-        'userId': Provider.of<Auth>(context, listen: false).userId,
+        'userId': userId,
+        'username': Provider.of<Auth>(context, listen: false).userName,
       },
     );
     _textController.clear();
