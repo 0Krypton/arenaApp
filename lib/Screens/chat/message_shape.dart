@@ -8,7 +8,8 @@ import 'package:provider/provider.dart';
 class MessageBubleShape extends StatelessWidget {
   final String messageText;
   final bool isMessageFromMe;
-  String user_name;
+  final String user_name;
+  final String image_url;
   // final String user_id;
 
   final Key key;
@@ -16,6 +17,7 @@ class MessageBubleShape extends StatelessWidget {
     this.messageText,
     this.isMessageFromMe,
     this.user_name,
+    this.image_url,
     // this.user_id,
     this.key,
   });
@@ -23,9 +25,36 @@ class MessageBubleShape extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment:
           isMessageFromMe ? MainAxisAlignment.start : MainAxisAlignment.end,
       children: [
+        isMessageFromMe
+            ? Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Container(
+                  height: 35,
+                  width: 35,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [
+                        kGradientBegin,
+                        kGradientEnd,
+                        Color(0xFF0F0478),
+                        Color(0xFFFF0099),
+                      ],
+                    ),
+                    image: image_url == null
+                        ? null
+                        : DecorationImage(
+                            image: NetworkImage(image_url),
+                            fit: BoxFit.cover,
+                          ),
+                  ),
+                ),
+              )
+            : SizedBox(width: 0, height: 0),
         Column(
           crossAxisAlignment: isMessageFromMe
               ? CrossAxisAlignment.start
@@ -66,7 +95,7 @@ class MessageBubleShape extends StatelessWidget {
                 vertical: 5,
               ),
               margin: EdgeInsets.symmetric(
-                horizontal: 15,
+                horizontal: 5,
                 vertical: 3,
               ),
               child: Text(
@@ -80,6 +109,32 @@ class MessageBubleShape extends StatelessWidget {
             ),
           ],
         ),
+        isMessageFromMe == false
+            ? Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Container(
+                  height: 35,
+                  width: 35,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [
+                        kGradientBegin,
+                        kGradientEnd,
+                        Color(0xFF0F0478),
+                        Color(0xFFFF0099),
+                      ],
+                    ),
+                    image: image_url == null
+                        ? null
+                        : DecorationImage(
+                            image: NetworkImage(image_url),
+                            fit: BoxFit.cover,
+                          ),
+                  ),
+                ),
+              )
+            : SizedBox(width: 0, height: 0),
       ],
     );
   }

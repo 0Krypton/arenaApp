@@ -33,7 +33,7 @@ class _DashBoardProfileState extends State<DashBoardProfile> {
 
   void _imageProfilePick() async {
     final image = await ImagePicker.pickImage(
-      source: ImageSource.camera,
+      source: ImageSource.gallery,
       imageQuality: 50,
       maxHeight: 150,
       maxWidth: 150,
@@ -43,7 +43,7 @@ class _DashBoardProfileState extends State<DashBoardProfile> {
       _imageProfile = image;
     });
     final userId = Provider.of<Auth>(context, listen: false).userId;
-    final ref =
+    final ref =await 
         FirebaseStorage.instance.ref().child('user_profile_images').child(
               userId + '.jpg',
             );
@@ -53,7 +53,7 @@ class _DashBoardProfileState extends State<DashBoardProfile> {
 
   void _imageBgPick() async {
     final image = await ImagePicker.pickImage(
-      source: ImageSource.camera,
+      source: ImageSource.gallery,
       imageQuality: 50,
       maxHeight: 150,
     );
@@ -62,7 +62,7 @@ class _DashBoardProfileState extends State<DashBoardProfile> {
       _imageBg = image;
     });
     final userId = Provider.of<Auth>(context, listen: false).userId;
-    final ref = FirebaseStorage.instance.ref().child('user_bg_images').child(
+    final ref = await FirebaseStorage.instance.ref().child('user_bg_images').child(
           userId + '.jpg',
         );
 
@@ -88,12 +88,21 @@ class _DashBoardProfileState extends State<DashBoardProfile> {
                         kGradientEnd,
                       ],
                     ),
-                    image: _imageBg != null
-                        ? DecorationImage(
-                            image: FileImage(_imageBg),
+                    image: Provider.of<Auth>(
+                              context,
+                              listen: true,
+                            ).bgImageUrl ==
+                            null
+                        ? null
+                        : DecorationImage(
+                            image: NetworkImage(
+                              Provider.of<Auth>(
+                                context,
+                                listen: true,
+                              ).bgImageUrl,
+                            ),
                             fit: BoxFit.fill,
-                          )
-                        : null,
+                          ),
                   ),
                 ),
                 Positioned(
@@ -124,16 +133,25 @@ class _DashBoardProfileState extends State<DashBoardProfile> {
                         shape: BoxShape.circle,
                         gradient: LinearGradient(
                           colors: [
-                            kGradientEnd,
                             kGradientBegin,
+                            kGradientEnd,
+                            Color(0xFF0F0478),
+                            Color(0xFFFF0099),
                           ],
                         ),
-                        image: _imageProfile != null
-                            ? DecorationImage(
-                                image: FileImage(_imageProfile),
+                        image: Provider.of<Auth>(
+                                  context,
+                                  listen: true,
+                                ).profileImageUrl ==
+                                null
+                            ? null
+                            : DecorationImage(
+                                image: NetworkImage(
+                                  Provider.of<Auth>(context, listen: true)
+                                      .profileImageUrl,
+                                ),
                                 fit: BoxFit.fill,
-                              )
-                            : null,
+                              ),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.4),
@@ -227,54 +245,54 @@ class _DashBoardProfileState extends State<DashBoardProfile> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
-                    FadeInYCustom(
-                      1.4,
-                      -50,
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              decoration: BoxDecoration(
-                                color: Colors.pinkAccent,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(25.0),
-                                ),
-                              ),
-                              child: Text(
-                                'Gamer',
-                                style: GoogleFonts.nunito(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              decoration: BoxDecoration(
-                                color: Colors.deepPurple,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(25.0),
-                                ),
-                              ),
-                              child: Text(
-                                'Admin',
-                                style: GoogleFonts.nunito(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                    // SizedBox(height: 10),
+                    // FadeInYCustom(
+                    //   1.4,
+                    //   -50,
+                    //   Padding(
+                    //     padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    //     child: Row(
+                    //       mainAxisAlignment: MainAxisAlignment.center,
+                    //       children: <Widget>[
+                    //         Container(
+                    //           padding: EdgeInsets.symmetric(horizontal: 10),
+                    //           decoration: BoxDecoration(
+                    //             color: Colors.pinkAccent,
+                    //             borderRadius: BorderRadius.all(
+                    //               Radius.circular(25.0),
+                    //             ),
+                    //           ),
+                    //           child: Text(
+                    //             'Gamer',
+                    //             style: GoogleFonts.nunito(
+                    //                 color: Colors.white,
+                    //                 fontSize: 13,
+                    //                 fontWeight: FontWeight.w600),
+                    //           ),
+                    //         ),
+                    //         SizedBox(
+                    //           width: 10.0,
+                    //         ),
+                    //         Container(
+                    //           padding: EdgeInsets.symmetric(horizontal: 10),
+                    //           decoration: BoxDecoration(
+                    //             color: Colors.deepPurple,
+                    //             borderRadius: BorderRadius.all(
+                    //               Radius.circular(25.0),
+                    //             ),
+                    //           ),
+                    //           child: Text(
+                    //             'Admin',
+                    //             style: GoogleFonts.nunito(
+                    //                 color: Colors.white,
+                    //                 fontSize: 13,
+                    //                 fontWeight: FontWeight.w600),
+                    //           ),
+                    //         )
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(height: 10),
                     FadeInYCustom(
                       1.6,

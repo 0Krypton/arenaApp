@@ -36,7 +36,7 @@ class _FortniteStatsScreenState extends State<FortniteStatsScreen> {
   fetchData() async {
     try {
       FortniteStats status =
-          FortniteStats(userId: userId, platform: 'pc', url: url);
+          FortniteStats(userId: userId, platform: platform, url: url);
       stats = await status.getStats();
     } catch (e) {
       return _scaffoldKey.currentState.showSnackBar(
@@ -327,7 +327,7 @@ class _FortniteStatsScreenState extends State<FortniteStatsScreen> {
                 color: Colors.white,
               ),
               textAlignVertical: TextAlignVertical.center,
-              onSaved: (input) => userId = input,
+              onSaved: (input) => userId = input.trim(),
               validator: (v) {
                 if (v.isEmpty) {
                   return 'Empty UserName';
@@ -375,7 +375,7 @@ class _FortniteStatsScreenState extends State<FortniteStatsScreen> {
                 color: Colors.white,
               ),
               textAlignVertical: TextAlignVertical.center,
-              onSaved: (input) => platform = input,
+              onSaved: (input) => platform = input.trim(),
               validator: (v) {
                 if (v.isEmpty) {
                   return 'Empty Platform';
@@ -503,7 +503,7 @@ class BuildStatsContainer extends StatelessWidget {
                   BuildRowStatsItem(
                     color: color,
                     nameRow: 'Rank',
-                    picker: statPicker.trnRatingRank.toString(),
+                    picker: '${statPicker.trnRatingRank}',
                     icon: FontAwesomeIcons.flagCheckered,
                   ),
                   SizedBox(
@@ -568,7 +568,7 @@ class BuildRowStatsItem extends StatelessWidget {
               ),
             ),
             Text(
-              "$picker",
+              picker,
               style: kFortniteStatsTextTheme(
                 color,
                 15,

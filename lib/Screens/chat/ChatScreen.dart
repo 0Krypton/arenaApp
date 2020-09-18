@@ -15,12 +15,25 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // print("id: ${tournoumentDetail.id}\n${tournoumentDetail.title}");
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: (){
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: kGradientBegin,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Container(
           child: Column(
             children: [
               Expanded(
-                child: Messages(tournoumentDetail.id,tournoumentDetail.title),
+                child: Messages(tournoumentDetail.id, tournoumentDetail.title),
               ),
               AddMessage(tournoumentDetail.id),
             ],

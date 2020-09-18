@@ -1,6 +1,5 @@
 import 'package:arena/Colors/colors.dart';
 import 'package:arena/services/auth_provider.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,18 +18,20 @@ class _AddMessageState extends State<AddMessage> {
 
   final _textController = TextEditingController();
 
-  void _send() {
+  void _send() async {
     //FocusScope.of(context).unfocus();
     // print("${Provider.of<Auth>(context,listen:false).userId}");
 
     final userId = Provider.of<Auth>(context, listen: false).userId;
+    final userData = await Firestore.instance.collection('users').document(userId).get();
 
     Firestore.instance.collection('chats/${widget.tournoumentId}/messages').add(
       {
         'text': _enteredMessage,
         'createdAt': Timestamp.now(),
         'userId': userId,
-        'username': Provider.of<Auth>(context, listen: false).userName,
+        'username': userData['username'],
+        'image_url':userData['profileImage'],
       },
     );
     _textController.clear();
@@ -42,9 +43,11 @@ class _AddMessageState extends State<AddMessage> {
       margin: EdgeInsets.only(top: 10),
       padding: EdgeInsets.all(10),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Expanded(
             child: TextField(
+              enableInteractiveSelection: true,
               controller: _textController,
               decoration: InputDecoration(
                 hintText: 'Enter a message',

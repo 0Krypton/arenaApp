@@ -58,6 +58,7 @@ class Messages extends StatelessWidget {
           itemBuilder: (context, index) => MessageBubleShape(
             messageText: chatDocs[index]['text'],
             user_name: chatDocs[index]['username'],
+            image_url: chatDocs[index]['image_url'],
             isMessageFromMe: chatDocs[index]['userId'] == userId,
             key: ValueKey(chatDocs[index].documentID),
           ),

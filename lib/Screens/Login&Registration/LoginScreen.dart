@@ -131,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 120,
                         child: FlareActor(
                           'assets/arena_logo.flr',
-                          // animation: 'logo_play',
+                          //animation: 'logo_play',
                           alignment: Alignment.center,
                         ),
                       ),

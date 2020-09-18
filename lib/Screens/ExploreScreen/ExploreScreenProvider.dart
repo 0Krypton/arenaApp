@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:arena/Utilities/ExploreScreenItemDetail.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class ExploreScreenProvider extends ChangeNotifier {
   List<ExploreScreenTournoumentDetail> _enteredTours = [];
@@ -380,9 +381,13 @@ class ExploreScreenProvider extends ChangeNotifier {
     // );
   }
 
-  Future<void> add(ExploreScreenTournoumentDetail tournoumentDetail) async {
+  Future<void> add(
+    ExploreScreenTournoumentDetail tournoumentDetail,
+    String userId,
+    String userEmail,
+  ) async {
     final url =
-        'https://arena-9e2f5.firebaseio.com/requestedTours.json?auth=$authToken';
+        'https://arena-9e2f5.firebaseio.com/playersCreatedTours.json?auth=$authToken';
 
     try {
       final response = await http.post(
@@ -394,6 +399,8 @@ class ExploreScreenProvider extends ChangeNotifier {
           'isPublic': tournoumentDetail.isPublic,
           'game': tournoumentDetail.game,
           'creator': tournoumentDetail.creator,
+          'creator_id': userId,
+          'creator_email':userEmail,
           'total_players': tournoumentDetail.totalPlayers,
           'entered_players': tournoumentDetail.enteredPlayers,
           'colorA': 255,

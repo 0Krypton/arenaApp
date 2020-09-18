@@ -2,9 +2,11 @@ import 'dart:math';
 
 import 'package:arena/Animations/fadeInX.dart';
 import 'package:arena/Animations/fadeInY.dart';
+import 'package:arena/Colors/colors.dart';
 import 'package:arena/Screens/TopScreen/TopScreenPlayers.dart';
 import 'package:arena/Screens/TopScreen/TopScreenPlayersProvider.dart';
 import 'package:arena/Themes/TextTheme.dart';
+import 'package:arena/services/auth_provider.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -71,9 +73,7 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 30,
-                      ),
+                      SizedBox(height: 30),
                       Stack(
                         children: [
                           FadeInX(
@@ -87,17 +87,18 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
                               width: MediaQuery.of(context).size.width,
                               height: 350,
                               decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withAlpha(50),
-                                      blurRadius: 15,
-                                      offset: Offset(10, -10),
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withAlpha(50),
+                                    blurRadius: 15,
+                                    offset: Offset(10, -10),
                                   ),
-                                  color: Colors.white),
+                                ],
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                           Positioned(
@@ -109,99 +110,113 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
+                                  // FadeInX(
+                                  //   1.2,
+                                  //   Text(
+                                  //     Provider.of<Auth>(context).userName,
+                                  //     style: kTopScreenTextTheme(
+                                  //       Colors.black,
+                                  //       25,
+                                  //       FontWeight.bold,
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // SizedBox(height: 20),
                                   FadeInX(
-                                    1.2,
+                                    1.4,
                                     Text(
-                                      'Krypton',
+                                      'Currently This Part not Available',
                                       style: kTopScreenTextTheme(
-                                          Colors.black, 25, FontWeight.bold),
+                                        Colors.black,
+                                        20,
+                                        FontWeight.w600,
+                                      ),
                                     ),
                                   ),
-                                  SizedBox(height: 20),
-                                  Expanded(
-                                    child:
-                                        FadeInX(1.5, LineChart(sampleData1())),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      FadeInX(
-                                        1.7,
-                                        Row(
-                                          children: [
-                                            Container(
-                                              width: 20,
-                                              height: 20,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Color(0xff3aa989),
-                                              ),
-                                            ),
-                                            SizedBox(width: 5),
-                                            Text(
-                                              'Wins (x50)',
-                                              style: kTopScreenTextTheme(
-                                                Color(0xff3aa989),
-                                                15,
-                                                FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(width: 20),
-                                      FadeInX(
-                                        1.9,
-                                        Row(
-                                          children: [
-                                            Container(
-                                              width: 20,
-                                              height: 20,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Color(0xFFAB00FF),
-                                              ),
-                                            ),
-                                            SizedBox(width: 5),
-                                            Text(
-                                              'Kills (x1000)',
-                                              style: kTopScreenTextTheme(
-                                                Color(0xFFAB00FF),
-                                                15,
-                                                FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(width: 20),
-                                      FadeInX(
-                                        2.1,
-                                        Row(
-                                          children: [
-                                            Container(
-                                              width: 20,
-                                              height: 20,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Color(0xFF00CBFF),
-                                              ),
-                                            ),
-                                            SizedBox(width: 5),
-                                            Text(
-                                              'K/D',
-                                              style: kTopScreenTextTheme(
-                                                Color(0xFF00CBFF),
-                                                15,
-                                                FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                  // Expanded(
+                                  //   child:
+                                  //       FadeInX(1.5, LineChart(sampleData1())),
+                                  // ),
+                                  // SizedBox(height: 10),
+                                  // Row(
+                                  //   mainAxisAlignment: MainAxisAlignment.center,
+                                  //   children: [
+                                  //     FadeInX(
+                                  //       1.7,
+                                  //       Row(
+                                  //         children: [
+                                  //           Container(
+                                  //             width: 20,
+                                  //             height: 20,
+                                  //             decoration: BoxDecoration(
+                                  //               shape: BoxShape.circle,
+                                  //               color: Color(0xff3aa989),
+                                  //             ),
+                                  //           ),
+                                  //           SizedBox(width: 5),
+                                  //           Text(
+                                  //             'Wins (x50)',
+                                  //             style: kTopScreenTextTheme(
+                                  //               Color(0xff3aa989),
+                                  //               15,
+                                  //               FontWeight.bold,
+                                  //             ),
+                                  //           ),
+                                  //         ],
+                                  //       ),
+                                  //     ),
+                                  //     SizedBox(width: 20),
+                                  //     FadeInX(
+                                  //       1.9,
+                                  //       Row(
+                                  //         children: [
+                                  //           Container(
+                                  //             width: 20,
+                                  //             height: 20,
+                                  //             decoration: BoxDecoration(
+                                  //               shape: BoxShape.circle,
+                                  //               color: Color(0xFFAB00FF),
+                                  //             ),
+                                  //           ),
+                                  //           SizedBox(width: 5),
+                                  //           Text(
+                                  //             'Kills (x1000)',
+                                  //             style: kTopScreenTextTheme(
+                                  //               Color(0xFFAB00FF),
+                                  //               15,
+                                  //               FontWeight.bold,
+                                  //             ),
+                                  //           ),
+                                  //         ],
+                                  //       ),
+                                  //     ),
+                                  //     SizedBox(width: 20),
+                                  //     FadeInX(
+                                  //       2.1,
+                                  //       Row(
+                                  //         children: [
+                                  //           Container(
+                                  //             width: 20,
+                                  //             height: 20,
+                                  //             decoration: BoxDecoration(
+                                  //               shape: BoxShape.circle,
+                                  //               color: Color(0xFF00CBFF),
+                                  //             ),
+                                  //           ),
+                                  //           SizedBox(width: 5),
+                                  //           Text(
+                                  //             'K/D',
+                                  //             style: kTopScreenTextTheme(
+                                  //               Color(0xFF00CBFF),
+                                  //               15,
+                                  //               FontWeight.bold,
+                                  //             ),
+                                  //           ),
+                                  //         ],
+                                  //       ),
+                                  //     ),
+                                  //   ],
+                                  // ),
                                 ],
                               ),
                             ),
@@ -220,91 +235,102 @@ class _TopScreenState extends State<TopScreen> with TickerProviderStateMixin {
                                   shape: BoxShape.circle,
                                   gradient: LinearGradient(
                                     colors: [
+                                      kGradientBegin,
+                                      kGradientEnd,
                                       Color(0xFF0F0478),
                                       Color(0xFFFF0099),
                                     ],
                                   ),
+                                  image:
+                                      Provider.of<Auth>(context, listen: true)
+                                                  .profileImageUrl ==
+                                              null
+                                          ? null
+                                          : DecorationImage(
+                                              image: NetworkImage(
+                                                Provider.of<Auth>(context,
+                                                        listen: true)
+                                                    .profileImageUrl,
+                                              ),
+                                              fit: BoxFit.cover,
+                                            ),
                                 ),
                               ),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      FadeInY(
-                        2.4,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 70,
-                              child: Divider(
-                                color: Colors.black.withAlpha(90),
-                              ),
-                            ),
-                            SizedBox(width: 10),
-                            Text(
-                              'Top 100',
-                              style: kTopScreenTextTheme(
-                                  Colors.black, 20, FontWeight.bold),
-                            ),
-                            SizedBox(width: 10),
-                            Container(
-                              width: 70,
-                              child: Divider(
-                                color: Colors.black.withAlpha(90),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      FadeInX(
-                        2.6,
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 30,
-                          margin: EdgeInsets.symmetric(horizontal: 20),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              BuildRegionServers(
-                                regionName: 'NA-West',
-                              ),
-                              BuildRegionServers(
-                                regionName: 'NA-East',
-                              ),
-                              BuildRegionServers(
-                                regionName: 'Iran',
-                              ),
-                              BuildRegionServers(
-                                regionName: 'Europe',
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      playerProvider.selectedPlayerRegion != null
-                          ? BuildTop100Regions(
-                              varSelectedPlayerRegion:
-                                  playerProvider.selectedPlayerRegion,
-                            )
-                          : Center(
-                              child: Text(
-                                'Select a region',
-                                style: kTopScreenTextTheme(
-                                  Colors.black,
-                                  25,
-                                  FontWeight.bold,
-                                ),
-                              ),
-                            ),
+                      // SizedBox(height: 20),
+                      // FadeInY(
+                      //   2.4,
+                      //   Row(
+                      //     mainAxisAlignment: MainAxisAlignment.center,
+                      //     crossAxisAlignment: CrossAxisAlignment.center,
+                      //     children: [
+                      //       Container(
+                      //         width: 70,
+                      //         child: Divider(
+                      //           color: Colors.black.withAlpha(90),
+                      //         ),
+                      //       ),
+                      //       SizedBox(width: 10),
+                      //       Text(
+                      //         'Top 100',
+                      //         style: kTopScreenTextTheme(
+                      //             Colors.black, 20, FontWeight.bold),
+                      //       ),
+                      //       SizedBox(width: 10),
+                      //       Container(
+                      //         width: 70,
+                      //         child: Divider(
+                      //           color: Colors.black.withAlpha(90),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      // SizedBox(height: 10),
+                      // FadeInX(
+                      //   2.6,
+                      //   Container(
+                      //     width: MediaQuery.of(context).size.width,
+                      //     height: 30,
+                      //     margin: EdgeInsets.symmetric(horizontal: 20),
+                      //     child: Row(
+                      //       crossAxisAlignment: CrossAxisAlignment.center,
+                      //       children: [
+                      //         BuildRegionServers(
+                      //           regionName: 'NA-West',
+                      //         ),
+                      //         BuildRegionServers(
+                      //           regionName: 'NA-East',
+                      //         ),
+                      //         BuildRegionServers(
+                      //           regionName: 'Iran',
+                      //         ),
+                      //         BuildRegionServers(
+                      //           regionName: 'Europe',
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      // SizedBox(height: 10),
+                      // playerProvider.selectedPlayerRegion != null
+                      //     ? BuildTop100Regions(
+                      //         varSelectedPlayerRegion:
+                      //             playerProvider.selectedPlayerRegion,
+                      //       )
+                      //     : Center(
+                      //         child: Text(
+                      //           'Select a region',
+                      //           style: kTopScreenTextTheme(
+                      //             Colors.black,
+                      //             25,
+                      //             FontWeight.bold,
+                      //           ),
+                      //         ),
+                      //       ),
                     ],
                   );
                 },

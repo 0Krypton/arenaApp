@@ -27,6 +27,7 @@ class _TourSuggestionItemState extends State<TourSuggestionItem> {
     }
 
     return Dismissible(
+      
       key: ValueKey(widget.tournoumentDetail.title),
       direction: DismissDirection.endToStart,
       onDismissed: (d) async {
@@ -49,6 +50,7 @@ class _TourSuggestionItemState extends State<TourSuggestionItem> {
           Positioned(
             left: positionFromLeft,
             child: Container(
+              color: Colors.transparent,
               padding: EdgeInsets.only(top: 10),
               height: deviceSize.height / 5,
               child: Image.network(

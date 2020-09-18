@@ -3,6 +3,7 @@ import 'package:arena/Screens/ExploreScreen/ExploreScreenProvider.dart';
 import 'package:arena/Themes/TextTheme.dart';
 import 'package:arena/Utilities/ExploreScreenItemDetail.dart';
 import 'package:arena/Utilities/TournumentDetail.dart';
+import 'package:arena/services/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -61,8 +62,10 @@ class _CreateTournoumentState extends State<CreateTournoument> {
       _isLoading = true;
     });
     try {
+      var userId = await Provider.of<Auth>(context).userId;
+      var userEmail = await Provider.of<Auth>(context).userEmail;
       await Provider.of<ExploreScreenProvider>(context, listen: false)
-          .add(_tour);
+          .add(_tour,userId,userEmail,);
     } catch (e) {
       showDialog(
         context: context,
@@ -214,7 +217,7 @@ class _CreateTournoumentState extends State<CreateTournoument> {
                                         fontSize: 17),
                                     labelText: 'Description',
                                     contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 8.0, vertical: 5.0),
+                                        horizontal: 8.0, vertical: 10),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color:
@@ -224,9 +227,9 @@ class _CreateTournoumentState extends State<CreateTournoument> {
                                     ),
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color:
-                                              kBgColorAccentCreateTournoument,
-                                          width: 1),
+                                        color: kBgColorAccentCreateTournoument,
+                                        width: 1,
+                                      ),
                                       borderRadius: BorderRadius.circular(15.0),
                                     ),
                                     // prefixIcon: Icon(

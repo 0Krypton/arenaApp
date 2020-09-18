@@ -160,6 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 15,
                                 FontWeight.bold,
                               ),
+                              textAlign: TextAlign.center,
                             ),
                           );
                         } else if (snapShot.connectionState ==
@@ -262,15 +263,40 @@ class BuildStats extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) {
-                          return (FortniteStatsScreen(
-                            color: listGamesPlayed[index].color,
-                          ));
-                        },
+                        builder: (context) => FortniteStatsScreen(
+                          color: listGamesPlayed[index].color,
+                        ),
                       ),
                     );
-                  }
-                  print("$index");
+                  } else
+                    showDialog(
+                      context: context,
+                      child: AlertDialog(
+                        content: Text(
+                          'For now, you can just get\nfortnite stats',
+                          style: kHomeScreenTitle(
+                            listGamesPlayed[index].color,
+                            20,
+                            FontWeight.w800,
+                          ),
+                        ),
+                        actions: [
+                          FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text(
+                              'Ok',
+                              style: kHomeScreenTitle(
+                                listGamesPlayed[index].color,
+                                16,
+                                FontWeight.w800,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
                 },
                 child: LayoutBuilder(
                   builder: (context, constraints) {
@@ -279,16 +305,17 @@ class BuildStats extends StatelessWidget {
                       width: 200,
                       margin: EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
-                          color: (listGamesPlayed[index].color),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: listGamesPlayed[index].color,
-                              blurRadius: 10,
-                            )
-                          ]),
+                        color: (listGamesPlayed[index].color),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(15),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: listGamesPlayed[index].color,
+                            blurRadius: 10,
+                          )
+                        ],
+                      ),
                       child: Center(
                         child: Container(
                           height: constraints.maxHeight / 2,

@@ -14,6 +14,11 @@ class Auth with ChangeNotifier {
   String _userId;
   String _userEmail;
   String _userName;
+  String _bgImageUrl;
+  String _profileImageUrl;
+
+  String get bgImageUrl => _bgImageUrl;
+  String get profileImageUrl => _profileImageUrl;
 
   Timer _authTimer;
 
@@ -80,8 +85,9 @@ class Auth with ChangeNotifier {
       await refProfileImage.putFile(imageProfile).onComplete;
 
       ///
-      final profileImageUrl = await refProfileImage.getDownloadURL();
-      final bgImageUrl = await refBgImage.getDownloadURL();
+
+      _profileImageUrl = await refProfileImage.getDownloadURL();
+      _bgImageUrl = await refBgImage.getDownloadURL();
 
       await Firestore.instance
           .collection('users')
@@ -90,9 +96,9 @@ class Auth with ChangeNotifier {
         {
           'username': userName,
           'email': email,
-          'password':password,
-          'bgImage': bgImageUrl,
-          'profileImage': profileImageUrl,
+          'password': password,
+          'bgImage': _bgImageUrl,
+          'profileImage': _profileImageUrl,
         },
       );
 
@@ -114,6 +120,8 @@ class Auth with ChangeNotifier {
         'userId': _userId,
         'email': _userEmail,
         'username': _userName,
+        'bgImageUrl': _bgImageUrl,
+        'profileImageUrl': _profileImageUrl,
         'expiryDate': _expiryDate.toIso8601String()
       });
       prefs.setString('userData', userData);
@@ -148,6 +156,9 @@ class Auth with ChangeNotifier {
           .document(responseData['localId'])
           .get();
 
+      _bgImageUrl = userFireStore.data['bgImage'];
+      _profileImageUrl = userFireStore.data['profileImage'];
+
       _userName = userFireStore.data['username'];
 
       _token = responseData['idToken'];
@@ -168,6 +179,8 @@ class Auth with ChangeNotifier {
         'userId': _userId,
         'email': _userEmail,
         'username': _userName,
+        'bgImageUrl': _bgImageUrl,
+        'profileImageUrl': _profileImageUrl,
         'expiryDate': _expiryDate.toIso8601String()
       });
       prefs.setString('userData', userData);
@@ -192,6 +205,8 @@ class Auth with ChangeNotifier {
     _userId = extractedUserData['userId'];
     _userEmail = extractedUserData['email'];
     _userName = extractedUserData['username'];
+    _bgImageUrl = extractedUserData['bgImageUrl'];
+    _profileImageUrl = extractedUserData['profileImageUrl'];
     _expiryDate = expiryDate;
     notifyListeners();
     _autoLogout();
