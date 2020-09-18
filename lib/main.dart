@@ -31,6 +31,8 @@ class MyApp extends StatelessWidget {
             auth.userEmail,
             auth.userId,
             previous == null ? [] : previous.searchScreenTours,
+            auth.userName,
+            auth.profileImageUrl,
           ),
         ),
         ChangeNotifierProvider.value(

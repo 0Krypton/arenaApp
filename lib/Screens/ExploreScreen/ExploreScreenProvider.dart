@@ -111,8 +111,16 @@ class ExploreScreenProvider extends ChangeNotifier {
   final String authToken;
   final String userEmail;
   final String userId;
-  ExploreScreenProvider(this.authToken, this.userEmail, this.userId,
-      this._searchScreenTournouments);
+  final String userName;
+  final String profileImageUrl;
+  ExploreScreenProvider(
+    this.authToken,
+    this.userEmail,
+    this.userId,
+    this._searchScreenTournouments,
+    this.userName,
+    this.profileImageUrl,
+  );
 
   bool _isEntered = false;
   bool _isLoading = false;
@@ -137,6 +145,18 @@ class ExploreScreenProvider extends ChangeNotifier {
   void addSearchScreenRecents(
       ExploreScreenTournoumentDetail exploreScreenTournoumentDetail) {
     recents.add(exploreScreenTournoumentDetail);
+    notifyListeners();
+  }
+
+  Map<String , dynamic> chatTournoumentStat;
+
+  Future<Map<String, dynamic>> getTournoumentChatStats(String id) async {
+    final getCurrentTour = await http.get(
+        'https://arena-9e2f5.firebaseio.com/Tournouments/$id.json?auth=$authToken');
+
+    // final currentTour =
+    print(getCurrentTour.body);
+    chatTournoumentStat = json.decode(getCurrentTour.body) as Map<String, dynamic>;
     notifyListeners();
   }
 
@@ -293,12 +313,14 @@ class ExploreScreenProvider extends ChangeNotifier {
       final currentTour =
           json.decode(getCurrentTour.body) as Map<String, dynamic>;
 
-      currentTour.forEach((key, value) {
-        if (key == userId) {
-          print('You\'re already joined with : $key');
-          throw ('You\'re already joined\nto this tournoument');
-        }
-      });
+      if (currentTour != null) {
+        currentTour.forEach((key, value) {
+          if (key == userId) {
+            print('You\'re already joined with : $key');
+            throw ('You\'re already joined\nto this tournoument');
+          }
+        });
+      }
       /** getting current tour to check is user Is joined to toue or not */
 
       final targetTour =
@@ -321,6 +343,10 @@ class ExploreScreenProvider extends ChangeNotifier {
             {
               'email': '$userEmail',
               'userId': '$userId',
+              'userName': userName,
+              'profileImageUrl': profileImageUrl,
+              'rank': newEnteredPlayers,
+              'points': 0,
             },
           ),
         )

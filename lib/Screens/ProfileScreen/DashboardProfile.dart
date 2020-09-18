@@ -31,7 +31,7 @@ class _DashBoardProfileState extends State<DashBoardProfile> {
   @override
   void initState() {
     Future.delayed(
-      Duration(seconds: 3),
+      Duration(seconds: 1),
       () {
         Provider.of<Auth>(
           context,
@@ -42,6 +42,8 @@ class _DashBoardProfileState extends State<DashBoardProfile> {
 
     super.initState();
   }
+
+ 
 
   @override
   Widget build(BuildContext context) {

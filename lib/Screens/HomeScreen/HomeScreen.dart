@@ -208,8 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ? Text('Oops')
                                         : Container(
                                             margin: EdgeInsets.symmetric(
-                                              vertical: 10,
-                                            ),
+                                                vertical: 10),
                                             child: TourSuggestionItem(
                                               tournoumentDetail:
                                                   list.enteredTours[index],
