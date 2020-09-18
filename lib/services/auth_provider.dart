@@ -41,6 +41,46 @@ class Auth with ChangeNotifier {
 
   String get userId => _userId;
 
+  Future<void> getImages() async {
+    final refProfileImage =
+        FirebaseStorage.instance.ref().child('user_profile_images').child(
+              _userId + '.jpg',
+            );
+    _profileImageUrl = await refProfileImage.getDownloadURL();
+
+    final refBgImage =
+        FirebaseStorage.instance.ref().child('user_bg_images').child(
+              _userId + '.jpg',
+            );
+    _bgImageUrl = await refBgImage.getDownloadURL();
+
+    notifyListeners();
+  }
+
+  Future<void> putBgImage(File bgImage) async {
+    final ref =
+        await FirebaseStorage.instance.ref().child('user_bg_images').child(
+              _userId + '.jpg',
+            );
+
+    await ref.putFile(bgImage).onComplete;
+    final imageUrl = await ref.getDownloadURL();
+    _bgImageUrl = imageUrl;
+    notifyListeners();
+  }
+
+  Future<void> putProfileImage(File profileImage) async {
+    final ref =
+        await FirebaseStorage.instance.ref().child('user_profile_images').child(
+              _userId + '.jpg',
+            );
+
+    await ref.putFile(profileImage).onComplete;
+    final imageUrl = await ref.getDownloadURL();
+    _profileImageUrl = imageUrl;
+    notifyListeners();
+  }
+
   Future<void> signup(
     String email,
     String password,
@@ -219,6 +259,8 @@ class Auth with ChangeNotifier {
     _userEmail = null;
     _userName = null;
     _expiryDate = null;
+    _bgImageUrl = null;
+    _profileImageUrl = null;
     if (_authTimer != null) {
       _authTimer.cancel();
     }

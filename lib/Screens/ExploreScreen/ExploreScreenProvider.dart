@@ -277,13 +277,43 @@ class ExploreScreenProvider extends ChangeNotifier {
         _searchScreenTournouments.indexWhere((element) => element.id == id);
 
     if (tourIndex >= 0) {
+      /** getting data from urls*/
       final url =
           'https://arena-9e2f5.firebaseio.com/Tournouments/$id/$userId.json?auth=$authToken';
       //  'https://arena-9e2f5.firebaseio.com/Tournouments/${_searchScreenTournouments[tourIndex].creator}${_searchScreenTournouments[tourIndex].game}${_searchScreenTournouments[tourIndex].title}/$userId.json?auth=$authToken';
 
-      if (_searchScreenTournouments[tourIndex].enteredPlayers <
-          _searchScreenTournouments[tourIndex].totalPlayers) {
+      final getTargetTournoument = await http.get(
+          'https://arena-9e2f5.firebaseio.com/requestedTours/$id.json?auth=$authToken');
+      /** getting data from urls*/
+
+      /** getting current tour to check is user Is joined to toue or not */
+      final getCurrentTour = await http.get(
+          'https://arena-9e2f5.firebaseio.com/Tournouments/$id.json?auth=$authToken');
+
+      final currentTour =
+          json.decode(getCurrentTour.body) as Map<String, dynamic>;
+
+      currentTour.forEach((key, value) {
+        if (key == userId) {
+          print('You\'re already joined with : $key');
+          throw ('You\'re already joined\nto this tournoument');
+        }
+      });
+      /** getting current tour to check is user Is joined to toue or not */
+
+      final targetTour =
+          json.decode(getTargetTournoument.body) as Map<String, dynamic>;
+
+      if (targetTour['entered_players'] < targetTour['total_players']) {
         toggleEnter();
+
+        int newEnteredPlayers = targetTour['entered_players'] + 1;
+        await http.patch(
+          'https://arena-9e2f5.firebaseio.com/requestedTours/$id.json?auth=$authToken',
+          body: json.encode(
+            {'entered_players': newEnteredPlayers},
+          ),
+        );
         await http
             .put(
           url,
@@ -304,6 +334,8 @@ class ExploreScreenProvider extends ChangeNotifier {
             }
           },
         );
+      } else if (targetTour['entered_players'] >= targetTour['total_players']) {
+        throw ('You can\'t join\nThe tournoument is Full');
       }
       // if (_searchScreenTournouments[tourIndex].enteredPlayers <
       //     _searchScreenTournouments[tourIndex].totalPlayers) {
@@ -362,6 +394,28 @@ class ExploreScreenProvider extends ChangeNotifier {
         'https://arena-9e2f5.firebaseio.com/Tournouments/$id/$userId.json?auth=$authToken';
     //  'https://arena-9e2f5.firebaseio.com/Tournouments/${_searchScreenTournouments[tourIndex].creator}${_searchScreenTournouments[tourIndex].game}${_searchScreenTournouments[tourIndex].title}/$userId.json?auth=$authToken';
 
+    final getTargetTournoument = await http.get(
+        'https://arena-9e2f5.firebaseio.com/requestedTours/$id.json?auth=$authToken');
+
+    final targetTour =
+        json.decode(getTargetTournoument.body) as Map<String, dynamic>;
+
+    /** checking the entrede_players */
+    int newEnteredPlayers;
+    if (targetTour['entered_players'] == 0) {
+      newEnteredPlayers = 0;
+    } else if (targetTour['entered_players'] > 0) {
+      newEnteredPlayers = targetTour['entered_players'] - 1;
+    }
+    /** checking the entrede_players */
+
+    await http.patch(
+      'https://arena-9e2f5.firebaseio.com/requestedTours/$id.json?auth=$authToken',
+      body: json.encode(
+        {'entered_players': newEnteredPlayers},
+      ),
+    );
+
     await http.delete(
       url,
     );
@@ -400,7 +454,7 @@ class ExploreScreenProvider extends ChangeNotifier {
           'game': tournoumentDetail.game,
           'creator': tournoumentDetail.creator,
           'creator_id': userId,
-          'creator_email':userEmail,
+          'creator_email': userEmail,
           'total_players': tournoumentDetail.totalPlayers,
           'entered_players': tournoumentDetail.enteredPlayers,
           'colorA': 255,

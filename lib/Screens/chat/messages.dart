@@ -49,18 +49,18 @@ class Messages extends StatelessWidget {
             ),
           );
         }
-        final chatDocs = chatSnapShot.data.documents;
+        // final chatDocs = chatSnapShot.data.documents;
         var userId = Provider.of<Auth>(context, listen: false).userId;
         // var userName = Provider.of<Auth>(context, listen: true).userName;
         return ListView.builder(
           reverse: true,
-          itemCount: chatDocs.length,
+          itemCount: chatSnapShot.data.documents.length,
           itemBuilder: (context, index) => MessageBubleShape(
-            messageText: chatDocs[index]['text'],
-            user_name: chatDocs[index]['username'],
-            image_url: chatDocs[index]['image_url'],
-            isMessageFromMe: chatDocs[index]['userId'] == userId,
-            key: ValueKey(chatDocs[index].documentID),
+            messageText: chatSnapShot.data.documents[index]['text'],
+            user_name: chatSnapShot.data.documents[index]['username'],
+            image_url: chatSnapShot.data.documents[index]['image_url'],
+            isMessageFromMe: chatSnapShot.data.documents[index]['userId'] == userId,
+            key: ValueKey(chatSnapShot.data.documents[index].documentID),
           ),
         );
       },
