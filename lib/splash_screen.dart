@@ -1,6 +1,3 @@
-import 'dart:async';
-
-import 'package:arena/BottomNavigationBar/MainScreen.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
@@ -11,32 +8,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  // bool isPaused = false;
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   startTime();
-  // }
-
-  // startTime() async {
-  //   var duration = new Duration(seconds: 6);
-  //   return Timer(duration, route);
-  // }
-
-  // route() {
-  //   Navigator.pushReplacement(
-  //     context,
-  //     MaterialPageRoute(
-  //       builder: (context) => BottomNavBar(),
-  //     ),
-  //   );
-  // }
-
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   isPaused = true;
-  // }
+  
 
   @override
   Widget build(BuildContext context) {

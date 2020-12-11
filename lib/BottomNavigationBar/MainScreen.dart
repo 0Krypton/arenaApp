@@ -20,28 +20,28 @@ class BottomNavBar extends StatefulWidget {
   final List<BarItem> barItems = [
     BarItem(
       text: 'Shop',
-      iconData: FontAwesomeIcons.shoppingBag,
-      color: Colors.indigo,
+      iconData: 'icons/BottomNavigationBarIcons/shopping-bag.svg',
+      color: Color(0xFF9E00FF),
     ),
     BarItem(
       text: 'Top',
-      iconData: Icons.show_chart,
-      color: Colors.pinkAccent,
+      iconData: 'icons/BottomNavigationBarIcons/barchart.svg',
+      color: Color(0xFFFF11A0),
     ),
     BarItem(
       text: 'Home',
-      iconData: Icons.home,
-      color: Colors.yellow.shade900,
+      iconData: 'icons/BottomNavigationBarIcons/home.svg',
+      color: Color(0xFFFF4D00),
     ),
     BarItem(
       text: 'Explore',
-      iconData: Icons.search,
-      color: Colors.cyan,
+      iconData: 'icons/BottomNavigationBarIcons/search.svg',
+      color: Color(0xFF00D1FF),
     ),
     BarItem(
       text: 'Me',
-      iconData: Icons.person,
-      color: Colors.deepPurple,
+      iconData: 'icons/BottomNavigationBarIcons/profile.svg',
+      color: Color(0xFF33019F),
     ),
   ];
 
@@ -64,6 +64,7 @@ class _BottomNavBarState extends State<BottomNavBar>
     animationController = AnimationController(vsync: this, duration: duration);
     animationController.addListener(() {});
   }
+
   @override
   void dispose() {
     animationController.dispose();
@@ -77,7 +78,6 @@ class _BottomNavBarState extends State<BottomNavBar>
       animationController.isCompleted
           ? animationController.reverse()
           : animationController.forward();
-      print(1);
     });
   }
 
@@ -102,7 +102,9 @@ class _BottomNavBarState extends State<BottomNavBar>
             animationController.value;
         double scale = 1 - (animationController.value * 0.3);
         return Container(
-          decoration: BoxDecoration(color: Colors.white),
+          decoration: BoxDecoration(
+            color: Colors.white,
+          ),
           child: Stack(
             children: [
               Scaffold(
@@ -174,7 +176,8 @@ class _BottomNavBarState extends State<BottomNavBar>
                           onTap: () {
                             print('Tapped LogOut');
                             toggle();
-                            Navigator.of(context).pushReplacementNamed(LoginScreen.id);
+                            Navigator.of(context)
+                                .pushReplacementNamed(LoginScreen.id);
                             Provider.of<Auth>(context, listen: false).logout();
                           },
                           child: Row(
@@ -203,22 +206,11 @@ class _BottomNavBarState extends State<BottomNavBar>
               Transform(
                 transform: Matrix4.identity()
                   ..translate(
-                    slide
-                    // Provider.of<SlideMenuProvider>(context, listen: false)
-                    //             .isSlideOpen ==
-                    //         false
-                    //     ? -90.0
-                    //     : 0.0,
-                    ,
+                    slide,
                     slideY,
                   )
                   ..scale(
                     scale,
-                    // Provider.of<SlideMenuProvider>(context, listen: false)
-                    //             .isSlideOpen ==
-                    //         false
-                    //     ? 0.8
-                    //     : 1,
                   ),
                 child: Container(
                   decoration: BoxDecoration(

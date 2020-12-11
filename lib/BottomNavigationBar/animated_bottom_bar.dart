@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class BarItem {
   String text;
-  IconData iconData;
+  //IconData iconData;
+  String iconData;
   Color color;
 
   BarItem({this.text, this.iconData, this.color});
 }
-
-//class BarStyle {
-//  final double fontSize , iconSize;
-//  final FontWeight fontWeight;
-//
-//  BarStyle({this.fontWeight = FontWeight.w600, this.fontSize = 18 , this.iconSize = 30});
-//}
 
 class AnimatedBottomBar extends StatefulWidget {
   final List<BarItem> barItems;
@@ -39,13 +34,14 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar>
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return Container(
+      width: MediaQuery.of(context).size.width,
       child: Padding(
         padding: EdgeInsets.only(
           bottom: 10.0,
           top: 10,
-          left: 10,
-          right: 10,
+          left: 20,
+          right: 20,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.max,
@@ -63,8 +59,8 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar>
       BarItem item = widget.barItems[i];
       bool isSelected = selectedBarIndex == i;
       _barItems.add(
-        InkWell(
-          splashColor: Colors.transparent,
+        GestureDetector(
+          // splashColor: Colors.transparent,
           onTap: () {
             setState(() {
               selectedBarIndex = i;
@@ -72,39 +68,25 @@ class _AnimatedBottomBarState extends State<AnimatedBottomBar>
             });
           },
           child: AnimatedContainer(
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
             duration: widget.animationDuration,
             decoration: BoxDecoration(
-              color:
-                  isSelected ? item.color.withOpacity(0.1) : Colors.transparent,
+              color: isSelected ? item.color : Colors.transparent,
               borderRadius: BorderRadius.all(
-                Radius.circular(30.0),
+                Radius.circular(15.0),
               ),
-            ),
-            child: Row(
-              children: <Widget>[
-                Icon(
-                  item.iconData,
-                  color: isSelected ? item.color : Colors.black,
-                  size: 25.0,
+              boxShadow: [
+                BoxShadow(
+                  color: isSelected ? item.color : Colors.transparent,
+                  blurRadius: 30,
                 ),
-                SizedBox(
-                  width: 10,
-                ),
-                AnimatedSize(
-                  curve: Curves.easeInOut,
-                  duration: widget.animationDuration,
-                  vsync: this,
-                  child: Text(
-                    isSelected ? item.text : '',
-                    style: TextStyle(
-                      color: item.color,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 15.0,
-                    ),
-                  ),
-                )
               ],
+            ),
+            child: SvgPicture.asset(
+              item.iconData,
+              color: isSelected ? Colors.white : Colors.black,
+              width: 25,
+              height: 25,
             ),
           ),
         ),

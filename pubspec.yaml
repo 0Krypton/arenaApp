@@ -41,6 +41,7 @@ dependencies:
   firebase_auth: ^0.16.0
   firebase_storage: ^3.1.5
   image_picker: ^0.6.5+3
+  flutter_svg: ^0.19.1
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +68,10 @@ flutter:
     - bundleimages/psycho_bundle/
     - bundleimages/shadow rising pack/
     - bundleimages/street serpent pack/
+    - icons/
+    - icons/BottomNavigationBarIcons/
+    - icons/chatScreen/
+    - icons/SignIn&Login/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -77,6 +82,7 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+    
   # fonts:
   #   - family: Schyler
   #     fonts:

@@ -148,19 +148,20 @@ class ExploreScreenProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Map<String , dynamic> chatTournoumentStat;
+  Map<String, dynamic> chatTournoumentStat;
 
   Future<Map<String, dynamic>> getTournoumentChatStats(String id) async {
     final getCurrentTour = await http.get(
         'https://arena-9e2f5.firebaseio.com/Tournouments/$id.json?auth=$authToken');
 
     // final currentTour =
-    print(getCurrentTour.body);
-    chatTournoumentStat = json.decode(getCurrentTour.body) as Map<String, dynamic>;
+    //print(getCurrentTour.body);
+    chatTournoumentStat =
+        json.decode(getCurrentTour.body) as Map<String, dynamic>;
     notifyListeners();
   }
 
-  Future fetchAndSetProduct() async {
+  Future fetchTournouments() async {
     var url =
         'https://arena-9e2f5.firebaseio.com/requestedTours.json?auth=$authToken';
 
@@ -259,35 +260,7 @@ class ExploreScreenProvider extends ChangeNotifier {
 
       _enteredTours = loadedTours;
       notifyListeners();
-    }
-    // try {
-    //   final response = await http.get(url);
-    //   final extractedData = json.decode(response.body) as Map<String, dynamic>;
-    //   List<ExploreScreenTournoumentDetail> loadedTours = [];
-    //   print(extractedData);
-
-    //   extractedData.forEach((key, value) {
-    //     print('key : $key ');
-    //     var values = (value.values).toList();
-
-    //     for (int i = 0; i < values.length; i++) {
-    //       if (values[i]['userId'] == userId) {
-    //         print(values[i]['userId']);
-    //         print(key);
-    //         int tour = _searchScreenTournouments
-    //             .indexWhere((element) => element.id == key);
-
-    //         print(_searchScreenTournouments[tour].id);
-    //       }
-    //     }
-    //     print("length ${keys.length}");
-    //     print(keys[0]['userId']);
-    //   });
-
-    //_enteredTours = loadedTours;
-    // notifyListeners();
-    // }
-    catch (e) {
+    } catch (e) {
       throw e;
     }
   }
@@ -300,7 +273,6 @@ class ExploreScreenProvider extends ChangeNotifier {
       /** getting data from urls*/
       final url =
           'https://arena-9e2f5.firebaseio.com/Tournouments/$id/$userId.json?auth=$authToken';
-      //  'https://arena-9e2f5.firebaseio.com/Tournouments/${_searchScreenTournouments[tourIndex].creator}${_searchScreenTournouments[tourIndex].game}${_searchScreenTournouments[tourIndex].title}/$userId.json?auth=$authToken';
 
       final getTargetTournoument = await http.get(
           'https://arena-9e2f5.firebaseio.com/requestedTours/$id.json?auth=$authToken');
@@ -363,55 +335,6 @@ class ExploreScreenProvider extends ChangeNotifier {
       } else if (targetTour['entered_players'] >= targetTour['total_players']) {
         throw ('You can\'t join\nThe tournoument is Full');
       }
-      // if (_searchScreenTournouments[tourIndex].enteredPlayers <
-      //     _searchScreenTournouments[tourIndex].totalPlayers) {
-      //   toggleEnter();
-
-      //   int enteredNumber = _searchScreenTournouments[tourIndex].enteredPlayers;
-      //   if (boolIsEntered) {
-      //     enteredNumber += 1;
-      //     if (enteredNumber < 0) enteredNumber = 0;
-      //     _searchScreenTournouments[tourIndex].enteredPlayers = enteredNumber;
-      //     await http
-      //         .put(
-      //       url,
-      //       body: json.encode(
-      //         {
-      //           'entered_players': ['$authToken'],
-      //         },
-      //       ),
-      //     )
-      //         .then(
-      //       (response) {
-      //         if (response.statusCode >= 400) {
-      //           throw 'Oops Something went wrong!';
-      //         }
-      //         notifyListeners();
-      //       },
-      //     );
-      //   } else {
-      //     enteredNumber -= 1;
-      //     if (enteredNumber < 0) enteredNumber = 0;
-      //     _searchScreenTournouments[tourIndex].enteredPlayers = enteredNumber;
-      //     await http
-      //         .patch(
-      //       url,
-      //       body: json.encode({
-      //         'entered_players': enteredNumber,
-      //       }),
-      //     )
-      //         .then(
-      //       (response) {
-      //         if (response.statusCode >= 400) {
-      //           throw 'Oops Something went wrong!';
-      //         }
-      //         notifyListeners();
-      //       },
-      //     );
-      //   }
-
-      //   notifyListeners();
-      // }
     }
   }
 

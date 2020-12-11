@@ -28,13 +28,8 @@ class Messages extends StatelessWidget {
       builder: (context, chatSnapShot) {
         if (chatSnapShot.connectionState == ConnectionState.waiting) {
           return Center(
-            child: Text(
-              'loading',
-            ),
-            // SpinKitFoldingCube(
-            //   size: 50,
-            //   color: kGradientEnd,
-            // ),
+            child: CircularProgressIndicator(),
+            
           );
         } else if (chatSnapShot.data.documents.length == 0) {
           return Center(
@@ -49,9 +44,7 @@ class Messages extends StatelessWidget {
             ),
           );
         }
-        // final chatDocs = chatSnapShot.data.documents;
         var userId = Provider.of<Auth>(context, listen: false).userId;
-        // var userName = Provider.of<Auth>(context, listen: true).userName;
         return ListView.builder(
           reverse: true,
           itemCount: chatSnapShot.data.documents.length,

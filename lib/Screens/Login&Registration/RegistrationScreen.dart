@@ -172,7 +172,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         height: 120,
                         child: FlareActor(
                           'assets/arena_logo.flr',
-                          animation: 'logo_play',
+                          // animation: 'logo_play',
                           alignment: Alignment.center,
                         ),
                       ),

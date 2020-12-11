@@ -18,20 +18,6 @@ class ExploreScreen extends StatefulWidget {
 class _ExploreScreenState extends State<ExploreScreen> {
   @override
   void initState() {
-    // Future.delayed(Duration.zero, () async {
-    //   try {
-    //     await Provider.of<ExploreScreenProvider>(
-    //       context,
-    //       listen: false,
-    //     ).fetchAndSetProduct();
-    //   } catch (e) {
-    //     Scaffold.of(context).showSnackBar(
-    //       SnackBar(
-    //         content: Text('Oops something went Wrong!\nPlease check your connection'),
-    //       ),
-    //     );
-    //   }
-    // });
     super.initState();
   }
 
@@ -40,7 +26,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
       await Provider.of<ExploreScreenProvider>(
         context,
         listen: false,
-      ).fetchAndSetProduct();
+      ).fetchTournouments();
     } catch (e) {
       Scaffold.of(context).showSnackBar(
         SnackBar(
@@ -230,7 +216,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             future: Provider.of<ExploreScreenProvider>(
                               context,
                               listen: false,
-                            ).fetchAndSetProduct(),
+                            ).fetchTournouments(),
                             builder: (context, snapShopt) {
                               if (snapShopt.hasError) {
                                 return Center(

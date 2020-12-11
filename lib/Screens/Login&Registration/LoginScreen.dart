@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
+
 class LoginScreen extends StatefulWidget {
   static const id = 'LogIn_Screen';
 
@@ -131,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 120,
                         child: FlareActor(
                           'assets/arena_logo.flr',
-                          //animation: 'logo_play',
+                          // animation: 'logo_play',
                           alignment: Alignment.center,
                         ),
                       ),
